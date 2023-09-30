@@ -1,0 +1,50 @@
+[
+ {
+  "Time": 0.2,
+  "Velocity": 1350
+ },
+ {
+  "Time": 1.9,
+  "Velocity": 2983.23
+ },
+ {
+  "Time": 3.6,
+  "Velocity": 4393.89
+ },
+ {
+  "Time": 5.31,
+  "Velocity": 4406.34
+ },
+ {
+  "Time": 7.01,
+  "Velocity": 4445.23
+ },
+ {
+  "Time": 8.71,
+  "Velocity": 4448.38
+ },
+ {
+  "Time": 10.41,
+  "Velocity": 4407.16
+ },
+ {
+  "Time": 12.11,
+  "Velocity": 4439.19
+ },
+ {
+  "Time": 13.82,
+  "Velocity": 4457.84
+ },
+ {
+  "Time": 15.52,
+  "Velocity": 4400.2
+ },
+ {
+  "Time": 17.22,
+  "Velocity": 4375.89
+ },
+ {
+  "Time": 18.92,
+  "Velocity": 4402.97
+ }
+]

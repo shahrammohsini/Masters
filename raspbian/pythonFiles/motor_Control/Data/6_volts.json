@@ -1,0 +1,38 @@
+[
+ {
+  "Time": 0.8,
+  "Velocity": 10
+ },
+ {
+  "Time": 3.1,
+  "Velocity": 1217.58
+ },
+ {
+  "Time": 5.41,
+  "Velocity": 2947.59
+ },
+ {
+  "Time": 7.71,
+  "Velocity": 2949.24
+ },
+ {
+  "Time": 10.01,
+  "Velocity": 2833.46
+ },
+ {
+  "Time": 12.31,
+  "Velocity": 2847.45
+ },
+ {
+  "Time": 14.62,
+  "Velocity": 2792.9
+ },
+ {
+  "Time": 16.92,
+  "Velocity": 2667.67
+ },
+ {
+  "Time": 19.22,
+  "Velocity": 2717.1
+ }
+]
