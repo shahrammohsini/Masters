@@ -209,17 +209,17 @@ class DynamicMatrix:
         data_points = self.write_to_array(pwm_val, loop_time, time_step)
         try:
         
-            with open(f"/home/sham/Desktop/pythonFiles/motor_Control/Data/{voltage}_volts.json", mode="w") as file:
+            with open(f"/home/sham/Desktop/github/Masters/raspbian/pythonFiles/motor_Control/Data/{voltage}_volts.json", mode="w") as file:
                 json.dump(data_points, file, indent=1)
             file.close
         except Exception as e:
             print(f"Error while writing data to the file: {e}")
-
+        return data_points
 
     
     #Create the A matrix
     def A_Matrix(self, voltage, nu, normalize_val):
-        with open(f"/home/sham/Desktop/pythonFiles/motor_Control/Data/{voltage}_volts.json", mode='r') as file:
+        with open(f"/home/sham/Desktop/github/Masters/raspbian/pythonFiles/motor_Control/Data/{voltage}_volts.json", mode='r') as file:
             data_points = json.load(file)
         velocity_Array = [data_point["Velocity"] for data_point in data_points]
         # Divide every value in velocity_Array by voltage to normalize

@@ -20,26 +20,26 @@ def main():
     # v = f.Visual()
     try:
         # print(dynamic_matrix.A_Matrix(voltage= 10, nu = 4))
-        # dynamic_matrix.data_writer(voltage=12, pwm_val = 255, loop_time =8 ,time_step = 0.078)
+        data_points = dynamic_matrix.data_writer(voltage=12, pwm_val = 255, loop_time =8 ,time_step = 0.078)
         # A = dynamic_matrix.A_Matrix(nu = 3, voltage = 6)
         print("hello")
         # data_points = []
         # # print(A)
-        data_points = mpc.controller(voltage = 12, nu = 6 , desired_vel= 2000, loop_time = 15, normalize_val=255, time_Step = 0.18, LAMBDA =1.1)
+        # data_points = mpc.controller(voltage = 12, nu = 6 , desired_vel= 2000, loop_time = 15, normalize_val=255, time_Step = 0.18, LAMBDA =1.1)
         
 
         # data_points = pid.controller(desired_vel= 2000, loop_time = 15, kp = 1.5, ki = 0.9, kd = 0.05)
 
-        # print(data_points)
-        # motor.stop()
-        # file_name = input("Enter file name: ")
-        # try:
+        print(data_points)
+        motor.stop()
+        file_name = input("Enter file name: ")
+        try:
         
-        #     with open(f"/home/sham/Desktop/pythonFiles/motor_Control/Data/Run_Data/{file_name}.json", mode="w") as file:
-        #         json.dump(data_points, file, indent=1)
-        #     file.close
-        # except Exception as e:
-        #     print(f"Error while writing data to the file: {e}")
+            with open(f"motor_Control/Data/Run_Data/MPC_Data/{file_name}.json", mode="w") as file:
+                json.dump(data_points, file, indent=1)
+            file.close
+        except Exception as e:
+            print(f"Error while writing data to the file: {e}")
 
 
 
