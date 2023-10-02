@@ -25,10 +25,10 @@ def main():
         print("hello")
         # data_points = []
         # # print(A)
-        data_points = mpc.controller(voltage = 12, nu = 2 , desired_vel= 2000, loop_time = 25, normalize_val=255, time_Step = 0.18, LAMBDA =1.6)
+        # data_points = mpc.controller(voltage = 12, nu = 2 , desired_vel= 2000, loop_time = 25, normalize_val=255, time_Step = 0.18, LAMBDA =1.6)
         
 
-        # data_points = pid.controller(desired_vel= 2000, loop_time = 15, kp = 1.5, ki = 0.9, kd = 0.05)
+        data_points = pid.controller(desired_vel= 2000, loop_time = 15, kp = 2, ki = 0.9, kd = 0.001)
 
         print(data_points)
         motor.stop()
