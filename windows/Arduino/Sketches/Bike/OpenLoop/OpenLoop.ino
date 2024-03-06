@@ -40,7 +40,6 @@ void loop() {
       run = Serial.readString();
       
     }
-  
   }
   // Calculate velocity
   int currentTime = millis()/1000; // get the current time sec

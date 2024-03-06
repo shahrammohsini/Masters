@@ -19,7 +19,7 @@ print("\n".join(portList))
 
 while True:
     #val = input("Select port: COM ")
-    val = 3 #Port number
+    val = 4 #Port number
     portVar = "COM" + str(val)
     serialInst = open_serial_port(portVar)
     if serialInst is not None:
@@ -56,6 +56,7 @@ while True:
         #desired_vel = int(data.split(',')[1]) #Split data by "," and take the second value which is the desired velocity
         #actual_vel = int(data.split(',')[2]) #Take the 3rd value which is the actual velocity
         #elapsed_time = time.time() - start_time
+    
         if len(str(data).split(',')) == 3 and str(data).split(',')[0]: #Ensuring there is enough data and no empty strings
 
             if python_timer_start is None: #this makes sure python_timer_start is updated only once as soon as the above if condition becomes true
@@ -63,12 +64,12 @@ while True:
 
             # Calculate the elapsed time since the python_timer was recorded
             python_timer = time.time() - python_timer_start
-            print(python_timer)
+            print(str(data))
 
             timer = int(str(data.split(',')[0].strip()))
-            desired_vel = int(str(data.split(',')[1].strip()))
-            actual_vel = int(str(data.split(',')[2].strip()))
-            f__Actual_velocity.plot(python_timer,actual_vel) #using python_timer instead because the time coming from arduino starts before python is ready to run the program
+            acceleration = int(str(data.split(',')[1].strip()))
+            robot_angle = int(str(data.split(',')[2].strip()))
+            f__Actual_velocity.plot(python_timer,robot_angle) #using python_timer instead because the time coming from arduino starts before python is ready to run the program
             #f__Desired_velocity.plot(timer,desired_vel)
 
         else:

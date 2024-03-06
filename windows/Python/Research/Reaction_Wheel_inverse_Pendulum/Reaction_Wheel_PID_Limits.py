@@ -3,16 +3,17 @@ import math
 
 #Parameters
 desired_angle = 0  #desired control angle
-thetaR = 180# angle of rod  (Initial rod angle)
+thetaR = 7# angle of rod  (Initial rod angle)
 thetaR = -math.radians(thetaR)
 print(thetaR)
-radius_f = 0.05
+radius_f = 0.06
 g = 9.8
-L = 0.17 # Length of Rod 0.17
+L = 0.133 # Length of Rod 0.17
 Xf = L*sin(thetaR) # x pos of flywheel
 Yf = L*cos(thetaR) # y pos of flywheel
-mR = 0.033 # mass of rod in kg           0.033kg
-mF = 0.588 # mass of flywheels in kg     0.588kg
+mR = 0.027 # mass of rod in kg           0.033kg
+mF = 0.06 # mass of flywheels in kg     0.588kg
+mm = 0.11 #mass of motor
 M = 0.5*mR + mF
 thetaF = 0 #sping angle of flywheel
 thetaF = -math.radians(thetaF)
@@ -28,13 +29,19 @@ IF = 0.5*mF*radius_f*radius_f  #Moment of intertia of flywheel
 IL = IR + mF*L*L #For conviniance let IL = IR + mF*L*L
 #Controller
 error = 0
-kp = 1.3  # 1.3
-kd = 0.2 #prevent overshooting   0.2
-ki = 0.2 #eleminates steady state error  0.2
+kp = 150 # 1.3
+kd = 0.8 #prevent overshooting   0.2
+ki = 1 #eleminates steady state error  0.2
 previous_integral = 0
 previous_error = 0
-stall_torque = 1.1 # Nm
+stall_torque = 0.05 # Nm
 
+#for the motor
+Rm = 2.5 #internal resitance of motor
+kt = 0.3568 #torque constant of motor
+Lm = 0.9 #0.499 #internal inductance of motor
+
+PWM = 0
 
 
 #Visual modeling
@@ -80,7 +87,7 @@ f_Flywheel_accelaration = gcurve(color=color.blue)
 
 
 
-while t < 20:
+while t < 10:
     i = i + 1
     Text_Time.text = f'Time: {i/100} Sec'
     
@@ -93,7 +100,12 @@ while t < 20:
     P = kp * error
     I = ki * integral
     D = kd * ((error - previous_error)/dt)
-    Torque_M = P + I + D
+
+    PWM = P + I + D
+    
+    V = 12*(PWM/255) #input voltage
+    Torque_M = kt*V*math.exp((-Rm/Lm))
+
 
     #Limits (saturation)
     if Torque_M > stall_torque:
@@ -111,8 +123,8 @@ while t < 20:
     #Simulation
     #thetaddotR = ((0.5*mR + mF)*g*L*thetaR - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #Linear equation
     #thetaddotR = ((M*g*L*sin(thetaR)) - Torque_M) / IL
-    #thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #without friction
-    thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M - (thetadotR*k)) / ((1/3)*mR*L*L + mF*L*L) #with friction
+    thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #without friction
+    # thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M - (thetadotR*k)) / ((1/3)*mR*L*L + mF*L*L) #with friction
     thetadotR = thetadotR + thetaddotR*dt
     thetaR = thetaR + thetadotR*dt
     Xf = L*sin(thetaR) # x pos of flywheel

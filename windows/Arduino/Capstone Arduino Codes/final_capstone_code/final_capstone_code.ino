@@ -1,10 +1,10 @@
 #include <Wire.h>
 
-#include <ServoTimer2.h>          // Library uses timer 2 to derive servo pwm
+// #include <ServoTimer2.h>          // Library uses timer 2 to derive servo pwm
 #define STEERING_CENTER 1490      // Steering servo pulse width center position
 #define DRIVING_CENTER 1500       // Driving servo pulse width static velocity
-ServoTimer2 steering_servo;       // Define servo objects to run using timer 2 of nano
-ServoTimer2 driving_servo;        // Define servo objects to run using timer 2 of nano
+// ServoTimer2 steering_servo;       // Define servo objects to run using timer 2 of nano
+// ServoTimer2 driving_servo;        // Define servo objects to run using timer 2 of nano
 
 #define MPU6050       0x68        // IMU address
 #define ACCEL_CONFIG  0x1C        // Accelerometer config address
@@ -22,9 +22,9 @@ const uint16_t PWM_FREQUENCY = 20000;                 // Reaction wheel motor dr
 const uint16_t PWMVALUE = F_CPU / PWM_FREQUENCY / 2;  // Prescale for new pwm frequency
 
                       //Alternative Tunings
-float P1 = 160;      //49.0  / 55.0 / defaults 75 //180/180/ 180
-float I2 = 0.6;      //4.80  / 5.83 / defaults 5.25  //1/0.2/0.3
-float D3 = 2.5;     //0.085 / 0.07 / defaults 0.04  //1/1.5/ 2.5
+float P1 =  165.5313375; //165.53;   //159 // 150    //49.0  / 55.0 / defaults 75 //180/180/ 180
+float I2 =  32.77424386; //32.77;  //44.25  //50    //0.6     //4.80  / 5.83 / defaults 5.25  //1/0.2/0.3
+float D3 =   1.66511344; //1.6;   //1.2 //0.6   //0.085 / 0.07 / defaults 0.04  //1/1.5/ 2.5
 float previous_integral = 0;
 float previous_error = 0;
 float integral;
@@ -78,7 +78,7 @@ unsigned long currentTime;      // Current time in milliseconds
 uint8_t i2cData[14]; // I2C buffer
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Set PWM frequency to 20kHz - Example derived from datasheet
   
@@ -102,15 +102,27 @@ void setup() {
 
   // Servo pin and pulse width setup
 
-   steering_servo.attach(5); 
-   driving_servo.attach(6); 
-   steering_servo.write(STEERING_CENTER); 
-   driving_servo.write(DRIVING_CENTER);
+  //  steering_servo.attach(5); 
+  //  driving_servo.attach(6); 
+  //  steering_servo.write(STEERING_CENTER); 
+  //  driving_servo.write(DRIVING_CENTER);
 
 }
 
+String run = "true";
+
 void loop() {   // Main Loop
   //delay(5);//remove this later
+
+  while(run == "false"){  //Don't run the program until data is recived from python
+    Serial.println("not running");
+    if (Serial.available() > 0){
+      run = Serial.readString();
+    }
+  }
+
+
+
   currentT = millis();
     // Calculate time step
   currentTime = millis();
@@ -125,21 +137,45 @@ void loop() {   // Main Loop
       
       // Filter Gyroscope and compute PWM send Using PID
       // Serial.print(gyroZ);
-      Serial.print(10);
-      Serial.print(",");
-      Serial.print(-0.7);
+     
       gyroZfilt = alpha * gyroZ + (1 - alpha) * gyroZfilt;  //This is a low pass filter
-      Serial.print(",");
+
       // Serial.print(gyroZfilt);
       // Serial.print(",");
       //Serial.println(robot_angle);
       error = robot_angle + 0.75;
-      Serial.println(error);
+
       //pwm_s = -constrain(P1 * robot_angle + I2 * gyroZfilt + D3 * -motor_speed, -255, 255); //This isn't a full implementation of PID. Integral and dirivative is not calculated anywhere.
       integral = previous_integral + error*dt;
       //integral += robot_angle * dt;
       dirivative = ((error - previous_error)/dt);
+
+      //clamping anti-windup on integral to prevent windup
+      int uncont_pwm = P1 * error + integral*I2 + dirivative*D3; //Unconstrained pwm. only used for anti clamping
+      if (uncont_pwm > 255 && error > 0){
+        integral = previous_integral;
+      }
+      else if (uncont_pwm < -255 and error < 0){
+        integral = previous_integral;
+      }
+
+
+      // Serial.print(1);
+      // Serial.print(",");
+      // Serial.print(1);
+      // Serial.print(",");
+      Serial.println((robot_angle));
+
+
+
+
+
+      //constrain pwm sent to Motor_control
       pwm_s = -constrain(P1 * error + integral*I2 + dirivative*D3, -255, 255);
+      
+     
+      
+
       // Serial.print(",");
       // Serial.println(integral*4);
       // Send computed pwm to motor control code
@@ -161,13 +197,13 @@ void loop() {   // Main Loop
       }
       //Stop Steering
        if ((currentT - vertical_time >= steering_off_delay_time) && steering_servo_set == true) {
-        steering_servo.write(STEERING_CENTER); // set driving_servo to a different value after 5 seconds
+        // steering_servo.write(STEERING_CENTER); // set driving_servo to a different value after 5 seconds
         previousT_2 = currentT;
         steering_servo_set = false;
       }
       //Stop Driving
       if ((currentT - vertical_time >= driving_off_delay_time) && driving_servo_set == true) {
-        driving_servo.write(DRIVING_CENTER); // set driving_servo to a different value after 5 seconds
+        // driving_servo.write(DRIVING_CENTER); // set driving_servo to a different value after 5 seconds
         previousT_2 = currentT;
         driving_servo_set = false;
       }

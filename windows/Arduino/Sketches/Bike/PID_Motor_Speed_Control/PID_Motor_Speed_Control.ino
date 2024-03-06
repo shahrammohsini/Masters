@@ -22,8 +22,8 @@ String run = "true"; //set to "false" if you want to run the program from python
 double error = 0;
 double dt = 0;
 double kp = 3;
-double kd = 2;
-double ki = 0;
+double kd = 0;
+double ki = 1;
 double integral = 0;
 double previous_integral = 0;
 double previous_error = 0;
@@ -83,6 +83,15 @@ void loop() {
   I = ki * integral;
   D = kd * ((error - previous_error)/dt);
   input = P + I + D;
+
+  // Clamping anti-windup on integral to prevent windup
+  if (input > max_vel && error > 0){ //# if the output is maxed out and error is still positive
+    integral = previous_integral; //don't accumulate
+  }
+  else if (input < -max_vel && error < 0){
+    integral = previous_integral;
+  } 
+
   if (input > max_vel){
     input = max_vel;
   }

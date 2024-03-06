@@ -1,0 +1,3434 @@
+[
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.1
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.69
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.76
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.68
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.68
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.49
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.26
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.29
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.25
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.29
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.26
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.5
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.73
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.74
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.68
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.61
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.53
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.96
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.61
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.96
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.66
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.91
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.61
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.1
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.66
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.62
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.74
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.84
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.7
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.82
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.53
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.89
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.0
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.1
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.61
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.7
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.73
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.95
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.57
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.29
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.0
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.96
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.49
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.84
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.0
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.99
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.86
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.75
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.0
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.13
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.26
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.49
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.49
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.78
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.98
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.74
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.54
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.69
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.72
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.25
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.25
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.94
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.47
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.5
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.75
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.13
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.29
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.97
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.53
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.66
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.5
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.71
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.57
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.97
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.13
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.49
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.71
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.78
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.95
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.7
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.84
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.99
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.99
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.76
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.53
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.5
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.6
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.76
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.89
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.25
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.57
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.63
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.86
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.07
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.69
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.98
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 6.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 6.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 6.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 6.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 5.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.68
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 4.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 3.41
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.43
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.1
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.86
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.8
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.82
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.84
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.63
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.75
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.13
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.7
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.62
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.76
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.57
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.6
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.72
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.69
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -4.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -4.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.66
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -3.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.72
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.0
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.4
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.89
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.66
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.29
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.11
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.99
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.98
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.86
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.71
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.61
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.53
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.28
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.83
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.97
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.13
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.1
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.81
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.55
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.65
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.19
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.26
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.98
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.42
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.59
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.06
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.33
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.24
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.08
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.87
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.62
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.02
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.35
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.32
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.15
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.99
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.39
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.09
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.62
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.33
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.48
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.6
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.34
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.71
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.86
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.36
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.33
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.14
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.38
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.72
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.33
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.93
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.2
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.96
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.03
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.12
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.22
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.01
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.8
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.76
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.51
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.7
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.31
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.3
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.23
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.37
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.54
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.52
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.05
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.64
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.33
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.04
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.17
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.6
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.21
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.45
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.97
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.6
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.27
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.58
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.79
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.46
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.77
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.85
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.25
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.88
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 2.18
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.9
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.67
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 1.56
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.92
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": 0.16
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -0.71
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -1.44
+ },
+ {
+  "Time": "1",
+  "Acceleration": 27,
+  "Robot_angle": -2.04
+ },
+ {
+  "Time": "1",
+  

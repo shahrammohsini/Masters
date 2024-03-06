@@ -9,7 +9,7 @@ data_points = []
 
 
 voltage = 4 #Voltage applied to motor
-duration = 25 #how long to run the sim in seconds
+duration = 10 #how long to run the sim in seconds
 python_timer_start = None #this timer will be used as the time for the time vs velocity. This is more correct than the arduino bc arduion timer starts before python is ready to collect data
 
 #get the current time at the start of the loop.
@@ -30,7 +30,7 @@ print("\n".join(portList))
 
 while True:
     #val = input("Select port: COM ")
-    val = 3 #Port number
+    val = 4 #Port number
     portVar = "COM" + str(val)
     serialInst = open_serial_port(portVar)
     if serialInst is not None:
@@ -75,25 +75,26 @@ while True:
             python_timer = time.time() - python_timer_start
 
             #print(data) #Split data by "," and take the first value which is time
-            timer = int(str(data.split(',')[0].strip()))
-            desired_vel = int(str(data.split(',')[1].strip()))
-            actual_vel = int(str(data.split(',')[2].strip()))
-            f__Actual_velocity.plot(python_timer,actual_vel)
+            timer = (str(data.split(',')[0].strip()))
+            acceleration = int(str(data.split(',')[1].strip()))
+            robot_angle = float(str(data.split(',')[2].strip()))
+            f__Actual_velocity.plot(python_timer,robot_angle)
             #f__Desired_velocity.plot(timer,desired_vel)
-            print(python_timer, actual_vel)
+            print(data)
 
 
             try:
                 #append the data into the list
-                data_points.append({"Time":python_timer, "Velocity":actual_vel})
+                data_points.append({"Time":timer, "Acceleration":27, "Robot_angle":robot_angle})
                 # Create a file to save this data
-                with open(f"Bicycle_Reaction_Wheel\Data\Motor_Two_Data_For_Comparison\{voltage}_Volts.json", mode="w") as file:
+                with open(f"C:/Users/100655277/Documents/GitHub/Masters/windows/Python/Research/Bicycle_Reaction_Wheel/Data/Bike_Model_validation/First_input.json", mode="w") as file:
                     json.dump(data_points, file, indent=1) #The indent makes it esier to read if you just open the json file
                 file.close()
             except Exception as e:
                 print(f"Error while writing data to the file: {e}")
             elapsed_time = time.time() - start_time
-            if elapsed_time >= duration:
+            # if elapsed_time >= duration:
+            if abs(robot_angle) >= 30:
                 break #exit the simulation after 25 sec
                 
         else:

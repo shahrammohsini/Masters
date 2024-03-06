@@ -1,9 +1,10 @@
 from vpython import *
 import math
+import json
 
 #Parameters
 desired_angle = 0  #desired control angle
-thetaR = 90# angle of rod  (Initial rod angle)
+thetaR = -7# angle of rod  (Initial rod angle)
 thetaR = -math.radians(thetaR)
 print(thetaR)
 radius_f = 0.06
@@ -12,7 +13,7 @@ L = 0.133 # Length of Rod 0.17
 Xf = L*sin(thetaR) # x pos of flywheel
 Yf = L*cos(thetaR) # y pos of flywheel
 mR = 0.027 # mass of rod in kg           0.033kg
-mF = 0.060 # mass of flywheels in kg     0.588kg
+mF = 0.06 # mass of flywheels in kg     0.588kg
 mm = 0.11
 M = 0.5*mR + mF
 thetaF = 0 #sping angle of flywheel
@@ -36,6 +37,8 @@ previous_integral = 0
 previous_error = 0
 stall_torque = 1.1 # Nm
 
+data_points = []
+
 
 
 #Visual modeling
@@ -57,7 +60,7 @@ Text_Time = label(pos=vec(-0.5, 0.5, 0), text='Time: 0 Sec', height=15)
 Graph_Motor_Torque = graph(title = 'Motor Torque vs Time', width = 400, height = 200, xtitle = "Time [s]", ytitle = "Torque", fast = False)
 f_Motor_Torque = gcurve(color=color.blue)
 #graph of Rod angle
-Graph_Rod_Angle = graph(title = 'Pendulum Position vs Time', width = 400, height = 200, xtitle = "Time [s]", ytitle = "Position [deg]", fast = True)
+Graph_Rod_Angle = graph(title = 'Pendulum Position vs Time', width = 400, height = 200, xtitle = "Time [s]", ytitle = "Position [deg]", fast = False)
 f_Rod_Angle = gcurve(color=color.blue, label = "Position")
 f_Rod_Reference_Angle = gcurve(color=color.red, label = "Reference")
 
@@ -81,7 +84,7 @@ f_Flywheel_accelaration = gcurve(color=color.blue)
 
 
 
-while t < 20:
+while t < 0.28:
     i = i + 1
     Text_Time.text = f'Time: {i/100} Sec'
     
@@ -89,14 +92,14 @@ while t < 20:
 
     #Control
     error = thetaR + math.radians(desired_angle)
-    print(math.degrees(error))
+    # print(math.degrees(error))
     integral = previous_integral + error*dt
     P = kp * error
     I = ki * integral
     D = kd * ((error - previous_error)/dt)
     # Torque_M = P + I + D  #Uncomment to use PID controller
-    Torque_M = 0
-
+    Torque_M =  (0.0471) * (IF) # Torque = (acceleration(rad/s^2)) * moment_of_inertia 
+    # Torque_M = 0.1
 
 
 
@@ -107,7 +110,7 @@ while t < 20:
         Torque_M = -stall_torque
 
     
-    print("Torque: ", Torque_M)
+    # print("Torque: ", Torque_M)
 
 
 
@@ -116,8 +119,8 @@ while t < 20:
     #Simulation
     #thetaddotR = ((0.5*mR + mF)*g*L*thetaR - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #Linear equation
     #thetaddotR = ((M*g*L*sin(thetaR)) - Torque_M) / IL
-    #thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #without friction
-    thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M - (thetadotR*k)) / ((1/3)*mR*L*L + (mF+mm)*L*L) #with friction
+    thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M) / ((1/3)*mR*L*L + mF*L*L)  #without friction
+    # thetaddotR = ((0.5*mR + mF)*g*L*sin(thetaR) - Torque_M - (thetadotR*k)) / ((1/3)*mR*L*L + (mF+mm)*L*L) #with friction
     thetadotR = thetadotR + thetaddotR*dt
     thetaR = thetaR + thetadotR*dt
     Xf = L*sin(thetaR) # x pos of flywheel
@@ -138,11 +141,15 @@ while t < 20:
 
 
 
-
+     
+    # Convert thetaR to degrees (0 to 360 degrees)
+    Mapped_rod_angle = math.degrees(thetaR) % 360
+    print("thetaR:",-math.degrees(thetaR))
     #Graph
     
     #f_Motor_Torque.plot(t,-math.degrees(thetaR)) #Plot morot torque
-    f_Rod_Angle.plot(t,-math.degrees(thetaR)) #Plot thetaR in degrees
+    f_Rod_Angle.plot(t,-math.degrees(thetaR)) #Plot thetaR in degrees  #This is the original line
+    # f_Rod_Angle.plot(t, Mapped_rod_angle -360) # Comment this out
     f_Motor_Torque.plot(t,Torque_M) #Plot morot torque
     f_Rod_Reference_Angle.plot(t,desired_angle) #Reference position
     f_Rod_velocity.plot(t,-math.degrees(thetadotw)) #Plot thetadotR in deg/s
@@ -156,6 +163,17 @@ while t < 20:
     previous_error = error
     t = t + dt
 
+
+    #write this data
+    try:
+        #append the data into the list
+        data_points.append({"Time":t, "Acceleration":27, "Robot_angle":(int(math.degrees(thetaR)))})
+        # Create a file to save this data
+        with open(f"C:/Users/100655277/Documents/GitHub/Masters/windows/Python/Research/Bicycle_Reaction_Wheel/Data/Bike_Model_validation/Sim_Data.json", mode="w") as file:
+            json.dump(data_points, file, indent=1) #The indent makes it esier to read if you just open the json file
+        file.close()
+    except Exception as e:
+        print(f"Error while writing data to the file: {e}")
 
 
 

@@ -33,7 +33,7 @@ u = 1*ones(size(t)); % Input signal (step input)
 initial_condition = [0; 0; 0; 0]; % 0 rads
 
 % Simulate the step response with the given initial condition
-%[y, t] = lsim(sys, u, t, initial_condition);
+[y, t] = lsim(sys, u, t, initial_condition);
 
 [y,t] = step(sys,t);
 var = step(sys,t);

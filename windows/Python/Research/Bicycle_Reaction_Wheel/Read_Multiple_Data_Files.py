@@ -65,7 +65,7 @@ import json
 import os
 
 # Combined graph
-Graph1 = graph(title="Velocity vs time (Combined)", xtitle="time [s]", ytitle="Velocity [rpm]", width=1400, height=800, fast=False)
+Graph1 = graph(title="Comparison of DMC with PID", xtitle="time [s]", ytitle="Velocity [rpm]", width=1400, height=800, fast=False)
 
 # List of vpython colors
 colors = [
@@ -74,7 +74,7 @@ colors = [
     vec(0.2, 0.1, 0.5), vec(0.8, 0.4, 0.7)
 ]
 
-directory_path = "C:\\Users\\100655277\\Desktop\\Python\\Research\\Bicycle_Reaction_Wheel\\Data\\DataToRead\\ThisFolder"
+directory_path = "windows\Python\Research\Bicycle_Reaction_Wheel\Data\DataToRead\ThisFolder"
 file_names = [f for f in os.listdir(directory_path)]
 print(file_names)
 
