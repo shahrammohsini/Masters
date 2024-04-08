@@ -113,7 +113,7 @@ while t < 20:
     i = i + 1
     Text_Time.text = f'Time: {i/100} Sec'
     
-    rate(100)
+    # rate(100)
 
     #Control
     error = thetaR + math.radians(desired_angle)

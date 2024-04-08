@@ -31,9 +31,9 @@ IF = 0.5*mF*((radius_f1*radius_f1) + (radius_f2*radius_f2))  #Moment of intertia
 IL = IR + mF*L*L #For conviniance let IL = IR + mF*L*L
 #Controller
 error = 0
-kp = 165.53 #165.53   150     # 1.3  300  150
-ki = 32.77 # 32.77    50      #eleminates steady state error  0.2   80
-kd = 1.665  #  1.665    2         #prevent overshooting   0.2   5
+kp = 150 #165.53   150     # 1.3  300  150
+ki = 50 # 32.77    50      #eleminates steady state error  0.2   80
+kd = 2  #  1.665    2         #prevent overshooting   0.2   5
 previous_integral = 0
 previous_error = 0
 stall_torque = 1.1 # Nm

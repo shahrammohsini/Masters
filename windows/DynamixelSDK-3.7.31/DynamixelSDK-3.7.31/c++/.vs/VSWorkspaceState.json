@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\example",
+    "\\example\\protocol2.0",
+    "\\example\\protocol2.0\\read_write"
+  ],
+  "SelectedNode": "\\example\\protocol2.0\\read_write\\read_write.cpp",
+  "PreviewInSolutionExplorer": false
+}

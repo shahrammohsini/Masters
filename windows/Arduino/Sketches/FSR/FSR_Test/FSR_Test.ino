@@ -16,7 +16,7 @@ FSR = 1023 - analogRead(A0);
 Serial.print("FSR Value = ");
 Serial.println(FSR);
 
-delay(50);
+delay(150);
 
 
 
