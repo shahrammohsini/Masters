@@ -68,28 +68,6 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -134,6 +112,28 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -273,6 +273,21 @@ bionic_hand_generate_messages_eus/fast:
 .PHONY : bionic_hand_generate_messages_eus/fast
 
 # Convenience name for target.
+bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
+
+# Convenience name for target.
+bionic_hand_gennodejs: bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
+
+.PHONY : bionic_hand_gennodejs
+
+# fast build rule for target.
+bionic_hand_gennodejs/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
+.PHONY : bionic_hand_gennodejs/fast
+
+# Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
 .PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
@@ -318,36 +333,6 @@ bionic_hand_genpy/fast:
 .PHONY : bionic_hand_genpy/fast
 
 # Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-
-# Convenience name for target.
-bionic_hand_gennodejs: bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-
-.PHONY : bionic_hand_gennodejs
-
-# fast build rule for target.
-bionic_hand_gennodejs/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
-.PHONY : bionic_hand_gennodejs/fast
-
-# Convenience name for target.
-bionic_hand/CMakeFiles/move_motor.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/move_motor.dir/rule
-.PHONY : bionic_hand/CMakeFiles/move_motor.dir/rule
-
-# Convenience name for target.
-move_motor: bionic_hand/CMakeFiles/move_motor.dir/rule
-
-.PHONY : move_motor
-
-# fast build rule for target.
-move_motor/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/move_motor.dir/build.make bionic_hand/CMakeFiles/move_motor.dir/build
-.PHONY : move_motor/fast
-
-# Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
 .PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
@@ -362,32 +347,74 @@ bionic_hand_generate_messages_py/fast:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build
 .PHONY : bionic_hand_generate_messages_py/fast
 
-src/move_motor.o: src/move_motor.cpp.o
+# Convenience name for target.
+bionic_hand/CMakeFiles/bionic.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic.dir/rule
 
-.PHONY : src/move_motor.o
+# Convenience name for target.
+bionic: bionic_hand/CMakeFiles/bionic.dir/rule
+
+.PHONY : bionic
+
+# fast build rule for target.
+bionic/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/build
+.PHONY : bionic/fast
+
+src/finger.o: src/finger.cpp.o
+
+.PHONY : src/finger.o
 
 # target to build an object file
-src/move_motor.cpp.o:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/move_motor.dir/build.make bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o
-.PHONY : src/move_motor.cpp.o
+src/finger.cpp.o:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o
+.PHONY : src/finger.cpp.o
 
-src/move_motor.i: src/move_motor.cpp.i
+src/finger.i: src/finger.cpp.i
 
-.PHONY : src/move_motor.i
+.PHONY : src/finger.i
 
 # target to preprocess a source file
-src/move_motor.cpp.i:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/move_motor.dir/build.make bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.i
-.PHONY : src/move_motor.cpp.i
+src/finger.cpp.i:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.i
+.PHONY : src/finger.cpp.i
 
-src/move_motor.s: src/move_motor.cpp.s
+src/finger.s: src/finger.cpp.s
 
-.PHONY : src/move_motor.s
+.PHONY : src/finger.s
 
 # target to generate assembly for a file
-src/move_motor.cpp.s:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/move_motor.dir/build.make bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.s
-.PHONY : src/move_motor.cpp.s
+src/finger.cpp.s:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.s
+.PHONY : src/finger.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -396,8 +423,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... install/strip"
 	@echo "... bionic_hand_gencpp"
@@ -408,16 +433,21 @@ help:
 	@echo "... bionic_hand_generate_messages_cpp"
 	@echo "... bionic_hand_genlisp"
 	@echo "... bionic_hand_generate_messages_eus"
+	@echo "... bionic_hand_gennodejs"
 	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... list_install_components"
 	@echo "... bionic_hand_geneus"
 	@echo "... bionic_hand_genpy"
-	@echo "... bionic_hand_gennodejs"
-	@echo "... move_motor"
 	@echo "... bionic_hand_generate_messages_py"
-	@echo "... src/move_motor.o"
-	@echo "... src/move_motor.i"
-	@echo "... src/move_motor.s"
+	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... bionic"
+	@echo "... src/finger.o"
+	@echo "... src/finger.i"
+	@echo "... src/finger.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

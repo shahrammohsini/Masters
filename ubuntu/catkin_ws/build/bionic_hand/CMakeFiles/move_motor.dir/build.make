@@ -57,9 +57,22 @@ include bionic_hand/CMakeFiles/move_motor.dir/progress.make
 # Include the compile flags for this target's objects.
 include bionic_hand/CMakeFiles/move_motor.dir/flags.make
 
+bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.o: bionic_hand/CMakeFiles/move_motor.dir/flags.make
+bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.o: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/motor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.o"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/move_motor.dir/src/motor.cpp.o -c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/motor.cpp
+
+bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/move_motor.dir/src/motor.cpp.i"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/motor.cpp > CMakeFiles/move_motor.dir/src/motor.cpp.i
+
+bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/move_motor.dir/src/motor.cpp.s"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/motor.cpp -o CMakeFiles/move_motor.dir/src/motor.cpp.s
+
 bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o: bionic_hand/CMakeFiles/move_motor.dir/flags.make
 bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/move_motor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o"
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/move_motor.dir/src/move_motor.cpp.o -c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/move_motor.cpp
 
 bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.i: cmake_force
@@ -72,11 +85,13 @@ bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.s: cmake_force
 
 # Object files for target move_motor
 move_motor_OBJECTS = \
+"CMakeFiles/move_motor.dir/src/motor.cpp.o" \
 "CMakeFiles/move_motor.dir/src/move_motor.cpp.o"
 
 # External object files for target move_motor
 move_motor_EXTERNAL_OBJECTS =
 
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: bionic_hand/CMakeFiles/move_motor.dir/src/motor.cpp.o
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: bionic_hand/CMakeFiles/move_motor.dir/src/move_motor.cpp.o
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: bionic_hand/CMakeFiles/move_motor.dir/build.make
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/libdynamixel_sdk.so
@@ -98,7 +113,7 @@ move_motor_EXTERNAL_OBJECTS =
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor: bionic_hand/CMakeFiles/move_motor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/bionic_hand/move_motor"
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/move_motor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

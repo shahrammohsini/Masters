@@ -1,0 +1,1 @@
+rosrun rosserial_python serial_node.py /dev/ttyUSB0 #change usb name if its a different port

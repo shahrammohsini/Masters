@@ -1,0 +1,8 @@
+prefix=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/install
+
+Name: smart_arm_moveit
+Description: Description of smart_arm_moveit
+Version: 0.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

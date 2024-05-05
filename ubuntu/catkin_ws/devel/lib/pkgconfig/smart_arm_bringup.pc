@@ -1,0 +1,8 @@
+prefix=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel
+
+Name: smart_arm_bringup
+Description: Description of smart_arm_bringup
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

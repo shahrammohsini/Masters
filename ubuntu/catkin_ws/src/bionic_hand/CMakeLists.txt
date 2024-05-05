@@ -117,6 +117,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
@@ -135,7 +136,18 @@ include_directories(
 
 ## Declare a C++ executable
 file(GLOB SOURCE_FILES "src/*.cpp")
-add_executable(move_motor ${SOURCE_FILES})
+# add_executable(move_motor ${SOURCE_FILES})
+# add_executable(finger ${SOURCE_FILES})
+# add_executable(main ${SOURCE_FILES})
+add_executable(bionic src/main.cpp src/finger.cpp)
+
+
+# target_link_libraries(move_motor
+#   ${catkin_LIBRARIES}
+# )
+target_link_libraries(bionic ${catkin_LIBRARIES})
+
+
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/bionic_hand_node.cpp)
@@ -154,9 +166,8 @@ add_executable(move_motor ${SOURCE_FILES})
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(move_motor
-  ${catkin_LIBRARIES}
-)
+
+
 
 #############
 ## Install ##

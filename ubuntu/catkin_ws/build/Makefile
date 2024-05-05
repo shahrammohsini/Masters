@@ -584,6 +584,19 @@ bionic_hand_generate_messages_eus/fast:
 .PHONY : bionic_hand_generate_messages_eus/fast
 
 #=============================================================================
+# Target rules for targets named bionic_hand_gennodejs
+
+# Build rule for target.
+bionic_hand_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_gennodejs
+.PHONY : bionic_hand_gennodejs
+
+# fast build rule for target.
+bionic_hand_gennodejs/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
+.PHONY : bionic_hand_gennodejs/fast
+
+#=============================================================================
 # Target rules for targets named bionic_hand_generate_messages_lisp
 
 # Build rule for target.
@@ -623,32 +636,6 @@ bionic_hand_genpy/fast:
 .PHONY : bionic_hand_genpy/fast
 
 #=============================================================================
-# Target rules for targets named bionic_hand_gennodejs
-
-# Build rule for target.
-bionic_hand_gennodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_gennodejs
-.PHONY : bionic_hand_gennodejs
-
-# fast build rule for target.
-bionic_hand_gennodejs/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
-.PHONY : bionic_hand_gennodejs/fast
-
-#=============================================================================
-# Target rules for targets named move_motor
-
-# Build rule for target.
-move_motor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 move_motor
-.PHONY : move_motor
-
-# fast build rule for target.
-move_motor/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/move_motor.dir/build.make bionic_hand/CMakeFiles/move_motor.dir/build
-.PHONY : move_motor/fast
-
-#=============================================================================
 # Target rules for targets named bionic_hand_generate_messages_py
 
 # Build rule for target.
@@ -660,6 +647,19 @@ bionic_hand_generate_messages_py: cmake_check_build_system
 bionic_hand_generate_messages_py/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build
 .PHONY : bionic_hand_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named bionic
+
+# Build rule for target.
+bionic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic
+.PHONY : bionic
+
+# fast build rule for target.
+bionic/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/build
+.PHONY : bionic/fast
 
 #=============================================================================
 # Target rules for targets named bulk_read_write_node
@@ -1174,12 +1174,12 @@ help:
 	@echo "... bionic_hand_generate_messages_cpp"
 	@echo "... bionic_hand_genlisp"
 	@echo "... bionic_hand_generate_messages_eus"
+	@echo "... bionic_hand_gennodejs"
 	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... bionic_hand_geneus"
 	@echo "... bionic_hand_genpy"
-	@echo "... bionic_hand_gennodejs"
-	@echo "... move_motor"
 	@echo "... bionic_hand_generate_messages_py"
+	@echo "... bionic"
 	@echo "... bulk_read_write_node"
 	@echo "... read_write_node"
 	@echo "... dynamixel_sdk_examples_generate_messages_py"

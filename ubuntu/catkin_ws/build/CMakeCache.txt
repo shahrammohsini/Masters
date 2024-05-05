@@ -395,6 +395,12 @@ _gtest_INCLUDES:FILEPATH=/usr/include/gtest/gtest.h
 _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Value Computed by CMake
+bio_ik_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/smart_ws/src/smart_arm_ros/third_party/bio_ik
+
+//Value Computed by CMake
+bio_ik_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/smart_ws/src/smart_arm_ros/third_party/bio_ik
+
+//Value Computed by CMake
 bionic_hand_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand
 
 //Value Computed by CMake
@@ -423,6 +429,9 @@ dynamixel_sdk_examples_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/
 
 //Value Computed by CMake
 dynamixel_sdk_examples_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples
+
+//The directory containing a CMake configuration file for eigen_conversions.
+eigen_conversions_DIR:PATH=/opt/ros/noetic/share/eigen_conversions/cmake
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/noetic/share/gencpp/cmake
@@ -500,6 +509,9 @@ message_generation_DIR:PATH=/opt/ros/noetic/share/message_generation/cmake
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/noetic/share/message_runtime/cmake
 
+//The directory containing a CMake configuration file for moveit_core.
+moveit_core_DIR:PATH=moveit_core_DIR-NOTFOUND
+
 //Value Computed by CMake
 my_robot_controller_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/my_robot_controller
 
@@ -526,6 +538,24 @@ rospy_DIR:PATH=/opt/ros/noetic/share/rospy/cmake
 
 //The directory containing a CMake configuration file for rostime.
 rostime_DIR:PATH=/opt/ros/noetic/share/rostime/cmake
+
+//Value Computed by CMake
+smart_arm_bringup_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/smart_ws/src/smart_arm_ros/smart_arm_bringup
+
+//Value Computed by CMake
+smart_arm_bringup_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/smart_ws/src/smart_arm_ros/smart_arm_bringup
+
+//Value Computed by CMake
+smart_arm_control_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/smart_ws/src/smart_arm_ros/smart_arm_control
+
+//Value Computed by CMake
+smart_arm_control_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/smart_ws/src/smart_arm_ros/smart_arm_control
+
+//Value Computed by CMake
+smart_arm_moveit_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/smart_ws/src/smart_arm_ros/smart_arm_moveit
+
+//Value Computed by CMake
+smart_arm_moveit_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/smart_ws/src/smart_arm_ros/smart_arm_moveit
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/noetic/share/std_msgs/cmake
