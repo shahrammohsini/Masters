@@ -1,5 +1,6 @@
 from vpython import *
 import math
+import matplotlib.pyplot as plt
 
 
 #Paramters
@@ -28,9 +29,7 @@ def create_phalanx(position, axis, radius):
 
 def create_joint(position, radius):
     """Creates a joint as a sphere."""
-    return sphere(pos=position, radius=radius, color=color.red)
-
-
+    return sphere(pos=position, radius=radius, color=color.gray(0.8))
 
 
 def finger_pos_update(theta_m):
@@ -70,32 +69,28 @@ def finger_pos_update(theta_m):
     Pos_D_joint_Y = p_phalanx_midF_Length*math.cos(theta_M_joint) + I_phalanx_midF_Length*math.cos(theta_M_joint + theta_P_joint)
     Pos_D_joint_X = p_phalanx_midF_Length*math.sin(theta_M_joint) + I_phalanx_midF_Length*math.sin(theta_M_joint + theta_P_joint)
 
-    pos_tip__Y = p_phalanx_midF_Length*math.cos(theta_M_joint) + I_phalanx_midF_Length*math.cos(theta_M_joint + theta_P_joint) + d_phalanx_midF_length*math.cos(theta_M_joint + theta_P_joint + theta_D_joint)
-    pos_tip__X = p_phalanx_midF_Length*math.sin(theta_M_joint) + I_phalanx_midF_Length*math.sin(theta_M_joint + theta_P_joint) + d_phalanx_midF_length*math.sin(theta_M_joint + theta_P_joint + theta_D_joint)
+    pos_tip_Y = p_phalanx_midF_Length*math.cos(theta_M_joint) + I_phalanx_midF_Length*math.cos(theta_M_joint + theta_P_joint) + d_phalanx_midF_length*math.cos(theta_M_joint + theta_P_joint + theta_D_joint)
+    pos_tip_X = p_phalanx_midF_Length*math.sin(theta_M_joint) + I_phalanx_midF_Length*math.sin(theta_M_joint + theta_P_joint) + d_phalanx_midF_length*math.sin(theta_M_joint + theta_P_joint + theta_D_joint)
 
 
 
-    # print("pos_p: ", pos_P_joint_X, pos_P_joint_Y )
-    # print("pos_d: ", Pos_D_joint_X, Pos_D_joint_Y)
-    # print("pos_tip:", pos_tip__X, pos_tip__Y)
-
-    return pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip__X, pos_tip__Y
+    return pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint
 
 
 
     
-def create_visual_model(pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip__X, pos_tip__Y):
-    meta_joint_mid = create_joint(position=vector(0, 0, 0), radius=1.6) #Joint 1
-    p_joint_mid = create_joint(position= vector(pos_P_joint_X, pos_P_joint_Y, 0), radius=1.4) #joint 2
+def create_visual_model(pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y):
+    meta_joint_mid = create_joint(position=vector(0, 0, 0), radius=1) #Joint 1
+    p_joint_mid = create_joint(position= vector(pos_P_joint_X, pos_P_joint_Y, 0), radius=0.8) #joint 2
 
     p_phalanx_mid = create_phalanx(position=meta_joint_mid.pos , axis = p_joint_mid.pos - meta_joint_mid.pos, radius=meta_joint_mid.radius) #Phalanx 1
 
-    D_joint_mid = create_joint(position= vector(Pos_D_joint_X, Pos_D_joint_Y, 0), radius=1.3)
+    D_joint_mid = create_joint(position= vector(Pos_D_joint_X, Pos_D_joint_Y, 0), radius=0.6)
 
 
     I_phalanx_mid = create_phalanx(position=p_joint_mid.pos, axis = D_joint_mid.pos - p_joint_mid.pos, radius= p_joint_mid.radius)
     
-    finger_tip_mid = sphere(pos= vector(pos_tip__X, pos_tip__Y, 0), radius=1.3, color=color.white)
+    finger_tip_mid = sphere(pos= vector(pos_tip_X, pos_tip_Y, 0), radius=0.6, color=color.white)
 
 
     D_phalanx_mid = create_phalanx(position= D_joint_mid.pos, axis = finger_tip_mid.pos - D_joint_mid.pos, radius= D_joint_mid.radius)
@@ -123,22 +118,105 @@ def update_visual_model(p_joint_mid_pos, D_joint_mid_pos, finger_tip_mid_pos):
 
 
 
+
+def plot_joint_angles(motor_angles, theta_M_joints, theta_P_joints, theta_D_joints):
+    # Plotting the angles
+    plt.figure(figsize=(10, 6))
+    plt.plot(motor_angles, theta_M_joints, label='Metacarpophalangeal Joint (Theta_M)')
+    plt.plot(motor_angles, theta_P_joints, label='Proximal Joint (Theta_P)')
+    plt.plot(motor_angles, theta_D_joints, label='Distal Joint (Theta_D)')
+    plt.xlabel('Motor Angle (degrees)')
+    plt.ylabel('Joint Angle (degrees)')
+    plt.title('Joint Angles as a Function of Motor Angle')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+
+def plot_joint_pos(motor_angles, pos_P_joint_Xs, Pos_D_joint_Xs, pos_tip_Xs, pos_P_joint_Ys, Pos_D_joint_Ys, pos_tip_Ys):
+    # Plotting the positions
+    plt.figure(figsize=(10, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(motor_angles, pos_P_joint_Xs, label='Proximal Joint X')
+    plt.plot(motor_angles, Pos_D_joint_Xs, label='Distal Joint X')
+    plt.plot(motor_angles, pos_tip_Xs, label='Tip X')
+    plt.xlabel('Motor Angle (degrees)')
+    plt.ylabel('Position X (cm)')
+    plt.title('X Positions of Joints as a Function of Motor Angle')
+    plt.legend()
+    plt.grid(True)
+
+    plt.subplot(1, 2, 2)
+    plt.plot(motor_angles, pos_P_joint_Ys, label='Proximal Joint Y')
+    plt.plot(motor_angles, Pos_D_joint_Ys, label='Distal Joint Y')
+    plt.plot(motor_angles, pos_tip_Ys, label='Tip Y')
+    plt.xlabel('Motor Angle (degrees)')
+    plt.ylabel('Position Y (cm)')
+    plt.title('Y Positions of Joints as a Function of Motor Angle')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+ 
+
+
+
 if __name__ == "__main__":
 
-    pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip__X, pos_tip__Y = finger_pos_update(theta_m = 0)
-    meta_joint_mid, p_joint_mid, p_phalanx_mid, D_joint_mid, I_phalanx_mid, finger_tip_mid, D_phalanx_mid = create_visual_model(pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip__X, pos_tip__Y)
+    #Initialize lists to store data
+    motor_angles = []
+    theta_M_joints = []
+    theta_P_joints = []
+    theta_D_joints = []
+
+    motor_angles = []
+    pos_P_joint_Xs = []
+    pos_P_joint_Ys = []
+    Pos_D_joint_Xs = []
+    Pos_D_joint_Ys = []
+    pos_tip_Xs = []
+    pos_tip_Ys = []
+
+
+    pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint = finger_pos_update(theta_m = 0)
+    meta_joint_mid, p_joint_mid, p_phalanx_mid, D_joint_mid, I_phalanx_mid, finger_tip_mid, D_phalanx_mid = create_visual_model(pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y)
 
 
 
     angles = range(0, 365)
     for angle in angles:
-        rate(100)
+        # rate(100)
 
         theta_m = math.radians(angle)
-        pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip__X, pos_tip__Y = finger_pos_update(theta_m)
+        pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint = finger_pos_update(theta_m)
 
-        update_visual_model(p_joint_mid_pos = vector(pos_P_joint_X,pos_P_joint_Y, 0), D_joint_mid_pos = vector(Pos_D_joint_X, Pos_D_joint_Y, 0), finger_tip_mid_pos = vector(pos_tip__X, pos_tip__Y, 0))
-        
+        update_visual_model(p_joint_mid_pos = vector(pos_P_joint_X,pos_P_joint_Y, 0), D_joint_mid_pos = vector(Pos_D_joint_X, Pos_D_joint_Y, 0), finger_tip_mid_pos = vector(pos_tip_X, pos_tip_Y, 0))
+
+
+        # Store the data
+        motor_angles.append(angle)
+        theta_M_joints.append(math.degrees(theta_M_joint))
+        theta_P_joints.append(math.degrees(theta_P_joint))
+        theta_D_joints.append(math.degrees(theta_D_joint))
+
+        pos_P_joint_Xs.append(pos_P_joint_X)
+        pos_P_joint_Ys.append(pos_P_joint_Y)
+        Pos_D_joint_Xs.append(Pos_D_joint_X)
+        Pos_D_joint_Ys.append(Pos_D_joint_Y)
+        pos_tip_Xs.append(pos_tip_X)
+        pos_tip_Ys.append(pos_tip_Y)
+
+
+
+    #Plot joint angles
+    plot_joint_angles(motor_angles, theta_M_joints, theta_P_joints, theta_D_joints)
+
+    plot_joint_pos(motor_angles, pos_P_joint_Xs, Pos_D_joint_Xs, pos_tip_Xs, pos_P_joint_Ys, Pos_D_joint_Ys, pos_tip_Ys)
+
+    
+    
+            
 
         
 
