@@ -38,7 +38,18 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bionic_hand/msg" TYPE FILE FILES "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bionic_hand/msg" TYPE FILE FILES
+    "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg"
+    "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bionic_hand/srv" TYPE FILE FILES
+    "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+    "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+    "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

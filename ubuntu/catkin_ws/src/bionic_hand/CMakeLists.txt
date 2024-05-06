@@ -52,15 +52,17 @@ add_message_files(
 #   Message1.msg
 #   Message2.msg
   SetPosition.msg
+  SetPWM.msg
+
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
-
+add_service_files(
+  FILES
+    GetPosition.srv
+    SyncGetPosition.srv
+    BulkGetItem.srv
+)
 ## Generate actions in the 'action' folder
 # add_action_files(
 #   FILES
@@ -105,9 +107,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES bionic_hand
-#  CATKIN_DEPENDS dynamixel_sdk rospy
+  CATKIN_DEPENDS
+    roscpp
+    std_msgs
+    dynamixel_sdk
 #  DEPENDS system_lib
 )
 
@@ -123,6 +126,13 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}/bionic_hand
 )
+
+
+add_executable(pwm_control_node src/pwm_control.cpp)
+add_dependencies(pwm_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(pwm_control_node ${catkin_LIBRARIES})
+
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

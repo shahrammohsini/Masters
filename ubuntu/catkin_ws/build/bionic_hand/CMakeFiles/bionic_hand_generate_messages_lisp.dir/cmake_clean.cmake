@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/SetPWM.lisp"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/SetPosition.lisp"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/srv/BulkGetItem.lisp"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/srv/GetPosition.lisp"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/srv/SyncGetPosition.lisp"
   "CMakeFiles/bionic_hand_generate_messages_lisp"
 )
 

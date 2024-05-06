@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/msg/BulkSetItem.lisp"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/msg/SetPWM.lisp"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/msg/SetPosition.lisp"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/msg/SyncSetPosition.lisp"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/srv/BulkGetItem.lisp"

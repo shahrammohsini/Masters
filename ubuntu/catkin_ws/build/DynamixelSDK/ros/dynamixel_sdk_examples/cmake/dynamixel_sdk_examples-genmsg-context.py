@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SyncSetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+messages_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SyncSetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
 services_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/SyncGetPosition.srv;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/BulkGetItem.srv"
 pkg_name = "dynamixel_sdk_examples"
 dependencies_str = "std_msgs"

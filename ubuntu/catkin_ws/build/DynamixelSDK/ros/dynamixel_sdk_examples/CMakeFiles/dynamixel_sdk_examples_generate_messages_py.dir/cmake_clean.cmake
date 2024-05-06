@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/msg/_BulkSetItem.py"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/msg/_SetPWM.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/msg/_SetPosition.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/msg/_SyncSetPosition.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/msg/__init__.py"

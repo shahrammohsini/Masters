@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/dynamixel_sdk_examples/msg/BulkSetItem.js"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/dynamixel_sdk_examples/msg/SetPWM.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/dynamixel_sdk_examples/msg/SetPosition.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/dynamixel_sdk_examples/msg/SyncSetPosition.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/dynamixel_sdk_examples/srv/BulkGetItem.js"

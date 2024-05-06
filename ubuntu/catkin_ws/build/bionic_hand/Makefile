@@ -103,16 +103,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -134,6 +124,16 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,6 +166,36 @@ preinstall/fast:
 depend:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/pwm_control_node.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/pwm_control_node.dir/rule
+.PHONY : bionic_hand/CMakeFiles/pwm_control_node.dir/rule
+
+# Convenience name for target.
+pwm_control_node: bionic_hand/CMakeFiles/pwm_control_node.dir/rule
+
+.PHONY : pwm_control_node
+
+# fast build rule for target.
+pwm_control_node/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/build
+.PHONY : pwm_control_node/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
+
+# Convenience name for target.
+bionic_hand_generate_messages_py: bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
+
+.PHONY : bionic_hand_generate_messages_py
+
+# fast build rule for target.
+bionic_hand_generate_messages_py/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build
+.PHONY : bionic_hand_generate_messages_py/fast
 
 # Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_gencpp.dir/rule:
@@ -213,6 +243,51 @@ bionic_hand_generate_messages_nodejs/fast:
 .PHONY : bionic_hand_generate_messages_nodejs/fast
 
 # Convenience name for target.
+bionic_hand/CMakeFiles/bionic.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic.dir/rule
+
+# Convenience name for target.
+bionic: bionic_hand/CMakeFiles/bionic.dir/rule
+
+.PHONY : bionic
+
+# fast build rule for target.
+bionic/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/build
+.PHONY : bionic/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/rule
+.PHONY : bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/rule
+
+# Convenience name for target.
+_bionic_hand_generate_messages_check_deps_SetPWM: bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/rule
+
+.PHONY : _bionic_hand_generate_messages_check_deps_SetPWM
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_SetPWM/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_SetPWM/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/rule
+.PHONY : bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/rule
+
+# Convenience name for target.
+_bionic_hand_generate_messages_check_deps_GetPosition: bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/rule
+
+.PHONY : _bionic_hand_generate_messages_check_deps_GetPosition
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_GetPosition/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_GetPosition/fast
+
+# Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_generate_messages.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages.dir/rule
 .PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages.dir/rule
@@ -258,64 +333,19 @@ bionic_hand_genlisp/fast:
 .PHONY : bionic_hand_genlisp/fast
 
 # Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
+bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/rule
+.PHONY : bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/rule
 
 # Convenience name for target.
-bionic_hand_generate_messages_eus: bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
+_bionic_hand_generate_messages_check_deps_SyncGetPosition: bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/rule
 
-.PHONY : bionic_hand_generate_messages_eus
+.PHONY : _bionic_hand_generate_messages_check_deps_SyncGetPosition
 
 # fast build rule for target.
-bionic_hand_generate_messages_eus/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build
-.PHONY : bionic_hand_generate_messages_eus/fast
-
-# Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-
-# Convenience name for target.
-bionic_hand_gennodejs: bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
-
-.PHONY : bionic_hand_gennodejs
-
-# fast build rule for target.
-bionic_hand_gennodejs/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
-.PHONY : bionic_hand_gennodejs/fast
-
-# Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-bionic_hand_generate_messages_lisp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-
-.PHONY : bionic_hand_generate_messages_lisp
-
-# fast build rule for target.
-bionic_hand_generate_messages_lisp/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
-.PHONY : bionic_hand_generate_messages_lisp/fast
-
-# Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
-
-# Convenience name for target.
-bionic_hand_geneus: bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
-
-.PHONY : bionic_hand_geneus
-
-# fast build rule for target.
-bionic_hand_geneus/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build
-.PHONY : bionic_hand_geneus/fast
+_bionic_hand_generate_messages_check_deps_SyncGetPosition/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SyncGetPosition.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_SyncGetPosition/fast
 
 # Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_genpy.dir/rule:
@@ -333,34 +363,79 @@ bionic_hand_genpy/fast:
 .PHONY : bionic_hand_genpy/fast
 
 # Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
+bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
 
 # Convenience name for target.
-bionic_hand_generate_messages_py: bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
+bionic_hand_geneus: bionic_hand/CMakeFiles/bionic_hand_geneus.dir/rule
 
-.PHONY : bionic_hand_generate_messages_py
+.PHONY : bionic_hand_geneus
 
 # fast build rule for target.
-bionic_hand_generate_messages_py/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/build
-.PHONY : bionic_hand_generate_messages_py/fast
+bionic_hand_geneus/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build
+.PHONY : bionic_hand_geneus/fast
 
 # Convenience name for target.
-bionic_hand/CMakeFiles/bionic.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic.dir/rule
+bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
 
 # Convenience name for target.
-bionic: bionic_hand/CMakeFiles/bionic.dir/rule
+bionic_hand_gennodejs: bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/rule
 
-.PHONY : bionic
+.PHONY : bionic_hand_gennodejs
 
 # fast build rule for target.
-bionic/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/build
-.PHONY : bionic/fast
+bionic_hand_gennodejs/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
+.PHONY : bionic_hand_gennodejs/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/rule
+.PHONY : bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/rule
+
+# Convenience name for target.
+_bionic_hand_generate_messages_check_deps_BulkGetItem: bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/rule
+
+.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_BulkGetItem/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+bionic_hand_generate_messages_eus: bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/rule
+
+.PHONY : bionic_hand_generate_messages_eus
+
+# fast build rule for target.
+bionic_hand_generate_messages_eus/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build
+.PHONY : bionic_hand_generate_messages_eus/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+bionic_hand_generate_messages_lisp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+
+.PHONY : bionic_hand_generate_messages_lisp
+
+# fast build rule for target.
+bionic_hand_generate_messages_lisp/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
+.PHONY : bionic_hand_generate_messages_lisp/fast
 
 src/finger.o: src/finger.cpp.o
 
@@ -416,6 +491,33 @@ src/main.cpp.s:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic.dir/build.make bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/pwm_control.o: src/pwm_control.cpp.o
+
+.PHONY : src/pwm_control.o
+
+# target to build an object file
+src/pwm_control.cpp.o:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.o
+.PHONY : src/pwm_control.cpp.o
+
+src/pwm_control.i: src/pwm_control.cpp.i
+
+.PHONY : src/pwm_control.i
+
+# target to preprocess a source file
+src/pwm_control.cpp.i:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.i
+.PHONY : src/pwm_control.cpp.i
+
+src/pwm_control.s: src/pwm_control.cpp.s
+
+.PHONY : src/pwm_control.s
+
+# target to generate assembly for a file
+src/pwm_control.cpp.s:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.s
+.PHONY : src/pwm_control.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -424,30 +526,38 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... test"
+	@echo "... pwm_control_node"
+	@echo "... bionic_hand_generate_messages_py"
 	@echo "... install/strip"
 	@echo "... bionic_hand_gencpp"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPosition"
 	@echo "... install"
 	@echo "... bionic_hand_generate_messages_nodejs"
-	@echo "... bionic_hand_generate_messages"
-	@echo "... bionic_hand_generate_messages_cpp"
-	@echo "... bionic_hand_genlisp"
-	@echo "... bionic_hand_generate_messages_eus"
-	@echo "... bionic_hand_gennodejs"
-	@echo "... bionic_hand_generate_messages_lisp"
-	@echo "... list_install_components"
-	@echo "... bionic_hand_geneus"
-	@echo "... bionic_hand_genpy"
-	@echo "... bionic_hand_generate_messages_py"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... bionic"
+	@echo "... _bionic_hand_generate_messages_check_deps_SetPWM"
+	@echo "... _bionic_hand_generate_messages_check_deps_GetPosition"
+	@echo "... bionic_hand_generate_messages"
+	@echo "... bionic_hand_generate_messages_cpp"
+	@echo "... bionic_hand_genlisp"
+	@echo "... _bionic_hand_generate_messages_check_deps_SyncGetPosition"
+	@echo "... list_install_components"
+	@echo "... bionic_hand_genpy"
+	@echo "... bionic_hand_geneus"
+	@echo "... bionic_hand_gennodejs"
+	@echo "... _bionic_hand_generate_messages_check_deps_BulkGetItem"
+	@echo "... bionic_hand_generate_messages_eus"
+	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... src/finger.o"
 	@echo "... src/finger.i"
 	@echo "... src/finger.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/pwm_control.o"
+	@echo "... src/pwm_control.i"
+	@echo "... src/pwm_control.s"
 .PHONY : help
 
 

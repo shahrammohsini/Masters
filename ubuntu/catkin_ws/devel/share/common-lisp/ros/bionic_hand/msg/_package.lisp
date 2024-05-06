@@ -3,6 +3,8 @@
   (:export
    "<BULKSETITEM>"
    "BULKSETITEM"
+   "<SETPWM>"
+   "SETPWM"
    "<SETPOSITION>"
    "SETPOSITION"
    "<SYNCSETPOSITION>"

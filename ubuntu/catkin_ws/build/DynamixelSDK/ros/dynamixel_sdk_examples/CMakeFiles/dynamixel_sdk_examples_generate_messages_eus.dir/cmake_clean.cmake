@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/manifest.l"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/msg/BulkSetItem.l"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/msg/SetPWM.l"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/msg/SetPosition.l"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/msg/SyncSetPosition.l"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/dynamixel_sdk_examples/srv/BulkGetItem.l"

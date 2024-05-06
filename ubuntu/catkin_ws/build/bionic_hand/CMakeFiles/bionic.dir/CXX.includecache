@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPosition.h
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
 string
 -
 vector
@@ -22,16 +22,10 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.cpp
-finger.h
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.h
 ros/ros.h
 -
-
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.h
-ros/ros.h
--
-bionic_hand/SetPosition.h
+bionic_hand/SetPWM.h
 -
 iostream
 -
@@ -39,7 +33,7 @@ iostream
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/main.cpp
 ros/ros.h
 -
-bionic_hand/SetPosition.h
+bionic_hand/SetPWM.h
 -
 iostream
 -

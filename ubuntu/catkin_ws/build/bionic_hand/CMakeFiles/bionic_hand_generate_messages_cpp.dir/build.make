@@ -54,6 +54,10 @@ CMAKE_BINARY_DIR = /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build
 include bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp.dir/progress.make
 
 bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPosition.h
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h
 
 
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPosition.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
@@ -62,8 +66,39 @@ bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp: /home/shahram/Document
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from bionic_hand/SetPosition.msg"
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand && /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from bionic_hand/SetPWM.msg"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand && /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h: /opt/ros/noetic/share/gencpp/msg.h.template
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from bionic_hand/GetPosition.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand && /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h: /opt/ros/noetic/share/gencpp/msg.h.template
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from bionic_hand/SyncGetPosition.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand && /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h: /opt/ros/noetic/share/gencpp/msg.h.template
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from bionic_hand/BulkGetItem.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand && /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand -e /opt/ros/noetic/share/gencpp/cmake/..
+
 bionic_hand_generate_messages_cpp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp
 bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPosition.h
+bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
+bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h
+bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SyncGetPosition.h
+bionic_hand_generate_messages_cpp: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h
 bionic_hand_generate_messages_cpp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_cpp.dir/build.make
 
 .PHONY : bionic_hand_generate_messages_cpp

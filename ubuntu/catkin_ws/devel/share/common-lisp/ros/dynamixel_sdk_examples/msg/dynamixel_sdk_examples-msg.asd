@@ -6,6 +6,8 @@
   :components ((:file "_package")
     (:file "BulkSetItem" :depends-on ("_package_BulkSetItem"))
     (:file "_package_BulkSetItem" :depends-on ("_package"))
+    (:file "SetPWM" :depends-on ("_package_SetPWM"))
+    (:file "_package_SetPWM" :depends-on ("_package"))
     (:file "SetPosition" :depends-on ("_package_SetPosition"))
     (:file "_package_SetPosition" :depends-on ("_package"))
     (:file "SyncSetPosition" :depends-on ("_package_SyncSetPosition"))

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "dynamixel_sdk_examples: 3 messages, 3 services")
+message(STATUS "dynamixel_sdk_examples: 4 messages, 3 services")
 
 set(MSG_I_FLAGS "-Idynamixel_sdk_examples:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -30,6 +30,11 @@ add_custom_target(_dynamixel_sdk_examples_generate_messages_check_deps_${_filena
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
 add_custom_target(_dynamixel_sdk_examples_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "dynamixel_sdk_examples" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" ""
+)
+
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
+add_custom_target(_dynamixel_sdk_examples_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "dynamixel_sdk_examples" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" ""
 )
 
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
@@ -67,6 +72,12 @@ _generate_msg_cpp(dynamixel_sdk_examples
 )
 _generate_msg_cpp(dynamixel_sdk_examples
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/dynamixel_sdk_examples
+)
+_generate_msg_cpp(dynamixel_sdk_examples
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/dynamixel_sdk_examples
@@ -110,6 +121,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(dynamixel_sdk_examples_generate_messages_cpp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_cpp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
+add_dependencies(dynamixel_sdk_examples_generate_messages_cpp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_cpp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/SyncGetPosition.srv" NAME_WE)
@@ -140,6 +153,12 @@ _generate_msg_eus(dynamixel_sdk_examples
 )
 _generate_msg_eus(dynamixel_sdk_examples
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/dynamixel_sdk_examples
+)
+_generate_msg_eus(dynamixel_sdk_examples
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/dynamixel_sdk_examples
@@ -183,6 +202,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(dynamixel_sdk_examples_generate_messages_eus _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_eus _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
+add_dependencies(dynamixel_sdk_examples_generate_messages_eus _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_eus _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/SyncGetPosition.srv" NAME_WE)
@@ -213,6 +234,12 @@ _generate_msg_lisp(dynamixel_sdk_examples
 )
 _generate_msg_lisp(dynamixel_sdk_examples
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/dynamixel_sdk_examples
+)
+_generate_msg_lisp(dynamixel_sdk_examples
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/dynamixel_sdk_examples
@@ -256,6 +283,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(dynamixel_sdk_examples_generate_messages_lisp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_lisp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
+add_dependencies(dynamixel_sdk_examples_generate_messages_lisp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_lisp _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/SyncGetPosition.srv" NAME_WE)
@@ -286,6 +315,12 @@ _generate_msg_nodejs(dynamixel_sdk_examples
 )
 _generate_msg_nodejs(dynamixel_sdk_examples
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/dynamixel_sdk_examples
+)
+_generate_msg_nodejs(dynamixel_sdk_examples
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/dynamixel_sdk_examples
@@ -329,6 +364,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(dynamixel_sdk_examples_generate_messages_nodejs _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_nodejs _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
+add_dependencies(dynamixel_sdk_examples_generate_messages_nodejs _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_nodejs _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/SyncGetPosition.srv" NAME_WE)
@@ -359,6 +396,12 @@ _generate_msg_py(dynamixel_sdk_examples
 )
 _generate_msg_py(dynamixel_sdk_examples
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/dynamixel_sdk_examples
+)
+_generate_msg_py(dynamixel_sdk_examples
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/dynamixel_sdk_examples
@@ -401,6 +444,8 @@ add_dependencies(dynamixel_sdk_examples_generate_messages_py _dynamixel_sdk_exam
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SyncSetPosition.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_py _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/BulkSetItem.msg" NAME_WE)
+add_dependencies(dynamixel_sdk_examples_generate_messages_py _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/msg/SetPWM.msg" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_py _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/DynamixelSDK/ros/dynamixel_sdk_examples/srv/GetPosition.srv" NAME_WE)
 add_dependencies(dynamixel_sdk_examples_generate_messages_py _dynamixel_sdk_examples_generate_messages_check_deps_${_filename})

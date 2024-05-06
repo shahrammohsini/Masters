@@ -54,6 +54,10 @@ CMAKE_BINARY_DIR = /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build
 include bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/progress.make
 
 bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPosition.js
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/GetPosition.js
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/SyncGetPosition.js
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/BulkGetItem.js
 
 
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPosition.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
@@ -61,8 +65,32 @@ bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs: /home/shahram/Docum
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from bionic_hand/SetPosition.msg"
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg
 
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from bionic_hand/SetPWM.msg"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/GetPosition.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/GetPosition.js: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from bionic_hand/GetPosition.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/SyncGetPosition.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/SyncGetPosition.js: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from bionic_hand/SyncGetPosition.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv
+
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/BulkGetItem.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/BulkGetItem.js: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from bionic_hand/BulkGetItem.srv"
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv -Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p bionic_hand -o /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv
+
 bionic_hand_generate_messages_nodejs: bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs
 bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPosition.js
+bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js
+bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/GetPosition.js
+bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/SyncGetPosition.js
+bionic_hand_generate_messages_nodejs: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/srv/BulkGetItem.js
 bionic_hand_generate_messages_nodejs: bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/build.make
 
 .PHONY : bionic_hand_generate_messages_nodejs

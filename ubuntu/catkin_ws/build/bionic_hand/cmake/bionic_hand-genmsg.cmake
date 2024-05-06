@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "bionic_hand: 1 messages, 0 services")
+message(STATUS "bionic_hand: 2 messages, 3 services")
 
 set(MSG_I_FLAGS "-Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -22,6 +22,26 @@ add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" ""
 )
 
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" ""
+)
+
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" ""
+)
+
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" ""
+)
+
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
+add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" ""
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -34,8 +54,32 @@ _generate_msg_cpp(bionic_hand
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
 )
+_generate_msg_cpp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Services
+_generate_srv_cpp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_cpp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_cpp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Module File
 _generate_module_cpp(bionic_hand
@@ -50,6 +94,14 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_cpp
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -67,8 +119,32 @@ _generate_msg_eus(bionic_hand
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
 )
+_generate_msg_eus(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Services
+_generate_srv_eus(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_eus(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_eus(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Module File
 _generate_module_eus(bionic_hand
@@ -83,6 +159,14 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_eus
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -100,8 +184,32 @@ _generate_msg_lisp(bionic_hand
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
 )
+_generate_msg_lisp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Services
+_generate_srv_lisp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_lisp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_lisp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Module File
 _generate_module_lisp(bionic_hand
@@ -116,6 +224,14 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_lis
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -133,8 +249,32 @@ _generate_msg_nodejs(bionic_hand
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
 )
+_generate_msg_nodejs(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Services
+_generate_srv_nodejs(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_nodejs(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_nodejs(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Module File
 _generate_module_nodejs(bionic_hand
@@ -149,6 +289,14 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_nod
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -166,8 +314,32 @@ _generate_msg_py(bionic_hand
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
 )
+_generate_msg_py(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Services
+_generate_srv_py(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_py(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
+)
+_generate_srv_py(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
+)
 
 ### Generating Module File
 _generate_module_py(bionic_hand
@@ -182,6 +354,14 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_py)
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
