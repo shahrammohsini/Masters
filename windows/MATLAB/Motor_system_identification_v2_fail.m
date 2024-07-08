@@ -1,0 +1,1 @@
+data2 = iddata(output_pos,input_volt, 0.01);

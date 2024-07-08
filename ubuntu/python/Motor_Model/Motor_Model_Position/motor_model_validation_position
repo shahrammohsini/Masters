@@ -1,0 +1,194 @@
+import matplotlib.pyplot as plt
+import os
+import dynamixel_sdk as dxl
+import time
+import csv
+import numpy as np
+
+# Protocol version and Dynamixel settings
+PROTOCOL_VERSION = 2.0
+DXL_ID = 1
+BAUDRATE = 57600
+DEVICENAME = 'COM10'
+ADDR_PRO_GOAL_PWM = 100
+ADDR_PRO_TORQUE_ENABLE = 64
+ADDR_PRO_GOAL_POSITION = 116
+ADDR_PRESENT_POSITION = 132
+ADDR_OPERATING_MODE = 11  # Address for the operating mode
+TORQUE_ENABLE = 1
+TORQUE_DISABLE = 0
+MAX_VOLTAGE = 12.2
+MAX_PWM = 885
+step_input = 12  # input voltage
+POSITION_MODE = 3
+PWM_MODE = 16
+
+# Experiment settings
+total_time = 1  # Total duration of the experiment
+dt = 0.01  # Time step for simulation
+step_time = 0  # Time at which the voltage steps up
+
+
+
+def initialize_dynamixel(devicename, baudrate, protocol_version):
+    portHandler = dxl.PortHandler(devicename)
+    packetHandler = dxl.PacketHandler(protocol_version)
+    if not portHandler.openPort():
+        raise IOError("Failed to open the port")
+    if not portHandler.setBaudRate(baudrate):
+        raise IOError("Failed to change the baudrate")
+    return portHandler, packetHandler
+
+def enable_torque(packetHandler, portHandler, dxl_id, torque_enable):
+    dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, dxl_id, ADDR_PRO_TORQUE_ENABLE, torque_enable)
+    if dxl_comm_result != dxl.COMM_SUCCESS:
+        raise RuntimeError(f"Torque enable failed: {packetHandler.getTxRxResult(dxl_comm_result)}")
+
+def disable_torque(packetHandler, portHandler, dxl_id):
+    packetHandler.write1ByteTxRx(portHandler, dxl_id, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE)
+
+
+def set_operating_mode(packet_handler, port_handler, mode):
+    """Set the operating mode."""
+    disable_torque(packet_handler, port_handler, DXL_ID)
+    dxl_comm_result, dxl_error = packet_handler.write1ByteTxRx(port_handler, DXL_ID, ADDR_OPERATING_MODE, mode)
+    if dxl_comm_result != dxl.COMM_SUCCESS:
+        raise Exception("Failed to set operating mode")
+    if dxl_error != 0:
+        print("Dynamixel error: %s" % packet_handler.getRxPacketError(dxl_error))
+
+
+def close_port(portHandler):
+    portHandler.closePort()
+
+def generate_step_input(total_time, dt, step_time, step_input, max_voltage, max_pwm):
+    times = np.arange(0, total_time, dt)
+    voltages = np.zeros_like(times)
+    voltages[times >= step_time] = step_input
+    pwms = (voltages / max_voltage * max_pwm).astype(int)
+    return times, voltages, pwms
+
+def generate_sinusoidal_input(total_time, dt, amplitude, frequency, max_pwm, max_voltage):
+    times = np.arange(0, total_time, dt)
+    voltages = amplitude * np.sin(2 * np.pi * frequency * times)
+    pwms = np.round(voltages / max_voltage * max_pwm).astype(int)
+    return times, voltages, pwms
+
+def read_position(packetHandler, portHandler, dxl_id):
+    dxl_present_position, dxl_comm_result, dxl_error = packetHandler.read4ByteTxRx(portHandler, dxl_id, ADDR_PRESENT_POSITION)
+    if dxl_comm_result != dxl.COMM_SUCCESS:
+        raise RuntimeError("Failed to read position")
+    if dxl_present_position > 4294967295 // 2:
+        dxl_present_position -= 4294967296
+
+    dxl_present_position = dxl_present_position * 0.088  # Example conversion factor to degrees (may vary)
+
+    return dxl_present_position
+
+def set_pwm(packetHandler, portHandler, dxl_id, pwm):
+    dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, dxl_id, ADDR_PRO_GOAL_PWM, pwm)
+    if dxl_comm_result != dxl.COMM_SUCCESS:
+        raise RuntimeError("Failed to set PWM")
+
+def calculate_position(previous_position, voltage, dt):
+    
+    # return previous_velocity + dt*(-169.8*previous_velocity + 4657*voltage)
+    # return (previous_position + dt*(-0.4273*previous_position + 127.8*voltage))
+    # return (previous_position + dt*(-0.2955*previous_position + 117*voltage))
+    return (previous_position + dt*(-0.40*previous_position + 105*voltage)) #best model so far
+
+
+    
+
+def run_experiment(times, voltages, pwms, packetHandler, portHandler, dxl_id):
+    sim_time = []
+    sim_position = []
+    actual_position = []
+    data = []
+
+    global previous_position #this will decide starting position
+    previous_position = 180  #decides the starting pos for sim
+
+    try:
+        for time_point, voltage, pwm in zip(times, voltages, pwms):
+            set_pwm(packetHandler, portHandler, dxl_id, pwm)
+            dxl_present_position = read_position(packetHandler, portHandler, dxl_id)
+
+            current_position = calculate_position(previous_position, voltage, dt)
+            previous_position = current_position
+
+            actual_position.append(dxl_present_position)
+            sim_time.append(time_point)
+            sim_position.append(current_position)
+            data.append([time_point, voltage, dxl_present_position, current_position])
+
+            time.sleep(dt)  # Sampling delay
+    finally:
+        set_pwm(packetHandler, portHandler, dxl_id, 0)  # stop the motor
+    return sim_time, sim_position, actual_position, data
+
+
+def set_goal_position(packet_handler, port_handler, position):
+    """Set the goal position."""
+    dxl_comm_result, dxl_error = packet_handler.write4ByteTxRx(port_handler, DXL_ID, ADDR_PRO_GOAL_POSITION, position)
+    if dxl_comm_result != dxl.COMM_SUCCESS:
+        raise Exception("Failed to set goal position")
+    if dxl_error != 0:
+        print("Dynamixel error: %s" % packet_handler.getRxPacketError(dxl_error))
+
+def plot_results(sim_time, sim_position, actual_position):
+    plt.plot(sim_time, sim_position, label='Simulated Position')
+    plt.plot(sim_time, actual_position, label='Actual Position')
+    plt.title('Simulated vs Actual Position')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+def save_to_csv(data, filename='motor_model_validation_step_input.csv'):
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Time", "Voltage", "Actual Position", "Simulated Position"])
+        writer.writerows(data)
+
+def main():
+    portHandler, packetHandler = None, None
+    try:
+        # Initialize PortHandler and PacketHandler
+        portHandler, packetHandler = initialize_dynamixel(DEVICENAME, BAUDRATE, PROTOCOL_VERSION)
+
+        # Set operating mode to Position Control Mode
+        set_operating_mode(packetHandler, portHandler, POSITION_MODE)
+
+        enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
+
+        # Set the goal position to 180 degrees. (Starting pos)
+        goal_position = int(180 / 360.0 * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
+        set_goal_position(packetHandler, portHandler, goal_position)
+        time.sleep(1)
+
+        # Switch back to pwm mode
+        set_operating_mode(packetHandler, portHandler, PWM_MODE)
+        enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
+
+
+
+        # times, voltages, pwms = generate_step_input(total_time, dt, step_time, step_input, MAX_VOLTAGE, MAX_PWM)
+        times, voltages, pwms = generate_sinusoidal_input(total_time, dt, amplitude = 12, frequency = 2, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
+        
+        sim_time, sim_position, actual_position, data = run_experiment(times, voltages, pwms, packetHandler, portHandler, DXL_ID)
+        
+        # print("voltages: ", voltages)
+        print("actual pos: ", actual_position)
+        print("sim pos: ", sim_position)
+        plot_results(sim_time, sim_position, actual_position)
+        save_to_csv(data)
+    except Exception as e:
+        print(e)
+    finally:
+        if packetHandler and portHandler:
+            disable_torque(packetHandler, portHandler, DXL_ID)
+            close_port(portHandler)
+
+if __name__ == "__main__":
+    
+    main()
