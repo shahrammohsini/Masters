@@ -406,6 +406,12 @@ bionic_hand_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catk
 //Value Computed by CMake
 bionic_hand_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand
 
+//Value Computed by CMake
+bionic_hand_model_BINARY_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand_model
+
+//Value Computed by CMake
+bionic_hand_model_SOURCE_DIR:STATIC=/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand_model
+
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/noetic/share/catkin/cmake
 

@@ -2,9 +2,9 @@
 #include <ros/ros.h>
 
 // Define the constructor using the scope resolution operator
-Finger::Finger(uint8_t motor_id) : id(motor_id), message_published(false) {
+Finger::Finger(uint8_t motor_id, std::string finger_name) 
+: id(motor_id), name(finger_name), message_published(false) { //set id and name variables to motor_id and finger_name
     // Initialize other member variables or perform initial setup here if necessary
-    
 }
 
 // // Define the setPosition method using the scope resolution operator

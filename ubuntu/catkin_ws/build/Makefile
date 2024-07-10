@@ -519,6 +519,32 @@ bionic_hand_generate_messages_py/fast:
 .PHONY : bionic_hand_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named bionic_hand_generate_messages_nodejs
+
+# Build rule for target.
+bionic_hand_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_generate_messages_nodejs
+.PHONY : bionic_hand_generate_messages_nodejs
+
+# fast build rule for target.
+bionic_hand_generate_messages_nodejs/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/build
+.PHONY : bionic_hand_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named bionic_hand_genlisp
+
+# Build rule for target.
+bionic_hand_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_genlisp
+.PHONY : bionic_hand_genlisp
+
+# fast build rule for target.
+bionic_hand_genlisp/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build
+.PHONY : bionic_hand_genlisp/fast
+
+#=============================================================================
 # Target rules for targets named bionic_hand_gencpp
 
 # Build rule for target.
@@ -545,19 +571,6 @@ _bionic_hand_generate_messages_check_deps_SetPosition/fast:
 .PHONY : _bionic_hand_generate_messages_check_deps_SetPosition/fast
 
 #=============================================================================
-# Target rules for targets named bionic_hand_generate_messages_nodejs
-
-# Build rule for target.
-bionic_hand_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_generate_messages_nodejs
-.PHONY : bionic_hand_generate_messages_nodejs
-
-# fast build rule for target.
-bionic_hand_generate_messages_nodejs/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir/build
-.PHONY : bionic_hand_generate_messages_nodejs/fast
-
-#=============================================================================
 # Target rules for targets named bionic
 
 # Build rule for target.
@@ -582,6 +595,58 @@ _bionic_hand_generate_messages_check_deps_SetPWM: cmake_check_build_system
 _bionic_hand_generate_messages_check_deps_SetPWM/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build
 .PHONY : _bionic_hand_generate_messages_check_deps_SetPWM/fast
+
+#=============================================================================
+# Target rules for targets named _bionic_hand_generate_messages_check_deps_FingerPos
+
+# Build rule for target.
+_bionic_hand_generate_messages_check_deps_FingerPos: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _bionic_hand_generate_messages_check_deps_FingerPos
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerPos
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_FingerPos/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerPos/fast
+
+#=============================================================================
+# Target rules for targets named _bionic_hand_generate_messages_check_deps_ControlCommands
+
+# Build rule for target.
+_bionic_hand_generate_messages_check_deps_ControlCommands: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _bionic_hand_generate_messages_check_deps_ControlCommands
+.PHONY : _bionic_hand_generate_messages_check_deps_ControlCommands
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_ControlCommands/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_ControlCommands.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_ControlCommands.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_ControlCommands/fast
+
+#=============================================================================
+# Target rules for targets named bionic_hand_gennodejs
+
+# Build rule for target.
+bionic_hand_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_gennodejs
+.PHONY : bionic_hand_gennodejs
+
+# fast build rule for target.
+bionic_hand_gennodejs/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
+.PHONY : bionic_hand_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named _bionic_hand_generate_messages_check_deps_BulkGetItem
+
+# Build rule for target.
+_bionic_hand_generate_messages_check_deps_BulkGetItem: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _bionic_hand_generate_messages_check_deps_BulkGetItem
+.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_BulkGetItem/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem/fast
 
 #=============================================================================
 # Target rules for targets named _bionic_hand_generate_messages_check_deps_GetPosition
@@ -623,19 +688,6 @@ bionic_hand_generate_messages_cpp/fast:
 .PHONY : bionic_hand_generate_messages_cpp/fast
 
 #=============================================================================
-# Target rules for targets named bionic_hand_genlisp
-
-# Build rule for target.
-bionic_hand_genlisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_genlisp
-.PHONY : bionic_hand_genlisp
-
-# fast build rule for target.
-bionic_hand_genlisp/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build
-.PHONY : bionic_hand_genlisp/fast
-
-#=============================================================================
 # Target rules for targets named _bionic_hand_generate_messages_check_deps_SyncGetPosition
 
 # Build rule for target.
@@ -673,32 +725,6 @@ bionic_hand_geneus: cmake_check_build_system
 bionic_hand_geneus/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_geneus.dir/build
 .PHONY : bionic_hand_geneus/fast
-
-#=============================================================================
-# Target rules for targets named bionic_hand_gennodejs
-
-# Build rule for target.
-bionic_hand_gennodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_gennodejs
-.PHONY : bionic_hand_gennodejs
-
-# fast build rule for target.
-bionic_hand_gennodejs/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build.make bionic_hand/CMakeFiles/bionic_hand_gennodejs.dir/build
-.PHONY : bionic_hand_gennodejs/fast
-
-#=============================================================================
-# Target rules for targets named _bionic_hand_generate_messages_check_deps_BulkGetItem
-
-# Build rule for target.
-_bionic_hand_generate_messages_check_deps_BulkGetItem: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _bionic_hand_generate_messages_check_deps_BulkGetItem
-.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem
-
-# fast build rule for target.
-_bionic_hand_generate_messages_check_deps_BulkGetItem/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem.dir/build
-.PHONY : _bionic_hand_generate_messages_check_deps_BulkGetItem/fast
 
 #=============================================================================
 # Target rules for targets named bionic_hand_generate_messages_eus
@@ -1247,20 +1273,22 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"
+	@echo "... bionic_hand_generate_messages_nodejs"
+	@echo "... bionic_hand_genlisp"
 	@echo "... bionic_hand_gencpp"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPosition"
-	@echo "... bionic_hand_generate_messages_nodejs"
 	@echo "... bionic"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPWM"
+	@echo "... _bionic_hand_generate_messages_check_deps_FingerPos"
+	@echo "... _bionic_hand_generate_messages_check_deps_ControlCommands"
+	@echo "... bionic_hand_gennodejs"
+	@echo "... _bionic_hand_generate_messages_check_deps_BulkGetItem"
 	@echo "... _bionic_hand_generate_messages_check_deps_GetPosition"
 	@echo "... bionic_hand_generate_messages"
 	@echo "... bionic_hand_generate_messages_cpp"
-	@echo "... bionic_hand_genlisp"
 	@echo "... _bionic_hand_generate_messages_check_deps_SyncGetPosition"
 	@echo "... bionic_hand_genpy"
 	@echo "... bionic_hand_geneus"
-	@echo "... bionic_hand_gennodejs"
-	@echo "... _bionic_hand_generate_messages_check_deps_BulkGetItem"
 	@echo "... bionic_hand_generate_messages_eus"
 	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... bulk_read_write_node"
