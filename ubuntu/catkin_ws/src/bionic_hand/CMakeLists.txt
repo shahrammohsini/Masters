@@ -53,6 +53,8 @@ add_message_files(
 #   Message2.msg
   SetPosition.msg
   SetPWM.msg
+  FingerPos.msg
+  ControlCommands.msg
 
 )
 
@@ -149,7 +151,8 @@ file(GLOB SOURCE_FILES "src/*.cpp")
 # add_executable(move_motor ${SOURCE_FILES})
 # add_executable(finger ${SOURCE_FILES})
 # add_executable(main ${SOURCE_FILES})
-add_executable(bionic src/main.cpp src/finger.cpp)
+add_executable(bionic src/main.cpp src/finger.cpp src/controller.cpp)
+
 
 
 # target_link_libraries(move_motor

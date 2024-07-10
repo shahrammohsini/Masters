@@ -4,6 +4,7 @@
 #include "finger.h"
 using namespace std;
 #include "std_msgs/Int32.h"
+#include "controller.h"
 
 std_msgs::Int32 int_msg;
 
@@ -22,10 +23,15 @@ void intCallback(const std_msgs::Int32::ConstPtr& msg)
 
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "move_motor"); // Initialize ROS node
+    // ros::init(argc, argv, "move_motor"); // Initialize ROS node
+    ros::init(argc, argv, "controller_node");
     ros::NodeHandle nh; // Create a NodeHandle
     // Create a finger object
-    Finger middle_finger(1); // Set motor ID. Middle finger's motor has id 1.
+    Finger middle_finger(1, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
+    // middle_finger.name = "middle_finger";
+
+    ControllerPublisher control_middle_finger(middle_finger.name); //create a middle finger object for controllerPublisher class
+
     
     // Create the publisher with queue size 10. **NOTE: This line should later be changed when new fingers are added. It should be made so that all the 
     //fingers use the same publisher and publish a new pos for all the fingers at the same time. The set position function will just look for the pos of the specific finger. Should also look at the option of moving the publisher decleration to finger.cpp 
@@ -36,21 +42,22 @@ int main(int argc, char** argv) {
     ros::Subscriber sub = nh.subscribe("/int_topic", 1000, intCallback);
 
 
-
+    control_middle_finger.run();
     int input;
     
-    while (ros::ok()) {
-        ros::spinOnce();
-        // cout << "Enter New Pos: " << global_int_value <<endl;
-        cout << "Enter New Pos: " <<endl;
+    // while (ros::ok()) {
+    //     ros::spinOnce();
+    //     // cout << "Enter New Pos: " << global_int_value <<endl;
+    //     // cout << "Enter New Pos: " <<endl;
 
-        cin >> input;
-        middle_finger.setPWM(input);
+    //     // cin >> input;
+    //     // middle_finger.setPWM(input);
 
-        // middle_finger.setPosition(input);
+    //     // // middle_finger.setPosition(input);
 
-        ros::Rate loop_rate(1);
-    }
+
+    //     ros::Rate loop_rate(1);
+    // }
 
     // ros::spin();
     return 0;
