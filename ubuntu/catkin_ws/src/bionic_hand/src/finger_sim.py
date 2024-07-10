@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import asyncio
 import time
@@ -293,6 +295,12 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
         writer.writerows(data)
     print("data saved at Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv")
 
+
+def convert_pwm_to_voltage(pwm):
+    voltage = (pwm/MAX_PWM)*MAX_VOLTAGE
+    return voltage
+
+
 class FingerControlCommandSubscriber:
     def __init__(self):
         # Initialize the ROS node
@@ -340,7 +348,6 @@ class FingerPositionPublisher:
         msg.theta_D = theta_D
         self.publisher.publish(msg)
         # rospy.loginfo("Published updated position data ", msg.theta_M )
-        print("tm:  ", msg.theta_M)
 
 
 async def main():
@@ -355,15 +362,15 @@ async def main():
     fpp = FingerPositionPublisher()
 
     try:
+        PWM = 0
+        voltage = 0
+
         while not rospy.is_shutdown():
 
             PWM = fccs.get_latest_control_command()
-
-            #main code here
-            print("PWM", PWM)
-
-
-            voltage = PWM  #---------------->just for testing. fix this
+            print("PWM: ", PWM)
+            voltage = convert_pwm_to_voltage(PWM)
+            print("voltage: ", voltage)
             #simulate new position
             pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, math.radians(prev_theta_D), math.radians(prev_theta_P), math.radians(prev_theta_M), time_Step = 0.03, acumalating_time = 123)
             
@@ -373,14 +380,10 @@ async def main():
             prev_theta_M = theta_M_joint
             prev_theta_P = theta_P_joint
             prev_theta_D = theta_D_joint
-            print("theta_D", prev_theta_D)
             update_visual_model(p_joint_mid_pos = vector(pos_P_joint_X,pos_P_joint_Y, 0), D_joint_mid_pos = vector(Pos_D_joint_X, Pos_D_joint_Y, 0), finger_tip_mid_pos = vector(pos_tip_X, pos_tip_Y, 0))
 
             await asyncio.sleep(0.1)  # Non-blocking sleep
-            
-            # if current_position is not None:
-            #     # rospy.loginfo(f"Processing position in main loop: {current_position}")
-            await asyncio.sleep(0.1)  # Simulate asynchronous operation
+
     except rospy.ROSInterruptException:
         pass
     except Exception as e:
