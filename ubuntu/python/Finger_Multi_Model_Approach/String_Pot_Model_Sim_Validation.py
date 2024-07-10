@@ -221,12 +221,7 @@ def calculate_theta_m(prev_theta_m, voltage, dt):
     # print("prev: ", prev_theta_m)
     
     theta_m = (prev_theta_m + dt*(-0.40*prev_theta_m + 105*voltage))
-    # theta_m = (prev_theta_m + dt*(-2*prev_theta_m + 105*voltage))
-
-    # theta_m = (prev_theta_m + dt*(-3*prev_theta_m + 350*voltage)) # decreased rise time
-
-    # print("theta_m: ", theta_m)
-    # prev_theta_m = theta_m
+    
     return theta_m
 
 def generate_step_input(total_time, dt, step_magnitude, max_pwm, max_voltage):
