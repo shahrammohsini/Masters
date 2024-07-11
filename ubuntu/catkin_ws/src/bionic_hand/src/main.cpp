@@ -5,6 +5,8 @@
 using namespace std;
 #include "std_msgs/Int32.h"
 #include "controller.h"
+#include <chrono>
+#include <thread>
 
 std_msgs::Int32 int_msg;
 
@@ -23,6 +25,17 @@ void intCallback(const std_msgs::Int32::ConstPtr& msg)
 
 
 int main(int argc, char** argv) {
+
+    float max_M_joint_angle;
+    float max_P_joint_angle;
+    float max_D_joint_angle;
+
+
+    // sleep for 1 sec
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout <<"begin------------------------------------------------------------------------"<< std::endl;
+
+
     // ros::init(argc, argv, "move_motor"); // Initialize ROS node
     ros::init(argc, argv, "controller_node");
     ros::NodeHandle nh; // Create a NodeHandle
@@ -30,7 +43,8 @@ int main(int argc, char** argv) {
     Finger middle_finger(1, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
     // middle_finger.name = "middle_finger";
 
-    ControllerPublisher control_middle_finger(middle_finger.name); //create a middle finger object for controllerPublisher class
+    // controller object for middle finger
+    Controller control_middle_finger(middle_finger.name); //create a middle finger object for Controller class
 
     
     // Create the publisher with queue size 10. **NOTE: This line should later be changed when new fingers are added. It should be made so that all the 
@@ -41,24 +55,20 @@ int main(int argc, char** argv) {
     // ros::init(argc, argv, "int_subscriber");
     ros::Subscriber sub = nh.subscribe("/int_topic", 1000, intCallback);
 
+    
+    //Load max joint angles form parameter yaml file
+    nh.getParam("/middle_finger/joint_limits/max_M_joint_angle", max_M_joint_angle);
+    nh.getParam("/middle_finger/joint_limits/max_P_joint_angle", max_P_joint_angle);
+    nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
-    control_middle_finger.run();
+
+    float setpoint_M = 15;
+    float setpoint_P = max_P_joint_angle;
+    float setpoint_D = max_D_joint_angle;
+
+    control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     int input;
     
-    // while (ros::ok()) {
-    //     ros::spinOnce();
-    //     // cout << "Enter New Pos: " << global_int_value <<endl;
-    //     // cout << "Enter New Pos: " <<endl;
 
-    //     // cin >> input;
-    //     // middle_finger.setPWM(input);
-
-    //     // // middle_finger.setPosition(input);
-
-
-    //     ros::Rate loop_rate(1);
-    // }
-
-    // ros::spin();
     return 0;
 }

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import asyncio
 import time
@@ -71,9 +73,9 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
                 theta_D_joint = max_D_joint_angle
             theta_P_joint = 0
             theta_M_joint = 0
-            print("moving J_D", theta_D_joint)
+            # print("moving J_D", theta_D_joint)
         elif theta_D_joint >= max_D_joint_angle and theta_P_joint < max_P_joint_angle: # Move joint P
-            print("Moving J_P", theta_P_joint)
+            # print("Moving J_P", theta_P_joint)
             theta_D_joint = max_D_joint_angle
             # theta_P_joint = prev_theta_P + time_Step*(-(1.165)*prev_theta_P + 53.13*voltage)
             theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
@@ -82,13 +84,13 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
 
             theta_M_joint = 0
         elif theta_D_joint >= max_D_joint_angle and theta_P_joint >= max_P_joint_angle and theta_M_joint < max_M_joint_angle: # Move joint M
-            print("Moving J_M,", theta_M_joint)
+            # print("Moving J_M,", theta_M_joint)
             theta_D_joint = max_D_joint_angle
             theta_P_joint = max_P_joint_angle
             theta_M_joint = prev_theta_M + time_Step*(-(1.36e-08)*prev_theta_M + 51.44*voltage)
             if(theta_M_joint > max_M_joint_angle):
                 theta_M_joint = max_M_joint_angle
-            print("JM: ", theta_M_joint)
+            # print("JM: ", theta_M_joint)
     else: #reverse motion    These models need to be replaced with reverse motion data models
         if theta_M_joint > 0: #Move joint M
             theta_D_joint = max_D_joint_angle
@@ -96,7 +98,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             theta_M_joint = prev_theta_M + time_Step*(-(0.002942)*prev_theta_M + (50.526*voltage))
             if(theta_M_joint < 0):
                 theta_M_joint = 0
-            print("M joint reverse: ", theta_M_joint)
+            # print("M joint reverse: ", theta_M_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint > 0: #Move joint P
             theta_D_joint = max_D_joint_angle
@@ -104,7 +106,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             if(theta_P_joint < 0):
                 theta_P_joint = 0
             theta_M_joint = 0
-            print("P joint reverse: ", theta_P_joint)
+            # print("P joint reverse: ", theta_P_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint <= 0 and theta_D_joint >= 0: #Move joint D
             theta_D_joint = prev_theta_D + time_Step*(-0.0006918*prev_theta_D + 49.12*voltage)
@@ -112,7 +114,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
                 theta_D_joint = 0
             theta_P_joint = 0
             theta_M_joint = 0
-            print("D joint reverse: ", theta_D_joint)
+            # print("D joint reverse: ", theta_D_joint)
 
     # convert to radians
     theta_D_joint = math.radians(theta_D_joint)
@@ -293,6 +295,12 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
         writer.writerows(data)
     print("data saved at Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv")
 
+
+def convert_pwm_to_voltage(pwm):
+    voltage = (pwm/MAX_PWM)*MAX_VOLTAGE
+    return voltage
+
+
 class FingerControlCommandSubscriber:
     def __init__(self):
         # Initialize the ROS node
@@ -340,7 +348,6 @@ class FingerPositionPublisher:
         msg.theta_D = theta_D
         self.publisher.publish(msg)
         # rospy.loginfo("Published updated position data ", msg.theta_M )
-        print("tm:  ", msg.theta_M)
 
 
 async def main():
@@ -355,15 +362,15 @@ async def main():
     fpp = FingerPositionPublisher()
 
     try:
+        PWM = 0
+        voltage = 0
+
         while not rospy.is_shutdown():
 
             PWM = fccs.get_latest_control_command()
-
-            #main code here
-            print("PWM", PWM)
-
-
-            voltage = PWM  #---------------->just for testing. fix this
+            # print("PWM: ", PWM)
+            voltage = convert_pwm_to_voltage(PWM)
+            # print("voltage: ", voltage)
             #simulate new position
             pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, math.radians(prev_theta_D), math.radians(prev_theta_P), math.radians(prev_theta_M), time_Step = 0.03, acumalating_time = 123)
             
@@ -373,14 +380,10 @@ async def main():
             prev_theta_M = theta_M_joint
             prev_theta_P = theta_P_joint
             prev_theta_D = theta_D_joint
-            print("theta_D", prev_theta_D)
             update_visual_model(p_joint_mid_pos = vector(pos_P_joint_X,pos_P_joint_Y, 0), D_joint_mid_pos = vector(Pos_D_joint_X, Pos_D_joint_Y, 0), finger_tip_mid_pos = vector(pos_tip_X, pos_tip_Y, 0))
 
             await asyncio.sleep(0.1)  # Non-blocking sleep
-            
-            # if current_position is not None:
-            #     # rospy.loginfo(f"Processing position in main loop: {current_position}")
-            await asyncio.sleep(0.1)  # Simulate asynchronous operation
+
     except rospy.ROSInterruptException:
         pass
     except Exception as e:
