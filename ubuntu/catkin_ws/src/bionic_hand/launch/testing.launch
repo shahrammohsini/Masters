@@ -1,0 +1,6 @@
+<launch>
+
+<!-- Launch the C++ executable -->
+    <node name="bionic_node" pkg="bionic_hand" type="bionic" output="screen" />
+</launch>
+

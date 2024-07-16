@@ -7,6 +7,8 @@
 
 <!-- Launch the simulation -->
 <node name="finger_sim_node" pkg="bionic_hand" type="finger_sim.py" output="screen"/>
+<!-- Launch the ploting script -->
+<node name="plot" pkg="bionic_hand" type="plot.py" output="screen"/>
 
 <!-- Launch the C++ executable -->
     <node name="bionic_node" pkg="bionic_hand" type="bionic" output="screen" />

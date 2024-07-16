@@ -279,7 +279,7 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
     for time,theta_m,theta_M_joint, theta_P_joint, theta_D_joint, pwm in zip(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwms):
         data.append([time,theta_m, theta_D_joint, theta_P_joint, theta_M_joint, pwm])
 
-    with open('Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv', 'w', newline='') as file:
+    with open('python/Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["time","theta_m", "theta_D_joint", "theta_P_joint" ,"theta_M_joint", "pwm"])
         writer.writerows(data)
@@ -290,18 +290,18 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
 async def main():
     #initialize positions:
     #forward
-    # prev_theta_D = 0
-    # prev_theta_P = 0
-    # prev_theta_M = 0
-    #reverse
-    prev_theta_D = math.radians(max_D_joint_angle)
-    prev_theta_P = math.radians(max_P_joint_angle)
-    prev_theta_M = math.radians(max_M_joint_angle)
+    prev_theta_D = 0
+    prev_theta_P = 0
+    prev_theta_M = 0
+    # #reverse
+    # prev_theta_D = math.radians(max_D_joint_angle)
+    # prev_theta_P = math.radians(max_P_joint_angle)
+    # prev_theta_M = math.radians(max_M_joint_angle)
     try:
         # Create sinusoidal voltage array
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
-        total_time = 0.07 #for step input
+        total_time = 1 #for step input
         dt = 0.01
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
@@ -329,7 +329,7 @@ async def main():
             # rate(100)
 
             #reverse
-            voltage = -voltage
+            # voltage = -voltage
 
             # Add current voltage to the buffer and get delayed voltage. This is to introduce dead time to the model with code
             # voltage_buffer.append(voltage)

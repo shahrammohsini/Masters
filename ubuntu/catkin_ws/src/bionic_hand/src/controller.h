@@ -4,6 +4,8 @@
 #include "ros/ros.h"
 #include "bionic_hand/ControlCommands.h"
 #include "bionic_hand/FingerPos.h"
+#include <eigen3/Eigen/Dense>//for matrix calculations 
+
 
 class Controller{
 public:
@@ -12,7 +14,7 @@ public:
     void fingerPositionCallback(const bionic_hand::FingerPos& msg);
     void run(float setpoint_M, float setpoint , float setpoint_D);  // Handles the ros::spin or ros::spinOnce inside
     double PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt);
-
+    Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
 
     //joint angles
     double theta_M = 0;

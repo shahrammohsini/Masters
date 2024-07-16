@@ -15,11 +15,6 @@ int global_int_value = 0;
 void intCallback(const std_msgs::Int32::ConstPtr& msg)
 {
     global_int_value = msg->data;
-    // ROS_INFO("Received: [%d]", global_int_value);
-    // cout << "new msg " << msg << endl;
-    // ROS_INFO("Received: [%d]", msg->data);
-    // middle_finger.setPosition(global_int_value);
-
 }
 
 
