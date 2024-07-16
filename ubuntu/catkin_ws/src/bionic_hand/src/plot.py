@@ -20,9 +20,11 @@ def position_callback(msg):
     theta_P.append(msg.theta_P)
     theta_D.append(msg.theta_D)
 
+    #stop graphing after this point
+    # if current_time > 45:
+    #     return
+    
 
-    if current_time > 4:
-        return
     # if len(position_data) < 100:
     #     position_data.pop(0)
     #     timestamps.pop(0)

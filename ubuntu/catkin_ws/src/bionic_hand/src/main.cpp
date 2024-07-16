@@ -39,6 +39,8 @@ int main(int argc, char** argv) {
     // middle_finger.name = "middle_finger";
 
     // controller object for middle finger
+    int N = 7;
+    int nu = 3;
     Controller control_middle_finger(middle_finger.name); //create a middle finger object for Controller class
 
     
@@ -57,9 +59,9 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 15;
-    float setpoint_P = max_P_joint_angle;
-    float setpoint_D = max_D_joint_angle;
+    float setpoint_M = 0;
+    float setpoint_P = 0;
+    float setpoint_D = 45;
 
     control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     int input;
