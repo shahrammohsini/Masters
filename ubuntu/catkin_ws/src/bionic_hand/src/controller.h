@@ -5,6 +5,9 @@
 #include "bionic_hand/ControlCommands.h"
 #include "bionic_hand/FingerPos.h"
 #include <eigen3/Eigen/Dense>//for matrix calculations 
+#include <eigen3/Eigen/Dense> // For matrix calculations
+#include <tuple> // For returning multiple matrices
+
 
 
 class Controller{
@@ -14,8 +17,14 @@ public:
     void fingerPositionCallback(const bionic_hand::FingerPos& msg);
     void run(float setpoint_M, float setpoint , float setpoint_D);  // Handles the ros::spin or ros::spinOnce inside
     double PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt);
-    Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
-    double MPC_Control(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu);
+    // Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
+    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
+    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_du_Matrix(int prediction_horizon, int control_horizon, Eigen::MatrixXd A_D, Eigen::MatrixXd A_P, Eigen::MatrixXd A_M, float LAMBDA_D, float LAMBDA_P, float LAMBDA_M);
+
+    double MPC_Control_D(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_D);
+    double MPC_Control_P(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_P);
+    double MPC_Control_M(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_M);
+
     double convert_Voltage_to_PWM(double voltage);
 
 
@@ -57,23 +66,63 @@ private:
     //mpc parameters
     int N;
     int nu;
-    Eigen::MatrixXd A;
-    Eigen::MatrixXd u;
-    Eigen::MatrixXd PHI;
     Eigen::MatrixXd I_Matrix;
-    Eigen::MatrixXd measured_posi;
-    Eigen::MatrixXd errors;
-    Eigen::MatrixXd delta_u;
-    Eigen::MatrixXd u_prev;
-    Eigen::MatrixXd delta_y;
-    Eigen::MatrixXd y_hat;
+    //D_joint controller parameters
+    Eigen::MatrixXd A_D;
+    Eigen::MatrixXd u_D;
+    Eigen::MatrixXd PHI_D;
+    Eigen::MatrixXd measured_posi_D;
+    Eigen::MatrixXd errors_D;
+    Eigen::MatrixXd delta_u_D;
+    Eigen::MatrixXd u_prev_D;
+    Eigen::MatrixXd delta_y_D;
+    Eigen::MatrixXd y_hat_D;
     //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
-    Eigen::MatrixXd A_T;
-    Eigen::MatrixXd LambdaI;
-    Eigen::MatrixXd ATA;
-    Eigen::MatrixXd ATA_LambdaI;
-    Eigen::MatrixXd ATA_LambdaI_Inv;
-    Eigen::MatrixXd du;
+    Eigen::MatrixXd A_T_D;
+    Eigen::MatrixXd LambdaI_D;
+    Eigen::MatrixXd ATA_D;
+    Eigen::MatrixXd ATA_LambdaI_D;
+    Eigen::MatrixXd ATA_LambdaI_Inv_D;
+    Eigen::MatrixXd du_D;
+
+    //P_joint controller parameters
+    Eigen::MatrixXd A_P;
+    Eigen::MatrixXd u_P;
+    Eigen::MatrixXd PHI_P;
+    Eigen::MatrixXd measured_posi_P;
+    Eigen::MatrixXd errors_P;
+    Eigen::MatrixXd delta_u_P;
+    Eigen::MatrixXd u_prev_P;
+    Eigen::MatrixXd delta_y_P;
+    Eigen::MatrixXd y_hat_P;
+    //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
+    Eigen::MatrixXd A_T_P;
+    Eigen::MatrixXd LambdaI_P;
+    Eigen::MatrixXd ATA_P;
+    Eigen::MatrixXd ATA_LambdaI_P;
+    Eigen::MatrixXd ATA_LambdaI_Inv_P;
+    Eigen::MatrixXd du_P;
+
+    //M_joint controller parameters
+    Eigen::MatrixXd A_M;
+    Eigen::MatrixXd u_M;
+    Eigen::MatrixXd PHI_M;
+    Eigen::MatrixXd measured_posi_M;
+    Eigen::MatrixXd errors_M;
+    Eigen::MatrixXd delta_u_M;
+    Eigen::MatrixXd u_prev_M;
+    Eigen::MatrixXd delta_y_M;
+    Eigen::MatrixXd y_hat_M;
+    //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
+    Eigen::MatrixXd A_T_M;
+    Eigen::MatrixXd LambdaI_M;
+    Eigen::MatrixXd ATA_M;
+    Eigen::MatrixXd ATA_LambdaI_M;
+    Eigen::MatrixXd ATA_LambdaI_Inv_M;
+    Eigen::MatrixXd du_M;
+
+
+
     int max_pwm;
     int min_pwm;
     double max_Voltage = 12;

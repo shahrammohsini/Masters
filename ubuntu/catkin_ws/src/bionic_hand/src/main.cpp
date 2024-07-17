@@ -60,8 +60,8 @@ int main(int argc, char** argv) {
 
 
     float setpoint_M = 0;
-    float setpoint_P = 0;
-    float setpoint_D = 45;
+    float setpoint_P = 35;
+    float setpoint_D = max_D_joint_angle;
 
     control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     int input;
