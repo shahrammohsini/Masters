@@ -16,6 +16,7 @@ public:
     double PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt);
     Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
     double MPC_Control(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu);
+    double convert_Voltage_to_PWM(double voltage);
 
 
     //joint angles
@@ -65,7 +66,6 @@ private:
     Eigen::MatrixXd delta_u;
     Eigen::MatrixXd u_prev;
     Eigen::MatrixXd delta_y;
-    int LAMBDA;
     Eigen::MatrixXd y_hat;
     //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
     Eigen::MatrixXd A_T;
@@ -76,6 +76,8 @@ private:
     Eigen::MatrixXd du;
     int max_pwm;
     int min_pwm;
+    double max_Voltage = 12;
+    double min_Voltage = -12;
     double setpoint_val;
 
 };

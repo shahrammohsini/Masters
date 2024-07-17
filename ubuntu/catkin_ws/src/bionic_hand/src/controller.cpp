@@ -3,6 +3,7 @@
 #include <iostream>
 #include "bionic_hand/FingerPos.h"
 #include "controller.h"
+#include <unistd.h> //needed for sleep funciton
 //libraries for reading csv files
 #include <iostream>
 #include <fstream>
@@ -120,7 +121,7 @@ Eigen::MatrixXd Controller::generate_Dynamic_Matrix(int prediction_horizon, int 
      for (int i =0; i < control_horizon; i++) { //create columns
         for(int j=0; j < prediction_horizon - i; j++){ //create rows
             const auto& d = dataset[j]; //d holds the current row
-            DM(i + j, i) = d.theta_D_joint; //fill current row for current column
+            DM(i + j, i) = (d.theta_D_joint/max_D_joint_angle); //fill current row for current column. Also, normalize the angle
         }
         
      }
@@ -129,22 +130,27 @@ Eigen::MatrixXd Controller::generate_Dynamic_Matrix(int prediction_horizon, int 
     return DM;
 }
 
+double Controller::convert_Voltage_to_PWM(double voltage){
+    double PWM = (voltage/max_Voltage)*max_pwm;
+    return PWM;
+
+}
 
 double Controller::MPC_Control(Eigen::MatrixXd setpoint,Eigen::MatrixXd measured_position, int N, int nu){
 
 
 
 
-    std::cout << "setpoint: \n" << setpoint <<std::endl; 
+    // std::cout << "setpoint: \n" << setpoint <<std::endl; 
     // std::cout << "measured pos: \n" << measured_position <<std::endl; 
     
     PHI = measured_position - y_hat; //difference between predicted pos (y_hat) and measured pos to obtain model inaccuracy.
     // std::cout << "PHI: \n" << PHI <<std::endl; 
     y_hat = y_hat + PHI; //correct prediciton inaccuracy
-    std::cout << "y_hat: \n" << y_hat <<std::endl; 
+    // std::cout << "y_hat: \n" << y_hat <<std::endl; 
 
     errors = setpoint - y_hat; //error
-    std::cout << "errors: \n" << errors <<std::endl; 
+    // std::cout << "errors: \n" << errors <<std::endl; 
 
     // std::cout << "du: \n" << du <<std::endl; 
 
@@ -152,14 +158,14 @@ double Controller::MPC_Control(Eigen::MatrixXd setpoint,Eigen::MatrixXd measured
     delta_u = du*errors; //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) // delta_u is the control input step
     // std::cout << "delta_u: \n" << delta_u <<std::endl; 
     u = u_prev + delta_u; //calculate control move vector
-
+    // std::cout << "u: \n" << u <<std::endl; 
     //add control input limits here
-    for(int i; i < nu; i++){
-        if (u(i,0) > max_pwm){
-            u(i,0) = max_pwm;
+    for(int i = 0; i < nu; i++){
+        if (u(i) > max_Voltage){
+            u(i) = max_Voltage;
         }
-        else if (u(i,0) < min_pwm){
-            u(i,0) = min_pwm;
+        else if (u(i) < min_Voltage){
+            u(i) = min_Voltage;
         }
     }
 
@@ -251,8 +257,8 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
 
     //MPC coeffecients
-    N = 7;
-    nu = 4;
+    N = 10;
+    nu = 3;
     A = Eigen::MatrixXd::Zero(N,nu);
     // double setpoint_Val = 45; //desired setpoint
     // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N,1,setpoint_Val); //matrix of setpoint values
@@ -260,7 +266,12 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     A = generate_Dynamic_Matrix(N, nu);
     std::cout<<"A: " << A <<std::endl;
 
-    // std::cout << "test2:" <<std::endl;
+    // // Compute the Singular Value Decomposition
+    // Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeFullU | Eigen::ComputeFullV);
+    // double cond = svd.singularValues()(0) / svd.singularValues()(svd.singularValues().size()-1);
+
+    // std::cout << "Condition number of A is: " << cond << std::endl;
+
 
     
     u = Eigen::MatrixXd::Zero(nu, 1); // control input -  1 dimentional matrix filled with zeros
@@ -272,7 +283,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     delta_u = Eigen::MatrixXd::Zero(nu, 1); // delta_u
     u_prev = Eigen::MatrixXd::Zero(nu, 1); // previous input
     delta_y = Eigen::MatrixXd::Zero(N, 1); // change in predicted output
-    int LAMBDA = 1.01; //penalty factor
+    float LAMBDA = 1.083; //penalty factor //decrasing this to 1.08 seems to slow down the rise time but also reduces overshoot
     y_hat = Eigen::MatrixXd::Zero(N, 1); // pridected output matrix
 
     //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
@@ -283,15 +294,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     ATA_LambdaI_Inv = ATA_LambdaI.inverse();
     du = ATA_LambdaI_Inv*A_T; //(ATA+λI)^−1)AT this part of the formula is calculated offline for effeciency. now all that's left is to multiply by error
 
-    int max_pwm = 800;
-    int min_pwm = -800;
+    max_pwm = 800;
+    min_pwm = -800;
 
 
     
-
-    // N = 7; //prediction horizon
-    // nu = 3; //control horizon
-
     
 //**************REAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDD*******************/
 ///FIND THE REASON FOR ERROR BEFORE FIXING THIS ISSUE SO YOU'RE NOT WASTING TIME.
@@ -303,15 +310,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 //one idea could be is if lets say I want to move joint p i can make the setpoint for j_d max j_d and make 
 //setpoint of p its own setpoint???
 
-
+    float dt = 0.04;
     while (ros::ok()) {
 
 
-         //send u(0) to plant
-        publishData(control_effort); //run publishData method
-        ros::spinOnce();
-        rate.sleep();
-
+         sleep(dt);
 
         // select the controlled joint. Note: only one joint can move at a time. J_D and J_P must be at max to move J_M
         if(setpoint_M == 0){
@@ -342,6 +345,14 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
         }
 
 
+        //send u(0) to plant
+        // std::cout <<"control_effor voltage: " << control_effort <<std::endl;
+        control_effort = convert_Voltage_to_PWM(control_effort); //convert from voltage to PWM
+        std::cout <<"control_effor pwm: " << control_effort <<std::endl;
+
+        publishData(control_effort); //run publishData method
+        ros::spinOnce();
+        rate.sleep();
 
     }
 
