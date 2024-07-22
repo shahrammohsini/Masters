@@ -146,7 +146,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
      for (int i =0; i < control_horizon_M; i++) { //create columns
         for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
             const auto& d = dataset[j + 6 + 7]; //d holds the current row.
-            DM_j_M(i + j, i) = (d.theta_M_joint/max_M_joint_angle); //fill current row for current column. Also, normalize the angle
+            DM_j_M(i + j, i) = (d.theta_M_joint); //fill current row for current column. Also, normalize the angle
         }
      }
     // std::cout << "Matrix_M: \n" << DM_j_M <<std::endl;
@@ -355,9 +355,6 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller:: gener
 
     ATA_LambdaI_D = ATA_D + LambdaI_D;
 
-    // ATA_LambdaI_D = ATA_D; //delte this 
-    // ATA_LambdaI_D.diagonal() *= LAMBDA_D; //delete this
-
     // std::cout << "ATA_LambdaI_D: \n" << ATA_LambdaI_D <<std::endl; 
     ATA_LambdaI_Inv_D = ATA_LambdaI_D.inverse();
     // std::cout << "ATA_LambdaI_Inv_D: \n" << ATA_LambdaI_Inv_D <<std::endl; 
@@ -424,7 +421,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     nu_D = 2;
     N_P = 8;
     nu_P = 2;
-    N_M = 9;
+    N_M = 7;
     nu_M = 2;
     I_Matrix_D = Eigen::MatrixXd::Identity(nu_D, nu_D); // model adjustment (correciton) matrix
     I_Matrix_P = Eigen::MatrixXd::Identity(nu_P, nu_P); // model adjustment (correciton) matrix
@@ -531,21 +528,6 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     std::cout<<"du_M: " << du_M <<std::endl;
 
     
-    
-
-
-    // Eigen::MatrixXd A_P = DM_j_P;
-    // std::cout<<"A_P: " << *A_P <<std::endl;
-
-
-
-    // // Compute the Singular Value Decomposition
-    // Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeFullU | Eigen::ComputeFullV);
-    // double cond = svd.singularValues()(0) / svd.singularValues()(svd.singularValues().size()-1);
-
-    // std::cout << "Condition number of A is: " << cond << std::endl;
-
-
 
 
     max_pwm = 800;
@@ -553,12 +535,6 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
 
     
-    
-//**************REAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDD*******************/
-/*Made the switch to using multiple models and multiple controllers (Hybrid controller)
-While j_D works well the other two do not
-I'm still using the same prediction horizon and control horizon for both. Should update so each joint have their own N and nu*/
-
     float dt = 0.04;
     while (ros::ok()) {
 

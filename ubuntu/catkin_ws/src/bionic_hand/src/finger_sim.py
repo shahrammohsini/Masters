@@ -102,7 +102,9 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
 
         elif theta_M_joint <= 0 and theta_P_joint > 0: #Move joint P
             theta_D_joint = max_D_joint_angle
-            theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + 36.1*voltage)
+            theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + 36.1*voltage) #actual reverse model
+            # theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage) #forward model for testing
+
             if(theta_P_joint < 0):
                 theta_P_joint = 0
             theta_M_joint = 0
