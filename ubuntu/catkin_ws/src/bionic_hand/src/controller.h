@@ -18,12 +18,12 @@ public:
     void run(float setpoint_M, float setpoint , float setpoint_D);  // Handles the ros::spin or ros::spinOnce inside
     double PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt);
     // Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
-    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
-    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_du_Matrix(int prediction_horizon, int control_horizon, Eigen::MatrixXd A_D, Eigen::MatrixXd A_P, Eigen::MatrixXd A_M, float LAMBDA_D, float LAMBDA_P, float LAMBDA_M);
+    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_Dynamic_Matrix(int prediction_horizon_D, int control_horizon_D, int prediction_horizon_P, int control_horizon_P, int prediction_horizon_M, int control_horizon_M);
+    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_du_Matrix(int prediction_horizon_D, int control_horizon_D,int prediction_horizon_P, int control_horizon_P,int prediction_horizon_M, int control_horizon_M, Eigen::MatrixXd A_D, Eigen::MatrixXd A_P, Eigen::MatrixXd A_M, float LAMBDA_D, float LAMBDA_P, float LAMBDA_M);
 
-    double MPC_Control_D(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_D);
-    double MPC_Control_P(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_P);
-    double MPC_Control_M(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N, int nu, Eigen::MatrixXd A_M);
+    double MPC_Control_D(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N_D, int nu_D, Eigen::MatrixXd A_D);
+    double MPC_Control_P(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N_P, int nu_P, Eigen::MatrixXd A_P);
+    double MPC_Control_M(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N_M, int nu_M, Eigen::MatrixXd A_M);
 
     double convert_Voltage_to_PWM(double voltage);
 
@@ -64,9 +64,16 @@ private:
     float max_D_joint_angle;
     //MPC coefficients
     //mpc parameters
-    int N;
-    int nu;
-    Eigen::MatrixXd I_Matrix;
+    int N_D;
+    int nu_D;
+    int N_P;
+    int nu_P;
+    int N_M;
+    int nu_M;
+    Eigen::MatrixXd I_Matrix_D;
+    Eigen::MatrixXd I_Matrix_P;
+    Eigen::MatrixXd I_Matrix_M;
+
     //D_joint controller parameters
     Eigen::MatrixXd A_D;
     Eigen::MatrixXd u_D;

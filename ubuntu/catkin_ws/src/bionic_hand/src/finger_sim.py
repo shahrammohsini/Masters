@@ -79,6 +79,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             theta_D_joint = max_D_joint_angle
             # theta_P_joint = prev_theta_P + time_Step*(-(1.165)*prev_theta_P + 53.13*voltage)
             theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
+            
             if(theta_P_joint > max_P_joint_angle):
                 theta_P_joint = max_P_joint_angle
 
@@ -353,9 +354,9 @@ class FingerPositionPublisher:
 async def main():
     rospy.init_node('main_node', anonymous=True)
 
-    #definitions here
-    prev_theta_D = 0
-    prev_theta_P = 0
+    #Initial position 
+    prev_theta_D = max_D_joint_angle
+    prev_theta_P = 1
     prev_theta_M = 0
 
     fccs = FingerControlCommandSubscriber()
