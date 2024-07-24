@@ -1,0 +1,18 @@
+middle_finger:
+        dt: 0.001
+        M_joint:
+                N_M: 8
+                nu_M: 2
+                LAMBDA_M: 1.01
+                deadTimeSteps_M: 0
+        P_joint:
+                N_P: 8
+                nu_P: 4
+                LAMBDA_P: 35
+                deadTimeSteps_P: 0
+        D_joint:
+                N_D: 8
+                nu_D: 4
+                LAMBDA_D: 35
+                deadTimeSteps_D: 2
+                

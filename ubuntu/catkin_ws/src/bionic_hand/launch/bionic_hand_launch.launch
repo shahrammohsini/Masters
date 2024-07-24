@@ -4,6 +4,8 @@
 <rosparam file="$(find bionic_hand)/config/PID_Param.yaml" command="load" />
 <!-- Load hand parameters -->
 <rosparam file="$(find bionic_hand)/config/hand_Param.yaml" command="load" />
+<!-- Load MPC parameters -->
+<rosparam file="$(find bionic_hand)/config/MPC_Param.yaml" command="load" />
 
 <!-- Launch the simulation -->
 <node name="finger_sim_node" pkg="bionic_hand" type="finger_sim.py" output="screen"/>
