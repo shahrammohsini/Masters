@@ -31,7 +31,7 @@ max_M_joint_angle = 67
 # max_M_joint_angle_motor = (r1/rm)*(max_M_joint_angle)
 
 step_magnitude = 6
-dt = 0.03  # should be small to ensure my model is accurate. At max 0.01
+dt = 0.01  # should be small to ensure my model is accurate. At max 0.01
 theta_m = 0
 global prev_theta_m
 
@@ -83,6 +83,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
                 theta_P_joint = max_P_joint_angle
 
             theta_M_joint = 0
+            # print("theta_P_joint", theta_P_joint)
         elif theta_D_joint >= max_D_joint_angle and theta_P_joint >= max_P_joint_angle and theta_M_joint < max_M_joint_angle: # Move joint M
             # print("Moving J_M,", theta_M_joint)
             theta_D_joint = max_D_joint_angle
@@ -102,16 +103,20 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
 
         elif theta_M_joint <= 0 and theta_P_joint > 0: #Move joint P
             theta_D_joint = max_D_joint_angle
-            theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + 36.1*voltage) #actual reverse model
+            theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + (36.1*voltage)) #actual reverse model
+            # theta_P_joint = prev_theta_P + time_Step*(-(4.255)*prev_theta_P + 37.75*voltage)
             # theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage) #forward model for testing
 
             if(theta_P_joint < 0):
                 theta_P_joint = 0
+
             theta_M_joint = 0
-            # print("P joint reverse: ", theta_P_joint)
+            print("voltage: ", voltage)
+            print("P joint reverse: ", theta_P_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint <= 0 and theta_D_joint >= 0: #Move joint D
             theta_D_joint = prev_theta_D + time_Step*(-0.0006918*prev_theta_D + 49.12*voltage)
+
             if(theta_D_joint < 0):
                 theta_D_joint = 0
             theta_P_joint = 0
@@ -356,8 +361,8 @@ async def main():
     rospy.init_node('main_node', anonymous=True)
 
     #Initial position 
-    prev_theta_D = 0
-    prev_theta_P = 0
+    prev_theta_D = max_D_joint_angle
+    prev_theta_P = 1
     prev_theta_M = 0
 
     fccs = FingerControlCommandSubscriber()
@@ -374,7 +379,7 @@ async def main():
             voltage = convert_pwm_to_voltage(PWM)
             # print("voltage: ", voltage)
             #simulate new position
-            pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, math.radians(prev_theta_D), math.radians(prev_theta_P), math.radians(prev_theta_M), time_Step = 0.03, acumalating_time = 123)
+            pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, math.radians(prev_theta_D), math.radians(prev_theta_P), math.radians(prev_theta_M), time_Step = dt, acumalating_time = 123)
             
             #publish latest position data
             fpp.publish_position(theta_M_joint, theta_P_joint, theta_D_joint)
@@ -410,7 +415,7 @@ if __name__ == "__main__":
 
     acumalating_time = 0
     #initial position setup
-    pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, acumalating_time = finger_pos_update(voltage = 0, prev_theta_D = 0, prev_theta_P = 0, prev_theta_M = 0, time_Step= 0.03, acumalating_time = acumalating_time)
+    pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, acumalating_time = finger_pos_update(voltage = 0, prev_theta_D = 0, prev_theta_P = 0, prev_theta_M = 0, time_Step= dt, acumalating_time = acumalating_time)
     meta_joint_mid, p_joint_mid, p_phalanx_mid, D_joint_mid, I_phalanx_mid, finger_tip_mid, D_phalanx_mid = create_visual_model(pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y)
 
     

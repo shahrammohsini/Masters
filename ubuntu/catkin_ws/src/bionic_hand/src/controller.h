@@ -19,11 +19,14 @@ public:
     double PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt);
     // Eigen::MatrixXd generate_Dynamic_Matrix(int prediction_horizon, int control_horizon);
     std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_Dynamic_Matrix(int prediction_horizon_D, int control_horizon_D, int prediction_horizon_P, int control_horizon_P, int prediction_horizon_M, int control_horizon_M);
-    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_du_Matrix(int prediction_horizon_D, int control_horizon_D,int prediction_horizon_P, int control_horizon_P,int prediction_horizon_M, int control_horizon_M, Eigen::MatrixXd A_D, Eigen::MatrixXd A_P, Eigen::MatrixXd A_M, float LAMBDA_D, float LAMBDA_P, float LAMBDA_M);
+    //std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_Dynamic_Matrix_rev(int prediction_horizon_D_rev, int control_horizon_D_rev, int prediction_horizon_P_rev, int control_horizon_P_rev, int prediction_horizon_M_rev, int control_horizon_M_rev);
+    Eigen::MatrixXd generate_Dynamic_Matrix_rev(int prediction_horizon_D_rev, int control_horizon_D_rev, int prediction_horizon_P_rev, int control_horizon_P_rev, int prediction_horizon_M_rev, int control_horizon_M_rev);
+    std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> generate_du_Matrix(int prediction_horizon_D, int control_horizon_D,int prediction_horizon_P, int control_horizon_P,int prediction_horizon_M, int control_horizon_M, int prediction_horizon_P_rev, int control_horizon_P_rev, Eigen::MatrixXd A_D, Eigen::MatrixXd A_P, Eigen::MatrixXd A_M, Eigen::MatrixXd A_P_rev, float LAMBDA_D, float LAMBDA_P, float LAMBDA_M, float LAMBDA_M_rev);
 
     double MPC_Control_D(Eigen::MatrixXd setpoint, double measured_position_D, int N_D, int nu_D, Eigen::MatrixXd A_D);
     double MPC_Control_P(Eigen::MatrixXd setpoint, double measured_position_P, int N_P, int nu_P, Eigen::MatrixXd A_P);
     double MPC_Control_M(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N_M, int nu_M, Eigen::MatrixXd A_M);
+    double MPC_Control_P_Reverse(Eigen::MatrixXd setpoint, double measured_position_P_rev, int N_P_rev, int nu_P_rev, Eigen::MatrixXd A_P_rev);
     double convert_Voltage_to_PWM(double voltage);
    Eigen::MatrixXd addDeadTime(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
 
@@ -64,6 +67,7 @@ private:
     float max_D_joint_angle;
     //MPC coefficients
     //mpc parameters
+        //forward
     float dt;
     int N_D;
     int nu_D;
@@ -77,10 +81,19 @@ private:
     int nu_M;
     int deadTimeSteps_M;
     float LAMBDA_M;
+        //reverse
+    int N_P_rev;
+    int nu_P_rev;
+    int deadTimeSteps_P_rev;
+    float LAMBDA_P_rev;
+        //I matrix forward
     Eigen::MatrixXd I_Matrix_D;
     Eigen::MatrixXd I_Matrix_P;
     Eigen::MatrixXd I_Matrix_M;
+        //I matrix reverse
+    Eigen::MatrixXd I_Matrix_P_rev;
 
+    //Forward
     //D_joint controller parameters
     Eigen::MatrixXd A_D;
     Eigen::MatrixXd u_D;
@@ -132,6 +145,24 @@ private:
     Eigen::MatrixXd ATA_LambdaI_M;
     Eigen::MatrixXd ATA_LambdaI_Inv_M;
     Eigen::MatrixXd du_M;
+
+    //Reverse
+    //P_joint controller parameters reverse
+    Eigen::MatrixXd A_P_rev;
+    Eigen::MatrixXd u_P_rev;
+    double PHI_P_rev;
+    Eigen::MatrixXd errors_P_rev;
+    Eigen::MatrixXd delta_u_P_rev;
+    Eigen::MatrixXd u_prev_P_rev;
+    Eigen::MatrixXd delta_y_P_rev;
+    Eigen::MatrixXd y_hat_P_rev;
+    //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) calculate first part of delta_u outside the loop for effecincy
+    Eigen::MatrixXd A_T_P_rev;
+    Eigen::MatrixXd LambdaI_P_rev;
+    Eigen::MatrixXd ATA_P_rev;
+    Eigen::MatrixXd ATA_LambdaI_P_rev;
+    Eigen::MatrixXd ATA_LambdaI_Inv_P_rev;
+    Eigen::MatrixXd du_P_rev;
 
 
 

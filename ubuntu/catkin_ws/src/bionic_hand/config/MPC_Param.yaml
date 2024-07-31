@@ -1,18 +1,35 @@
 middle_finger:
-        dt: 0.001
-        M_joint:
-                N_M: 8
-                nu_M: 2
-                LAMBDA_M: 1.01
-                deadTimeSteps_M: 0
-        P_joint:
-                N_P: 8
-                nu_P: 4
-                LAMBDA_P: 35
-                deadTimeSteps_P: 0
-        D_joint:
-                N_D: 8
-                nu_D: 4
-                LAMBDA_D: 35
-                deadTimeSteps_D: 2
+        dt: 0.01
+        forward:
+                M_joint:
+                        N_M: 8
+                        nu_M: 2
+                        LAMBDA_M: 1.01
+                        deadTimeSteps_M: 0
+                P_joint:
+                        N_P: 15
+                        nu_P: 3
+                        LAMBDA_P: 80
+                        deadTimeSteps_P: 0
+                D_joint:
+                        N_D: 10
+                        nu_D: 9
+                        LAMBDA_D: 70
+                        deadTimeSteps_D: 3
+        reverse:
+                M_joint:
+                        N_M_rev: 8
+                        nu_M_rev: 3
+                        LAMBDA_M_rev: 1.01
+                        deadTimeSteps_M_rev: 0
+                P_joint:
+                        N_P_rev: 20
+                        nu_P_rev: 2
+                        LAMBDA_P_rev:  500
+                        deadTimeSteps_P_rev: 3
+                D_joint:
+                        N_D_rev: 8
+                        nu_D_rev: 4
+                        LAMBDA_D_rev: 35
+                        deadTimeSteps_D_rev: 2
                 
