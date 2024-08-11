@@ -302,7 +302,7 @@ async def main():
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
         total_time = 1 #for step input
-        dt = 0.01
+        dt = 0.02
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         # times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
         

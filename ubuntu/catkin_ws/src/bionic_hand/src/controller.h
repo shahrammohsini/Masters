@@ -29,6 +29,8 @@ public:
     double MPC_Control_P_Reverse(Eigen::MatrixXd setpoint, double measured_position_P_rev, int N_P_rev, int nu_P_rev, Eigen::MatrixXd A_P_rev);
     double convert_Voltage_to_PWM(double voltage);
    Eigen::MatrixXd addDeadTime(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
+   Eigen::MatrixXd addDeadTime_rev(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
+
 
 
     //joint angles

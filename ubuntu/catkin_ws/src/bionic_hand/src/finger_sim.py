@@ -31,7 +31,7 @@ max_M_joint_angle = 67
 # max_M_joint_angle_motor = (r1/rm)*(max_M_joint_angle)
 
 step_magnitude = 6
-dt = 0.01  # should be small to ensure my model is accurate. At max 0.01
+dt = 0.02 # should be small to ensure my model is accurate. At max 0.01
 theta_m = 0
 global prev_theta_m
 
@@ -111,8 +111,8 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
                 theta_P_joint = 0
 
             theta_M_joint = 0
-            print("voltage: ", voltage)
-            print("P joint reverse: ", theta_P_joint)
+            # print("voltage: ", voltage)
+            # print("P joint reverse: ", theta_P_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint <= 0 and theta_D_joint >= 0: #Move joint D
             theta_D_joint = prev_theta_D + time_Step*(-0.0006918*prev_theta_D + 49.12*voltage)
@@ -362,8 +362,8 @@ async def main():
 
     #Initial position 
     prev_theta_D = max_D_joint_angle
-    prev_theta_P = 1
-    prev_theta_M = 0
+    prev_theta_P = max_P_joint_angle
+    prev_theta_M = 1
 
     fccs = FingerControlCommandSubscriber()
     fpp = FingerPositionPublisher()
@@ -371,9 +371,9 @@ async def main():
     try:
         PWM = 0
         voltage = 0
+        # rate = rospy.Rate(1.0 / 0.5)  # 10 Hz if dt = 0.1
 
         while not rospy.is_shutdown():
-
             PWM = fccs.get_latest_control_command()
             # print("PWM: ", PWM)
             voltage = convert_pwm_to_voltage(PWM)
@@ -390,6 +390,7 @@ async def main():
             update_visual_model(p_joint_mid_pos = vector(pos_P_joint_X,pos_P_joint_Y, 0), D_joint_mid_pos = vector(Pos_D_joint_X, Pos_D_joint_Y, 0), finger_tip_mid_pos = vector(pos_tip_X, pos_tip_Y, 0))
 
             await asyncio.sleep(0.1)  # Non-blocking sleep
+            # rate.sleep()
 
     except rospy.ROSInterruptException:
         pass

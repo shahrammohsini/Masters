@@ -57,8 +57,8 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 0;
-    float setpoint_P = 45;
+    float setpoint_M = 45;
+    float setpoint_P = max_P_joint_angle;
     float setpoint_D =  max_D_joint_angle;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */

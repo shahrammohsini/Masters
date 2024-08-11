@@ -25,7 +25,7 @@ max_M_joint_angle = 67
 # max_P_joint_angle_motor = (r2/rm)*(max_P_joint_angle)
 # max_M_joint_angle_motor = (r1/rm)*(max_M_joint_angle)
 
-step_magnitude = 6
+step_magnitude = 5
 # dt = 0.03  # should be small to ensure my model is accurate. At max 0.01
 theta_m = 0
 global prev_theta_m
@@ -284,7 +284,7 @@ async def main():
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
         total_time = 1 #for step input
-        dt = 0.01
+        dt = 0.02
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         # times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
         
