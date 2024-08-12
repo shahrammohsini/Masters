@@ -124,28 +124,28 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
 
     file.close();
 
-    // DM_j_D.setZero(); //populate with zeros
-    float bias = 4.2; //If motor has a bias value (min voltage to move motor)
-    int normalize_val = 5;
-    DM_j_D.setConstant(bias); // populate with min voltage to move. This is the bias
+    DM_j_D.setZero(); //populate with zeros
+    // float bias = 4.2; //If motor has a bias value (min voltage to move motor)
+    int normalize_val = 1;
+    // DM_j_D.setConstant(bias); // populate with min voltage to move. This is the bias
     //populate dynamic matrix
      for (int i =0; i < control_horizon_D; i++) { //create columns
         for(int j=0; j < prediction_horizon_D - i; j++){ //create rows
             const auto& d = dataset[j]; //d holds the current row
             DM_j_D(i + j, i) = ((d.theta_D_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-            if(DM_j_D(i + j, i) < bias) {DM_j_D(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+            // if(DM_j_D(i + j, i) < bias) {DM_j_D(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
         }
      }
 
 
-    // DM_j_P.setZero(); //populate with zeros
-    DM_j_P.setConstant(bias);
+    DM_j_P.setZero(); //populate with zeros
+    // DM_j_P.setConstant(bias);
     //populate dynamic matrix
      for (int i =0; i < control_horizon_P; i++) { //create columns
         for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-            const auto& d = dataset[j+14]; //d holds the current row adding +6 to start at the point where M joint moves
+            const auto& d = dataset[j+29]; //d holds the current row adding +6 to start at the point where M joint moves
             DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-            if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+            // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
         }
      }
@@ -404,7 +404,10 @@ double Controller::MPC_Control_P(Eigen::MatrixXd setpoint,double measured_positi
     y_hat_P = y_hat_P + Eigen::MatrixXd::Constant(y_hat_P.rows(), y_hat_P.cols(), PHI_P); //add the constant PHI to each value of y_hat
 
     errors_P = setpoint - y_hat_P; //error
-    // std::cout << "errors: \n" << errors <<std::endl; 
+    std::cout << "setpoint: \n" << setpoint(0) <<std::endl; 
+    std::cout << "y_hat_P: \n" << y_hat_P(0) <<std::endl; 
+
+    std::cout << "errors: \n" << errors_P(0) <<std::endl; 
 
     // std::cout << "du: \n" << du <<std::endl; 
     // std::cout << "du_D: \n" << du_D <<std::endl; 
@@ -571,12 +574,6 @@ double Controller::MPC_Control_P_Reverse(Eigen::MatrixXd setpoint,double measure
     }
     y_hat_P_rev(y_hat_P_rev.size() - 1) = y_hat_last_P_rev;  // Setting the last element to first element
     
-    // y_hat_D(y_hat_D.size() - 1) = y_hat_D(y_hat_D.size() - 2) + delta_y_D(delta_y_D.size() - 1);
-    //y_hat_D(y_hat_D.size() - 1) = y_hat_D(y_hat_D.size() - 2) + (A_D.row(y_hat_D.size() - 1) * delta_u_D)(0);
-    
-    // std::cout << "y_hat: \n" << y_hat <<std::endl; 
-    // std::cout << "y_hat_P_posthift: \n" << y_hat_P <<std::endl; 
-
     //update control move
     u_prev_P_rev = u_P_rev;
     // std::cout << "u_prev: \n" << u_prev <<std::endl; 
@@ -630,9 +627,16 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> C
     A_T_P_rev = A_P_rev.transpose();//transpose the A matrix
     LambdaI_P_rev = LAMBDA_P_rev*I_Matrix_P_rev;
     ATA_P_rev = A_T_P_rev*A_P_rev;
+    // std::count <<"ATA_P_rev" << ATA_P_rev <<std::endl;
+    std::cout << "ATA_P_rev: "<< ATA_P_rev <<std::endl;
+
     //instead of adding lambda (penalty factor) we multiply it to the diagonal values of the matrix
     for (int i = 0; i < ATA_P_rev.rows(); ++i) {
         ATA_P_rev(i, i) = ATA_P_rev(i, i)*LAMBDA_P_rev;}
+
+        std::cout << "ATA_P_rev_lambda: "<< ATA_P_rev <<std::endl;
+
+    
     ATA_LambdaI_Inv_P_rev = ATA_P_rev.inverse();
     du_P_rev = ATA_LambdaI_Inv_P_rev*A_T_P_rev; //(ATA+λI)^−1)AT this part of the formula is calculated offline for effeciency. now all that's left is to multiply by error
    
@@ -805,6 +809,15 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     max_pwm = 800;
     min_pwm = -800;
 
+    //initialize trajectory vectors
+    Eigen::MatrixXd y_pdt_D = Eigen::MatrixXd::Zero(N_D, 1);
+    Eigen::MatrixXd y_pdt_P = Eigen::MatrixXd::Zero(N_P, 1);
+    Eigen::MatrixXd y_pdt_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1);
+    Eigen::MatrixXd y_pdt_M = Eigen::MatrixXd::Zero(N_M, 1);
+    
+    double alpha_D = 0.95; //trajectory smoothness parameter
+    double alpha_P = 0; //trajectory smoothness parameter
+    double alpha_M = 0; //trajectory smoothness parameter
 
     // sleep(1);
     
@@ -821,9 +834,15 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
                 //control D joint
                 // measured_posi_D = Eigen::MatrixXd::Constant(N_D, 1, theta_D); //set all values of measured pos to theta_D
                 setpoint_val = setpoint_D;
-                Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,setpoint_val); //matrix of setpoint values
-                
+                y_pdt_D(0) = theta_D; // Initialize with the current position
+                // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,setpoint_val); //matrix of setpoint values
+                for (int j = 1; j < 3; ++j) { //create a setpoint trajectory for a smoother rise
+                y_pdt_D(j) = alpha_D * y_pdt_D(j - 1) + (1 - alpha_D) * setpoint_val;
+                }
+                Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,y_pdt_D(1)); //only use first value from the setpoint trajectory
+
                 control_effort = MPC_Control_D(setpoint, theta_D, N_D, nu_D, A_D);
+                // control_effort = MPC_Control_D(setpoint, theta_D, N_D, nu_D, A_D);
                 // std::cout<<"Controlling D_Joint: " << control_effort<<std::endl;
 
 
@@ -833,17 +852,25 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
                 //control P joint
                 // measured_posi_P = Eigen::MatrixXd::Constant(N_P, 1, theta_P); //set all values of measured pos to theta_D
                 setpoint_val = setpoint_P;
-                Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_P,1,setpoint_val); //matrix of setpoint values                
-                Eigen::MatrixXd setpoint_rev = Eigen::MatrixXd::Constant(N_P_rev,1,setpoint_val); //matrix of setpoint values                
-    
+                y_pdt_P(0) = theta_P; // Initialize with the current position
+                // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,setpoint_val); //matrix of setpoint values
+                for (int j = 1; j < 3; ++j) { //create a setpoint trajectory for a smoother rise
+                y_pdt_P(j) = alpha_P * y_pdt_P(j - 1) + (1 - alpha_P) * setpoint_val;}
+                Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_P,1,y_pdt_P(1)); //only use first value from the setpoint trajectory
+                // /Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_P,1,setpoint_val); //matrix of setpoint values                
+                
+                Eigen::MatrixXd setpoint_rev = Eigen::MatrixXd::Constant(N_P_rev,1,y_pdt_P(1)); //matrix of setpoint values                
+                
                 control_effort = MPC_Control_P(setpoint, theta_P, N_P, nu_P, A_P);
+                // std::cout<<"Controlling P_Joint:  " <<control_effort <<std::endl;
+
                 // std::cout<<"Controlling P_Joint_Forward:  " <<control_effort <<std::endl;
-                if(control_effort < 0){ //Reverse motion
+                // if(control_effort < 0){ //Reverse motion
+                // // control_effort = -1;
+                // control_effort = 1*(MPC_Control_P_Reverse(setpoint_rev, theta_P, N_P_rev, nu_P_rev, A_P_rev));
+                // // std::cout<<"Controlling P_Joint_Reverse:  " <<control_effort <<std::endl;
 
-                control_effort = 1*(MPC_Control_P_Reverse(setpoint_rev, theta_P, N_P_rev, nu_P_rev, A_P_rev));
-                std::cout<<"Controlling P_Joint_Reverse:  " <<control_effort <<std::endl;
-
-                }
+                // }
 
 
             }
@@ -852,17 +879,26 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
             //control M joint
             measured_posi_M = Eigen::MatrixXd::Constant(N_M, 1, theta_M); //set all values of measured pos to theta_D
             setpoint_val = setpoint_M;
-            Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,setpoint_val); //matrix of setpoint values
+            y_pdt_M(0) = theta_M; // Initialize with the current position
+            // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,setpoint_val); //matrix of setpoint values
+            for (int j = 1; j < 3; ++j) { //create a setpoint trajectory for a smoother rise
+            y_pdt_M(j) = alpha_M * y_pdt_M(j - 1) + (1 - alpha_M) * setpoint_val;
+            }
+            Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,y_pdt_M(1)); //only use first value from the setpoint trajectory
+            std::cout<<"theta M_Joint: "<< theta_M<<std::endl;
+            std::cout<<"setpoint M_Joint: "<< setpoint<<std::endl;
+            // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,setpoint_val); //matrix of setpoint values
             control_effort = MPC_Control_M(setpoint, measured_posi_M, N_M, nu_M, A_M);
-            std::cout<<"Controlling M_Joint "<<std::endl;
+            // std::cout<<"Controlling M_Joint "<<std::endl;
 
 
         }
 
 
         //send u(0) to plant
-        // std::cout <<"control_effor voltage: " << control_effort <<std::endl;
+        std::cout <<"control_effor voltage: " << control_effort <<std::endl;
         control_effort = convert_Voltage_to_PWM(control_effort); //convert from voltage to PWM
+
         // std::cout <<"control_effor pwm: " << control_effort <<std::endl;
 
         publishData(control_effort); //run publishData method
