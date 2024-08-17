@@ -25,7 +25,7 @@ max_M_joint_angle = 67
 # max_P_joint_angle_motor = (r2/rm)*(max_P_joint_angle)
 # max_M_joint_angle_motor = (r1/rm)*(max_M_joint_angle)
 
-step_magnitude = 6
+step_magnitude = 5
 dt = 0.03  # should be small to ensure my model is accurate. At max 0.01
 theta_m = 0
 global prev_theta_m
@@ -90,21 +90,24 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
         if theta_M_joint > 0: #Move joint M
             theta_D_joint = max_D_joint_angle
             theta_P_joint = max_P_joint_angle
-            theta_M_joint = prev_theta_M + time_Step*(-(0.002942)*prev_theta_M + (50.526*voltage))
+            # theta_M_joint = prev_theta_M + time_Step*(-(0.002942)*prev_theta_M + (50.526*voltage))
+            theta_M_joint = prev_theta_M + time_Step*(-(0.2415)*prev_theta_M + (58.15*voltage))
             if(theta_M_joint < 0):
                 theta_M_joint = 0
             print("M joint reverse: ", theta_M_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint > 0: #Move joint P
             theta_D_joint = max_D_joint_angle
-            theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + 36.1*voltage)
+            theta_P_joint = prev_theta_P + time_Step*(-(4.255)*prev_theta_P + 37.75*voltage)
             if(theta_P_joint < 0):
                 theta_P_joint = 0
             theta_M_joint = 0
             print("P joint reverse: ", theta_P_joint)
 
         elif theta_M_joint <= 0 and theta_P_joint <= 0 and theta_D_joint >= 0: #Move joint D
-            theta_D_joint = prev_theta_D + time_Step*(-0.0006918*prev_theta_D + 49.12*voltage)
+            # theta_D_joint = prev_theta_D + time_Step*(-0.0006918*prev_theta_D + 49.12*voltage)
+            theta_D_joint = prev_theta_D + time_Step*(-4.086*prev_theta_D + 27.08*voltage)
+
             if(theta_D_joint < 0):
                 theta_D_joint = 0
             theta_P_joint = 0
@@ -221,7 +224,12 @@ def calculate_theta_m(prev_theta_m, voltage, dt):
     # print("prev: ", prev_theta_m)
     
     theta_m = (prev_theta_m + dt*(-0.40*prev_theta_m + 105*voltage))
-    
+    # theta_m = (prev_theta_m + dt*(-2*prev_theta_m + 105*voltage))
+
+    # theta_m = (prev_theta_m + dt*(-3*prev_theta_m + 350*voltage)) # decreased rise time
+
+    # print("theta_m: ", theta_m)
+    # prev_theta_m = theta_m
     return theta_m
 
 def generate_step_input(total_time, dt, step_magnitude, max_pwm, max_voltage):
@@ -301,7 +309,7 @@ async def main():
         # Create sinusoidal voltage array
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
-        total_time = 0.07 #for step input
+        total_time = 0.23 #for step input
         dt = 0.01
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
@@ -321,7 +329,7 @@ async def main():
 
         #Run simulation
         start_time = time.time()
-        for voltage,pwm in zip(voltages,pwms):
+        for voltage in voltages:
             sim_time = time.time() - start_time
             sim_times.append(round(sim_time, 6))
             await asyncio.sleep(0.01)

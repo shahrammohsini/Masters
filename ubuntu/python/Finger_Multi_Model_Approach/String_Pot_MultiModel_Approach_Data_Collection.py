@@ -22,10 +22,10 @@ TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 MAX_VOLTAGE = 12
 MAX_PWM = 885
-step_input = 10  # input voltage
+# step_input = 10  # input voltage
 POSITION_MODE = 3
 PWM_MODE = 16
-step_magnitude = 10 #volts
+step_magnitude = 5 #volts
 
 # Function to generate sinusoidal input
 def generate_sinusoidal_input(total_time, dt, amplitude, frequency, max_pwm, max_voltage):
@@ -148,7 +148,8 @@ def main():
 
         # Set the goal position to 180 degrees (starting pos)
         starting_point = 180
-        goal_position = int(starting_point / 360.0 * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
+        final_point = 350
+        goal_position = int(starting_point / final_point * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
         set_goal_position(packetHandler, portHandler, goal_position)
         time.sleep(1)
 
@@ -157,12 +158,12 @@ def main():
         enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
 
         # Total time and time step for the step input
-        total_time = 0.13
+        total_time = 0.3
         dt = 0.01
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
        
         # Open the serial connection
-        ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino's serial port
+        ser = serial.Serial('COM4', 9600)  # Replace 'COM3' with your Arduino's serial port
         time.sleep(2)  # Give some time to establish the connection
         ser.write(b'start')  # Send start signal to Arduino
 
@@ -173,8 +174,8 @@ def main():
         # Main loop to set PWM values
         for pwm in pwms:
             dxl_present_position = read_position(packetHandler, portHandler, DXL_ID, ADDR_PRESENT_POSITION)
-            if dxl_present_position < 150: #if the motor reaches max safe pos stop
-                print("Stopping pos: ", dxl_present_position)
+            if dxl_present_position < 150 or dxl_present_position > 350: #if the motor reaches max safe pos stop
+                print("Motor position exceded safety limit. Stoping motor: ", dxl_present_position)
                 set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm = 0) #stop 
                 break
             if not set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm): #set pwm to whatever is on the pwms list

@@ -20,12 +20,12 @@ ADDR_PRESENT_POSITION = 132
 ADDR_OPERATING_MODE = 11  # Address for the operating mode
 TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
-MAX_VOLTAGE = 12.2
-MAX_PWM = 850
+MAX_VOLTAGE = 12
+MAX_PWM = 885
 step_input = 10  # input voltage
 POSITION_MODE = 3
 PWM_MODE = 16
-step_magnitude = 5
+step_magnitude = 5 #volts
 
 # Function to generate sinusoidal input
 def generate_sinusoidal_input(total_time, dt, amplitude, frequency, max_pwm, max_voltage):
@@ -40,7 +40,7 @@ def generate_step_input(total_time, dt, step_magnitude, max_pwm, max_voltage):
     pwms = np.full(num_steps, pwm_value, dtype=int)
     voltages = np.full(num_steps, step_magnitude)
     times = np.arange(0, total_time, dt)
-    # print("pwms: ", pwms)
+    print("pwms: ", pwms)
     return times, voltages, pwms
 
 # Function to initialize Dynamixel
@@ -76,6 +76,22 @@ def disable_torque(packetHandler, portHandler, dxl_id):
 def close_port(portHandler):
     portHandler.closePort()
 
+def read_position(packet_handler, port_handler, dxl_id, addr_present_position):
+    dxl_present_position, dxl_comm_result, dxl_error = packet_handler.read4ByteTxRx(port_handler, dxl_id, addr_present_position)
+    if dxl_comm_result != dxl.COMM_SUCCESS or dxl_error != 0:
+        print("Failed to read position")
+        return None
+    
+    # Convert the position reading if necessary (depends on Dynamixel model and firmware)
+    if dxl_present_position > 2147483647:  # 2147483647 is 2^31 - 1, half of the range of 32-bit signed integer
+        dxl_present_position -= 4294967296  # Subtract 2^32 to get the correct negative value
+
+    # Convert position from raw value to degrees if necessary (depends on Dynamixel model)
+    dxl_present_position = dxl_present_position * 0.088  # Example conversion factor to degrees (may vary)
+    
+    return dxl_present_position
+
+
 # Function to set goal position
 def set_goal_position(packet_handler, port_handler, position):
     dxl_comm_result, dxl_error = packet_handler.write4ByteTxRx(port_handler, DXL_ID, ADDR_PRO_GOAL_POSITION, position)
@@ -93,21 +109,6 @@ def set_pwm(packet_handler, port_handler, dxl_id, addr_pro_goal_pwm, pwm):
     print(f"Set PWM to {pwm}")
     return True
 
-def read_position(packet_handler, port_handler, dxl_id, addr_present_position):
-    dxl_present_position, dxl_comm_result, dxl_error = packet_handler.read4ByteTxRx(port_handler, dxl_id, addr_present_position)
-    if dxl_comm_result != dxl.COMM_SUCCESS or dxl_error != 0:
-        print("Failed to read position")
-        return None
-    
-    # Convert the position reading if necessary (depends on Dynamixel model and firmware)
-    if dxl_present_position > 2147483647:  # 2147483647 is 2^31 - 1, half of the range of 32-bit signed integer
-        dxl_present_position -= 4294967296  # Subtract 2^32 to get the correct negative value
-
-    # Convert position from raw value to degrees if necessary (depends on Dynamixel model)
-    dxl_present_position = dxl_present_position * 0.088  # Example conversion factor to degrees (may vary)
-    
-    return dxl_present_position
-    
 # Function to collect data from Arduino
 def collect_data(ser, data_queue, stop_event):
     start_time = time.time()
@@ -146,7 +147,7 @@ def main():
         enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
 
         # Set the goal position to 180 degrees (starting pos)
-        starting_point = 340 #180 #340
+        starting_point = 330
         goal_position = int(starting_point / 360.0 * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
         set_goal_position(packetHandler, portHandler, goal_position)
         time.sleep(1)
@@ -156,13 +157,10 @@ def main():
         enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
 
         # Total time and time step for the step input
-        # total_time = 0.4 #for sin input
-        total_time = 0.23 #for step input
+        total_time = 0.16
         dt = 0.01
-        # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude=12, frequency=3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
-        times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
+        times, voltages, pwms = generate_step_input(total_time, dt, -step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
        
-        print("voltages: ", voltages)
         # Open the serial connection
         ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino's serial port
         time.sleep(2)  # Give some time to establish the connection
@@ -174,22 +172,18 @@ def main():
 
         # Main loop to set PWM values
         for pwm in pwms:
-            #reverse
-            pwm = -pwm
             dxl_present_position = read_position(packetHandler, portHandler, DXL_ID, ADDR_PRESENT_POSITION)
-            if dxl_present_position > 350 or dxl_present_position < 120: #if the motor reaches max safe pos stop
+            if dxl_present_position < 150: #if the motor reaches max safe pos stop
                 print("Stopping pos: ", dxl_present_position)
                 set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm = 0) #stop 
                 break
-            if not set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm):
+            if not set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm): #set pwm to whatever is on the pwms list
                 continue
             time.sleep(dt)
         
         set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm = 0) #stop 
-        
-        
-        time.sleep(1) # Allow for all the data to pass from arduino before we stop collection.
 
+        time.sleep(0.50) # Allow for all the data to pass from arduino before we stop collection.
         # Stop data collection
         stop_event.set()
         data_thread.join()
@@ -207,7 +201,7 @@ def main():
             close_port(portHandler)
         if ser:
             ser.close()
-        save_data_to_csv(data, 'Finger_Multi_Model_Approach/Data/Finger_Validation_Real_data.csv')
+        save_data_to_csv(data, 'Finger_Multi_Model_Approach/Data/Finger_Pos_Data_Reverse.csv')
 
 if __name__ == "__main__":
     main()
