@@ -63,7 +63,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
         #Joint 3 (D)
         #move joint D
         if theta_D_joint < max_D_joint_angle:
-            theta_D_joint = prev_theta_D + time_Step*((-5.712)*prev_theta_D + 104.5*voltage)
+            theta_D_joint = prev_theta_D + time_Step*((-1.973)*prev_theta_D + 96.15*voltage)
             if(theta_D_joint > max_D_joint_angle):
                 theta_D_joint = max_D_joint_angle
             theta_P_joint = 0
@@ -73,7 +73,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             print("Moving J_P")
             theta_D_joint = max_D_joint_angle
             # theta_P_joint = prev_theta_P + time_Step*(-(1.165)*prev_theta_P + 53.13*voltage)
-            theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
+            theta_P_joint = prev_theta_P + time_Step*(-(0.6998)*prev_theta_P + 68.92*voltage)
             if(theta_P_joint > max_P_joint_angle):
                 theta_P_joint = max_P_joint_angle
 
@@ -82,7 +82,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             print("Moving J_M")
             theta_D_joint = max_D_joint_angle
             theta_P_joint = max_P_joint_angle
-            theta_M_joint = prev_theta_M + time_Step*(-(1.36e-08)*prev_theta_M + 51.44*voltage)
+            theta_M_joint = prev_theta_M + time_Step*(-(2.77)*prev_theta_M + 68.65*voltage)
             if(theta_M_joint > max_M_joint_angle):
                 theta_M_joint = max_M_joint_angle
             print("JM: ", theta_M_joint)
@@ -287,29 +287,29 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
     for time,theta_m,theta_M_joint, theta_P_joint, theta_D_joint, pwm in zip(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwms):
         data.append([time,theta_m, theta_D_joint, theta_P_joint, theta_M_joint, pwm])
 
-    with open('Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv', 'w', newline='') as file:
+    with open('ubuntu\python\Finger_Multi_Model_Approach\Data\Finger_Validation_Sim_Data_Forward.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["time","theta_m", "theta_D_joint", "theta_P_joint" ,"theta_M_joint", "pwm"])
         writer.writerows(data)
-    print("data saved at Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_data.csv")
+    print("data saved at ubuntu\python\Finger_Multi_Model_Approach\Data\Finger_Validation_Sim_Data_Forward.csv")
 
 
 
 async def main():
     #initialize positions:
     #forward
-    # prev_theta_D = 0
-    # prev_theta_P = 0
-    # prev_theta_M = 0
+    prev_theta_D = 0
+    prev_theta_P = 0
+    prev_theta_M = 0
     #reverse
-    prev_theta_D = math.radians(max_D_joint_angle)
-    prev_theta_P = math.radians(max_P_joint_angle)
-    prev_theta_M = math.radians(max_M_joint_angle)
+    # prev_theta_D = math.radians(max_D_joint_angle)
+    # prev_theta_P = math.radians(max_P_joint_angle)
+    # prev_theta_M = math.radians(max_M_joint_angle)
     try:
         # Create sinusoidal voltage array
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
-        total_time = 0.23 #for step input
+        total_time = 0.29 #for step input
         dt = 0.01
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
@@ -337,7 +337,7 @@ async def main():
             # rate(100)
 
             #reverse
-            voltage = -voltage
+            # voltage = -voltage
 
             # Add current voltage to the buffer and get delayed voltage. This is to introduce dead time to the model with code
             # voltage_buffer.append(voltage)
@@ -350,9 +350,9 @@ async def main():
             # prev_theta_m = math.degrees(theta_m)
 
             #FORWARD MOTION
-            # pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_Step = 0.03, acumalating_time = acumalating_time)
-            #REVERSE MOTION
             pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_Step = 0.03, acumalating_time = acumalating_time)
+            #REVERSE MOTION
+            # pos_P_joint_X, pos_P_joint_Y, Pos_D_joint_X, Pos_D_joint_Y, pos_tip_X, pos_tip_Y, theta_M_joint, theta_P_joint, theta_D_joint, next_acumalating_time = finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_Step = 0.03, acumalating_time = acumalating_time)
             prev_theta_D = theta_D_joint
             prev_theta_P = theta_P_joint
             prev_theta_M = theta_M_joint

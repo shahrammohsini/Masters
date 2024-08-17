@@ -2,8 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the simulation data
-sim_data = pd.read_csv("Finger_Multi_Model_Approach\Data\Finger_Validation_Sim_data.csv")
-real_data = pd.read_csv("Finger_Multi_Model_Approach\Data\Finger_Validation_Real_data.csv")
+sim_data = pd.read_csv("ubuntu\python\Finger_Multi_Model_Approach\Data\Finger_Validation_Sim_Data_Forward.csv")
+real_data = pd.read_csv("ubuntu\python\Finger_Multi_Model_Approach\Data\Finger_Validation_Real_Data_Forward.csv")
 
 # extract the columns for joints from real data
 real_theta_D_joint = real_data['Joint_3']
