@@ -25,7 +25,7 @@ MAX_PWM = 850
 step_input = 10  # input voltage
 POSITION_MODE = 3
 PWM_MODE = 16
-step_magnitude = 6
+step_magnitude = 5
 
 # Function to generate sinusoidal input
 def generate_sinusoidal_input(total_time, dt, amplitude, frequency, max_pwm, max_voltage):
@@ -157,7 +157,7 @@ def main():
 
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
-        total_time = 0.07 #for step input
+        total_time = 0.23 #for step input
         dt = 0.01
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude=12, frequency=3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
@@ -188,7 +188,7 @@ def main():
         set_pwm(packetHandler, portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, pwm = 0) #stop 
         
         
-        time.sleep(0.4) # Allow for all the data to pass from arduino before we stop collection.
+        time.sleep(1) # Allow for all the data to pass from arduino before we stop collection.
 
         # Stop data collection
         stop_event.set()

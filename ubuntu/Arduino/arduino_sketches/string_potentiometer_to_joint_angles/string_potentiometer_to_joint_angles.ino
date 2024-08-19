@@ -44,12 +44,12 @@ void setup() {
     // Do nothing until data is available
   }
   Serial.read(); // Read the signal (assume it's a single byte)
-  // delay(350);
+  delay(300);
   // delay(250);
   // delay(220);
   // delay(190);
   // delay(160);
-  delay(130);
+  // delay(130);
 
   start_time = millis();
 
