@@ -143,7 +143,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
     //populate dynamic matrix
      for (int i =0; i < control_horizon_P; i++) { //create columns
         for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-            const auto& d = dataset[j+29]; //d holds the current row adding +6 to start at the point where M joint moves
+            const auto& d = dataset[j+121]; //d holds the current row adding +6 to start at the point where M joint moves
             DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
             // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
@@ -156,8 +156,8 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
     //populate dynamic matrix
      for (int i =0; i < control_horizon_M; i++) { //create columns
         for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
-            const auto& d = dataset[j + 25]; //d holds the current row.
-            DM_j_M(i + j, i) = ((d.theta_M_joint)/1); //fill current row for current column. Also, normalize the angle
+            const auto& d = dataset[j + 319]; //d holds the current row.
+            DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
             // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
         }
@@ -404,10 +404,10 @@ double Controller::MPC_Control_P(Eigen::MatrixXd setpoint,double measured_positi
     y_hat_P = y_hat_P + Eigen::MatrixXd::Constant(y_hat_P.rows(), y_hat_P.cols(), PHI_P); //add the constant PHI to each value of y_hat
 
     errors_P = setpoint - y_hat_P; //error
-    std::cout << "setpoint: \n" << setpoint(0) <<std::endl; 
-    std::cout << "y_hat_P: \n" << y_hat_P(0) <<std::endl; 
+    // std::cout << "setpoint: \n" << setpoint(0) <<std::endl; 
+    // std::cout << "y_hat_P: \n" << y_hat_P(0) <<std::endl; 
 
-    std::cout << "errors: \n" << errors_P(0) <<std::endl; 
+    // std::cout << "errors: \n" << errors_P(0) <<std::endl; 
 
     // std::cout << "du: \n" << du <<std::endl; 
     // std::cout << "du_D: \n" << du_D <<std::endl; 
@@ -885,8 +885,8 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
             y_pdt_M(j) = alpha_M * y_pdt_M(j - 1) + (1 - alpha_M) * setpoint_val;
             }
             Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,y_pdt_M(1)); //only use first value from the setpoint trajectory
-            std::cout<<"theta M_Joint: "<< theta_M<<std::endl;
-            std::cout<<"setpoint M_Joint: "<< setpoint<<std::endl;
+            // std::cout<<"theta M_Joint: "<< theta_M<<std::endl;
+            // std::cout<<"setpoint M_Joint: "<< setpoint<<std::endl;
             // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,setpoint_val); //matrix of setpoint values
             control_effort = MPC_Control_M(setpoint, measured_posi_M, N_M, nu_M, A_M);
             // std::cout<<"Controlling M_Joint "<<std::endl;

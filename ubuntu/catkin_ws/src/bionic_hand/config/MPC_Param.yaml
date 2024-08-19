@@ -1,18 +1,18 @@
 middle_finger:
-        dt: 0.001
+        dt: 0.03
         forward:
                 M_joint:
-                        N_M: 12
-                        nu_M: 5
-                        LAMBDA_M: 10
+                        N_M: 120
+                        nu_M: 22
+                        LAMBDA_M: 1.3
                         deadTimeSteps_M: 0
                 P_joint:
-                        N_P: 48
-                        nu_P: 2
-                        LAMBDA_P: 1.05
+                        N_P: 120
+                        nu_P: 15
+                        LAMBDA_P: 4
                         deadTimeSteps_P: 0
                 D_joint:
-                        N_D: 30
+                        N_D: 60
                         nu_D: 2
                         LAMBDA_D: 1.05
                         deadTimeSteps_D: 0

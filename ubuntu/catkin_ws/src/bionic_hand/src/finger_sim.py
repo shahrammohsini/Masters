@@ -68,7 +68,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
         #Joint 3 (D)
         #move joint D
         if theta_D_joint < max_D_joint_angle:
-            theta_D_joint = prev_theta_D + time_Step*((-5.712)*prev_theta_D + 104.5*voltage)
+            theta_D_joint = prev_theta_D + time_Step*((-1.973)*prev_theta_D + 96.15*voltage)
             if(theta_D_joint > max_D_joint_angle):
                 theta_D_joint = max_D_joint_angle
             theta_P_joint = 0
@@ -77,8 +77,9 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
         elif theta_D_joint >= max_D_joint_angle and theta_P_joint < max_P_joint_angle: # Move joint P
             # print("Moving J_P", theta_P_joint)
             theta_D_joint = max_D_joint_angle
+            print("voltage to finger fwd: ", voltage)
             # theta_P_joint = prev_theta_P + time_Step*(-(1.165)*prev_theta_P + 53.13*voltage)
-            theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
+            theta_P_joint = prev_theta_P + time_Step*(-(0.6998)*prev_theta_P + 68.92*voltage)
             if(theta_P_joint > max_P_joint_angle):
                 theta_P_joint = max_P_joint_angle
 
@@ -88,7 +89,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             # print("Moving J_M,", theta_M_joint)
             theta_D_joint = max_D_joint_angle
             theta_P_joint = max_P_joint_angle
-            theta_M_joint = prev_theta_M + time_Step*(-(1.36e-08)*prev_theta_M + 51.44*voltage)
+            theta_M_joint = prev_theta_M + time_Step*(-(2.77)*prev_theta_M + 68.65*voltage)
             if(theta_M_joint > max_M_joint_angle):
                 theta_M_joint = max_M_joint_angle
             # print("JM: ", theta_M_joint)
@@ -103,11 +104,10 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
 
         elif theta_M_joint <= 0 and theta_P_joint > 0: #Move joint P
             theta_D_joint = max_D_joint_angle
-            # print("voltage to finger: ", voltage)
-            voltage = -5
-            print("jump: ", -(5.557)*prev_theta_P + (36.1*voltage))
+            print("voltage to finger rev: ", voltage)
             theta_P_joint = prev_theta_P + time_Step*(-(5.557)*prev_theta_P + (36.1*voltage)) #actual reverse model
-            # theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
+            # theta_P_joint = prev_theta_P + time_Step*(-(0.6998)*prev_theta_P + 68.92*voltage)
+
             
             
             # theta_P_joint = prev_theta_P + time_Step*(-(4.255)*prev_theta_P + 37.75*voltage)
@@ -369,7 +369,7 @@ async def main():
     #Initial position 
     prev_theta_D = 0
     prev_theta_P = 0
-    prev_theta_M = 0
+    prev_theta_M = 35
 
     fccs = FingerControlCommandSubscriber()
     fpp = FingerPositionPublisher()

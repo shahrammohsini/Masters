@@ -63,7 +63,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
         #Joint 3 (D)
         #move joint D
         if theta_D_joint < max_D_joint_angle:
-            theta_D_joint = prev_theta_D + time_Step*((-5.712)*prev_theta_D + 104.5*voltage)
+            theta_D_joint = prev_theta_D + time_Step*((-1.973)*prev_theta_D + 96.15*voltage)
             if(theta_D_joint > max_D_joint_angle):
                 theta_D_joint = max_D_joint_angle
             theta_P_joint = 0
@@ -73,7 +73,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             print("Moving J_P")
             theta_D_joint = max_D_joint_angle
             # theta_P_joint = prev_theta_P + time_Step*(-(1.165)*prev_theta_P + 53.13*voltage)
-            theta_P_joint = prev_theta_P + time_Step*(-(7.19e-12)*prev_theta_P + 76.06*voltage)
+            theta_P_joint = prev_theta_P + time_Step*(-(0.6998)*prev_theta_P + 68.92*voltage)
             if(theta_P_joint > max_P_joint_angle):
                 theta_P_joint = max_P_joint_angle
 
@@ -82,7 +82,7 @@ def finger_pos_update(voltage, prev_theta_D, prev_theta_P, prev_theta_M, time_St
             print("Moving J_M")
             theta_D_joint = max_D_joint_angle
             theta_P_joint = max_P_joint_angle
-            theta_M_joint = prev_theta_M + time_Step*(-(1.36e-08)*prev_theta_M + 51.44*voltage)
+            theta_M_joint = prev_theta_M + time_Step*(-(2.77)*prev_theta_M + 68.65*voltage)
             if(theta_M_joint > max_M_joint_angle):
                 theta_M_joint = max_M_joint_angle
             print("JM: ", theta_M_joint)
@@ -301,8 +301,8 @@ async def main():
         # Create sinusoidal voltage array
         # Total time and time step for the step input
         # total_time = 0.4 #for sin input
-        total_time = 1 #for step input
-        dt = 0.005
+        total_time = 0.8 #for step input
+        dt = 0.001
         # times, voltages, pwms = generate_sinusoidal_input(total_time, dt = 0.01, amplitude = 12, frequency = 3.3, max_pwm=MAX_PWM, max_voltage=MAX_VOLTAGE)
         # times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
         
@@ -324,7 +324,7 @@ async def main():
         timer = 0
         voltage = 7
         # for voltage,pwm in zip(voltages,pwms):
-        while(timer < 3):
+        while(timer < total_time):
             print("timer: ", timer)
             sim_time = time.time() - start_time
             sim_times.append(round(sim_time, 6))
