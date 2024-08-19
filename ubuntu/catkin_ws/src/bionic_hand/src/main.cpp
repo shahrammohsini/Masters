@@ -15,11 +15,6 @@ int global_int_value = 0;
 void intCallback(const std_msgs::Int32::ConstPtr& msg)
 {
     global_int_value = msg->data;
-    // ROS_INFO("Received: [%d]", global_int_value);
-    // cout << "new msg " << msg << endl;
-    // ROS_INFO("Received: [%d]", msg->data);
-    // middle_finger.setPosition(global_int_value);
-
 }
 
 
@@ -62,10 +57,11 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 15;
-    float setpoint_P = max_P_joint_angle;
-    float setpoint_D = max_D_joint_angle;
+    float setpoint_M = 0;
+    float setpoint_P = 0;
+    float setpoint_D =  35;
 
+//**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     int input;
     

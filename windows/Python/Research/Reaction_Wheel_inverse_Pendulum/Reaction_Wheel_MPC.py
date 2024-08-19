@@ -72,7 +72,7 @@ LAMBDA = 7 #Penalty factor
 #Du calculations. A is the dynamixc matrix
 LambdaI = LAMBDA * I_Matrix
 
-ATA = A_T.dot(A)
+ATA = A_T.dot(A) #not really a dot product. its actually AT*A. The dot funciton knows and multiplies them because their not vectors
 ATA_LambdaI = ATA - LambdaI
 ATA_LambdaI_Inv = np.linalg.inv(ATA_LambdaI)
 Du = ATA_LambdaI_Inv.dot(A_T)

@@ -1,0 +1,9 @@
+<launch>
+
+<!-- Launch the C++ executable -->
+    <node name="bionic_node" pkg="bionic_hand" type="bionic" output="screen" />
+
+    <!-- Load MPC parameters -->
+<rosparam file="$(find bionic_hand)/config/MPC_Param.yaml" command="load" />
+</launch>
+

@@ -4,9 +4,9 @@ middle_finger:
                 ki: 0.1
                 kd: 0.001
         P_joint:
-                kp: 20
-                ki: 0.1
-                kd: 0.001
+                kp: 0.001
+                ki: 0
+                kd: 0
         D_joint:
                 kp: 20
                 ki: 0.1
