@@ -815,9 +815,9 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     Eigen::MatrixXd y_pdt_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1);
     Eigen::MatrixXd y_pdt_M = Eigen::MatrixXd::Zero(N_M, 1);
     
-    double alpha_D = 0.7; //trajectory smoothness parameter
+    double alpha_D = 0; //trajectory smoothness parameter
     double alpha_P = 0; //trajectory smoothness parameter
-    double alpha_M = 0; //trajectory smoothness parameter
+    double alpha_M = 0.95; //trajectory smoothness parameter
 
     // sleep(1);
     
