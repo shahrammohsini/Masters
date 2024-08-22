@@ -55,25 +55,25 @@ struct openLoop_data{
 
 double Controller::PID_Control(double setpoint, double measured_position, double kp, double ki, double kd, double dt){
 
-    std::cout <<"setpoint_PID: " << setpoint << std::endl;
-    std::cout <<"measured_position_PID: " << measured_position << std::endl;
+    // std::cout <<"setpoint_PID: " << setpoint << std::endl;
+    // std::cout <<"measured_position_PID: " << measured_position << std::endl;
 
     error = (setpoint - measured_position);
-    std::cout <<"error " << error << std::endl;
+    // std::cout <<"error " << error << std::endl;
 
     integral += error * dt;
     derivative = (error - previous_error)/dt;
     previous_error = error;
     control_effort = kp * error + ki * integral + kd * derivative;
-    std::cout <<"control effort " << control_effort << std::endl;
+    // std::cout <<"control effort " << control_effort << std::endl;
     if (control_effort > 12){control_effort = 12;}
 
     if (control_effort < -12){control_effort = -12;}
     
-    std::cout<<"kp "<< kp <<std::endl;
-    std::cout<<"ki "<< ki <<std::endl;
+    // std::cout<<"kp "<< kp <<std::endl;
+    // std::cout<<"ki "<< ki <<std::endl;
 
-    std::cout<<"control effort from PID"<< control_effort <<std::endl;
+    // std::cout<<"control effort from PID"<< control_effort <<std::endl;
     return control_effort;
 }
 
@@ -149,7 +149,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
 
         }
      }
-    std::cout << "Matrix_P: \n" << DM_j_P <<std::endl;
+    // std::cout << "Matrix_P: \n" << DM_j_P <<std::endl;
 
     DM_j_M.setZero(); //populate with zeros
     // DM_j_M.setConstant(bias);
@@ -162,7 +162,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
 
         }
      }
-    std::cout << "Matrix_M: \n" << DM_j_M <<std::endl;
+    // std::cout << "Matrix_M: \n" << DM_j_M <<std::endl;
 
     return std::make_tuple(DM_j_D, DM_j_P, DM_j_M);
 }
@@ -269,7 +269,7 @@ Eigen::MatrixXd Controller::generate_Dynamic_Matrix_rev(int prediction_horizon_D
 
 
 
-    std::cout << "DM_j_P_rev: \n" << DM_j_P_rev <<std::endl;
+    // std::cout << "DM_j_P_rev: \n" << DM_j_P_rev <<std::endl;
 
     // DM_j_M.setZero(); //populate with zeros
     // //populate dynamic matrix
@@ -628,13 +628,13 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> C
     LambdaI_P_rev = LAMBDA_P_rev*I_Matrix_P_rev;
     ATA_P_rev = A_T_P_rev*A_P_rev;
     // std::count <<"ATA_P_rev" << ATA_P_rev <<std::endl;
-    std::cout << "ATA_P_rev: "<< ATA_P_rev <<std::endl;
+    // std::cout << "ATA_P_rev: "<< ATA_P_rev <<std::endl;
 
     //instead of adding lambda (penalty factor) we multiply it to the diagonal values of the matrix
     for (int i = 0; i < ATA_P_rev.rows(); ++i) {
         ATA_P_rev(i, i) = ATA_P_rev(i, i)*LAMBDA_P_rev;}
 
-        std::cout << "ATA_P_rev_lambda: "<< ATA_P_rev <<std::endl;
+        // std::cout << "ATA_P_rev_lambda: "<< ATA_P_rev <<std::endl;
 
     
     ATA_LambdaI_Inv_P_rev = ATA_P_rev.inverse();
@@ -765,7 +765,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     A_P = DM_j_P;
     A_M = DM_j_M;
 
-    std::cout<<"A_D: " << A_D <<std::endl;
+    // std::cout<<"A_D: " << A_D <<std::endl;
     // std::cout<<"A_P: " << A_P <<std::endl;
     // std::cout<<"A_M: " << A_M <<std::endl;
 
@@ -788,8 +788,8 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     A_M = addDeadTime(A_M,  deadTimeSteps_M);
     A_P_rev = addDeadTime_rev(A_P_rev,  deadTimeSteps_P_rev);
 
-    std::cout<<"A_D_Deadtime: " << A_D <<std::endl;
-    std::cout<<"A_P_rev_deadtime: " << A_P_rev <<std::endl;
+    // std::cout<<"A_D_Deadtime: " << A_D <<std::endl;
+    // std::cout<<"A_P_rev_deadtime: " << A_P_rev <<std::endl;
 
     //reverse
     //...... to be added
@@ -798,7 +798,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     //gernerate du matrix (offline matrix calculations)
     std::tie(du_D, du_P, du_M, du_P_rev) = generate_du_Matrix(N_D, nu_D,N_P, nu_P,N_M, nu_M, N_P_rev, nu_P_rev, A_D, A_P, A_M, A_P_rev, LAMBDA_D, LAMBDA_P, LAMBDA_M, LAMBDA_P_rev);
 
-    std::cout<<"du_D: " << du_D <<std::endl;
+    // std::cout<<"du_D: " << du_D <<std::endl;
     // std::cout<<"du_P: " << du_P <<std::endl;
     // std::cout<<"du_M: " << du_M <<std::endl;
     // std::cout<<"du_P_rev: " << du_P_rev <<std::endl;
@@ -896,11 +896,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
 
         //send u(0) to plant
-        std::cout <<"control_effor voltage: " << control_effort <<std::endl;
+        // std::cout <<"control_effor voltage: " << control_effort <<std::endl;
         control_effort = convert_Voltage_to_PWM(control_effort); //convert from voltage to PWM
 
         // std::cout <<"control_effor pwm: " << control_effort <<std::endl;
-
+        control_effort = 50;
         publishData(control_effort); //run publishData method
         ros::spinOnce();
         rate.sleep();

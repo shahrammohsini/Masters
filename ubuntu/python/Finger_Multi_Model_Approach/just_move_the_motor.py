@@ -5,14 +5,14 @@ import dynamixel_sdk as dxl
 import time
 import threading
 import queue
-from scipy import signal
+# from scipy import signal
 import numpy as np
 
 # Protocol version and Dynamixel settings
 PROTOCOL_VERSION = 2.0
 DXL_ID = 1
 BAUDRATE = 57600
-DEVICENAME = 'COM10'
+DEVICENAME = '/dev/ttyUSB0'
 ADDR_PRO_GOAL_PWM = 100
 ADDR_PRO_TORQUE_ENABLE = 64
 ADDR_PRO_GOAL_POSITION = 116
@@ -25,7 +25,7 @@ MAX_PWM = 885
 step_input = 12  # input voltage
 POSITION_MODE = 3
 PWM_MODE = 16
-step_magnitude = 10 #volts
+step_magnitude = 5 #volts
 
 # Function to generate sinusoidal input
 def generate_sinusoidal_input(total_time, dt, amplitude, frequency, max_pwm, max_voltage):
@@ -147,8 +147,8 @@ def main():
         enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
 
         # Set the goal position to 180 degrees (starting pos)
-        starting_point = 320
-        goal_position = int(starting_point / 360.0 * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
+        starting_point = 180
+        goal_position = int(starting_point / 350.0 * 4095)  # Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
         set_goal_position(packetHandler, portHandler, goal_position)
         time.sleep(1)
 
@@ -157,9 +157,9 @@ def main():
         enable_torque(packetHandler, portHandler, DXL_ID, TORQUE_ENABLE)
 
         # Total time and time step for the step input
-        total_time = 0.07
+        total_time = 0.2
         dt = 0.01
-        times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (-MAX_VOLTAGE))
+        times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, max_pwm = MAX_PWM, max_voltage = (MAX_VOLTAGE))
        
         # # Open the serial connection
         # ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino's serial port

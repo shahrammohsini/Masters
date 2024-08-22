@@ -1,0 +1,17 @@
+<launch>
+
+<!-- Load PID parameters -->
+<rosparam file="$(find bionic_hand)/config/PID_Param.yaml" command="load" />
+<!-- Load hand parameters -->
+<rosparam file="$(find bionic_hand)/config/hand_Param.yaml" command="load" />
+<!-- Load MPC parameters -->
+<rosparam file="$(find bionic_hand)/config/MPC_Param.yaml" command="load" />
+
+<!-- Launch bionic executable executable -->
+    <node name="bionic_node" pkg="bionic_hand" type="bionic" output="screen" />
+
+    <!-- Launch the move_motor_node executable independantly -->
+<node name="move_motor_node" pkg="bionic_hand" type="move_motor_node" output="screen"/>
+
+</launch>
+

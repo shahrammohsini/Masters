@@ -151,8 +151,10 @@ file(GLOB SOURCE_FILES "src/*.cpp")
 # add_executable(move_motor ${SOURCE_FILES})
 # add_executable(finger ${SOURCE_FILES})
 # add_executable(main ${SOURCE_FILES})
-add_executable(bionic src/main.cpp src/finger.cpp src/controller.cpp)
-
+add_executable(bionic src/main.cpp src/finger.cpp src/controller.cpp) #create an exectuable called bionic
+add_executable(move_motor_node src/move_motor.cpp) #move motor has its own executable so it can run independantly of main.cpp
+add_dependencies(move_motor_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(move_motor_node ${catkin_LIBRARIES})
 
 
 # target_link_libraries(move_motor
