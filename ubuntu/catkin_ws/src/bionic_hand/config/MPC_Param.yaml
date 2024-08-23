@@ -1,5 +1,5 @@
 middle_finger:
-        dt: 0.005
+        dt: 0.01
         forward:
                 M_joint:
                         N_M: 120

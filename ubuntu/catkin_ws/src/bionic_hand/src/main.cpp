@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
 
 
     float setpoint_M = 0;
-    float setpoint_P = 0;
-    float setpoint_D =  35;
+    float setpoint_P = 45;
+    float setpoint_D =  max_D_joint_angle;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);

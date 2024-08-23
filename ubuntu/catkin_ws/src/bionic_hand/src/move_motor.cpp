@@ -3,12 +3,13 @@
 #include <ros/ros.h>
 #include <thread>
 #include <bionic_hand/ControlCommands.h>  //ROS message header
+#include <unistd.h>
 
 // Dynamixel settings
 #define PROTOCOL_VERSION 2.0
 #define DXL_ID 1
 #define BAUDRATE 57600
-#define DEVICENAME "/dev/ttyUSB0"
+#define DEVICENAME "/dev/ttyUSB1"
 #define ADDR_PRO_GOAL_PWM 100
 #define ADDR_PRO_TORQUE_ENABLE 64
 #define ADDR_PRO_GOAL_POSITION 116
@@ -21,7 +22,7 @@
 #define PWM_MODE 16
 
 // Global variable for PWM value
-int g_PWM = 0;
+float g_PWM = 0;
 
 // Initialize Dynamixel
 dynamixel::PortHandler* initializeDynamixel(const char* devicename, int baudrate) {
@@ -62,6 +63,24 @@ float read_position(dynamixel::PacketHandler* packetHandler, dynamixel::PortHand
     return dxl_present_position; //return current position
 }
 
+void set_goal_position(dynamixel::PacketHandler* packetHandler, dynamixel::PortHandler* portHandler, int dxl_id,  float position){
+    int dxl_comm_result; // Result of communication
+    uint8_t dxl_error = 0; // Dynamixel error
+
+    // Assuming goal position is a 4-byte value; change to write2ByteTxRx if it's a 2-byte value
+    dxl_comm_result = packetHandler->write4ByteTxRx(portHandler, dxl_id, ADDR_PRO_GOAL_POSITION, position, &dxl_error);
+
+    if (dxl_comm_result != COMM_SUCCESS) {
+        std::cerr << "Failed to set goal position: " << packetHandler->getTxRxResult(dxl_comm_result) << std::endl;
+        throw std::runtime_error("Failed to set goal position");
+    }
+    if (dxl_error != 0) {
+        std::cerr << "Dynamixel error: " << packetHandler->getRxPacketError(dxl_error) << std::endl;
+    } else {
+        std::cout << "Moving robot to starting position: " << position << std::endl;
+    }
+}
+
 // Main function
 int main(int argc, char **argv) {
     std::cout << "Prepared to move motor" << std::endl;
@@ -73,6 +92,18 @@ int main(int argc, char **argv) {
 
     auto portHandler = initializeDynamixel(DEVICENAME, BAUDRATE);
     auto packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
+
+    // # Set operating mode to Position Control Mode
+    packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_OPERATING_MODE, POSITION_MODE);
+    packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
+    float starting_point = 180;
+    float final_point = 350;
+    float goal_position = int(starting_point / final_point * 4095);  // Convert 180 degrees to the corresponding value (assuming 12-bit resolution)
+    std::cout<<"Moving robot to starting position: " << goal_position<< std::endl;
+    set_goal_position(packetHandler, portHandler, DXL_ID, goal_position);
+    sleep(1);
+    packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE); //disable torequ
+    std::cout<<"Begin Control "<< std::endl;
 
     // Set operating mode to PWM
     packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_OPERATING_MODE, PWM_MODE);
@@ -86,12 +117,16 @@ int main(int argc, char **argv) {
         
         int dxl_present_position = read_position(packetHandler, portHandler, DXL_ID, ADDR_PRESENT_POSITION);
 
-        std::cout << "Current Position: " << dxl_present_position << std::endl;
-        if (dxl_present_position < 175 || dxl_present_position > 250) {
+        std::cout << "Current Position: " << dxl_present_position << " -- PWM: " << g_PWM << std::endl;
+        if (dxl_present_position < 175 || dxl_present_position > 340) {
             packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, 0);
-            // break;
+            std::cout<<"Motor limit reached. Stopping "<< std::endl;
+            break;
+
         }
-        packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, g_PWM);
+        else{
+            packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, g_PWM);
+        }
     
         ros::spinOnce();
     }

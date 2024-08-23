@@ -10,8 +10,12 @@
 <!-- Launch bionic executable executable -->
     <node name="bionic_node" pkg="bionic_hand" type="bionic" output="screen" />
 
-    <!-- Launch the move_motor_node executable independantly -->
+<!-- Launch the move_motor_node executable independantly -->
 <node name="move_motor_node" pkg="bionic_hand" type="move_motor_node" output="screen"/>
+
+<!-- Launch the ploting script -->
+<node name="plot" pkg="bionic_hand" type="plot.py" output="screen"/>
+
 
 </launch>
 

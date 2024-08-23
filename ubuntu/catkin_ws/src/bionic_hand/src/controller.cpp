@@ -59,7 +59,7 @@ double Controller::PID_Control(double setpoint, double measured_position, double
     // std::cout <<"measured_position_PID: " << measured_position << std::endl;
 
     error = (setpoint - measured_position);
-    // std::cout <<"error " << error << std::endl;
+    std::cout <<"error " << error << std::endl;
 
     integral += error * dt;
     derivative = (error - previous_error)/dt;
@@ -69,6 +69,11 @@ double Controller::PID_Control(double setpoint, double measured_position, double
     if (control_effort > 12){control_effort = 12;}
 
     if (control_effort < -12){control_effort = -12;}
+
+    //Handle motor deadzone
+    if (control_effort < 0.5 & control_effort > 0){control_effort = 0.5;}
+    if (control_effort > -0.5 & control_effort < 0){control_effort = -0.5;}
+
     
     // std::cout<<"kp "<< kp <<std::endl;
     // std::cout<<"ki "<< ki <<std::endl;
@@ -650,7 +655,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> C
 //run method holding main control loop
 void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     ros::Rate rate(10); // 10 Hz
-
+    float dt_pid;
     //Load PID values form parameter yaml file
     nh.getParam("middle_finger/M_joint/kp", kp_M);
     nh.getParam("middle_finger/M_joint/ki", ki_M);
@@ -661,6 +666,8 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     nh.getParam("middle_finger/D_joint/kp", kp_D);
     nh.getParam("middle_finger/D_joint/ki", ki_D);
     nh.getParam("middle_finger/D_joint/kd", kd_D);
+    nh.getParam("middle_finger/dt", dt_pid);
+
     ///Load max joint angles form parameter yaml file
     nh.getParam("/middle_finger/joint_limits/max_M_joint_angle", max_M_joint_angle);
     nh.getParam("/middle_finger/joint_limits/max_P_joint_angle", max_P_joint_angle);
@@ -841,9 +848,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
                 }
                 Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,y_pdt_D(1)); //only use first value from the setpoint trajectory
 
-                control_effort = MPC_Control_D(setpoint, theta_D, N_D, nu_D, A_D);
                 // control_effort = MPC_Control_D(setpoint, theta_D, N_D, nu_D, A_D);
-                // std::cout<<"Controlling D_Joint: " << control_effort<<std::endl;
+                control_effort = PID_Control(setpoint_val, theta_D, kp_D, ki_D, kd_D, dt_pid);
+
+                // control_effort = MPC_Control_D(setpoint, theta_D, N_D, nu_D, A_D);
+                std::cout<<"Controlling D_Joint: " << control_effort<<std::endl;
 
 
 
@@ -861,8 +870,10 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
                 
                 Eigen::MatrixXd setpoint_rev = Eigen::MatrixXd::Constant(N_P_rev,1,y_pdt_P(1)); //matrix of setpoint values                
                 
-                control_effort = MPC_Control_P(setpoint, theta_P, N_P, nu_P, A_P);
-                // std::cout<<"Controlling P_Joint:  " <<control_effort <<std::endl;
+                // control_effort = MPC_Control_P(setpoint, theta_P, N_P, nu_P, A_P);
+                control_effort = PID_Control(setpoint_val, theta_P, kp_P, ki_P, kd_P, dt_pid);
+
+                std::cout<<"Controlling P_Joint:  " <<control_effort <<std::endl;
 
                 // std::cout<<"Controlling P_Joint_Forward:  " <<control_effort <<std::endl;
                 // if(control_effort < 0){ //Reverse motion
@@ -888,8 +899,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
             // std::cout<<"theta M_Joint: "<< theta_M<<std::endl;
             // std::cout<<"setpoint M_Joint: "<< setpoint<<std::endl;
             // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,setpoint_val); //matrix of setpoint values
-            control_effort = MPC_Control_M(setpoint, measured_posi_M, N_M, nu_M, A_M);
-            // std::cout<<"Controlling M_Joint "<<std::endl;
+            
+            // control_effort = MPC_Control_M(setpoint, measured_posi_M, N_M, nu_M, A_M);
+            control_effort = PID_Control(setpoint_val, theta_M, kp_M, ki_M, kd_M, dt_pid);
+
+            std::cout<<"Controlling M_Joint "<<std::endl;
 
 
         }
@@ -897,10 +911,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
         //send u(0) to plant
         // std::cout <<"control_effor voltage: " << control_effort <<std::endl;
+        
         control_effort = convert_Voltage_to_PWM(control_effort); //convert from voltage to PWM
 
         // std::cout <<"control_effor pwm: " << control_effort <<std::endl;
-        control_effort = 50;
+        // control_effort = 50;
         publishData(control_effort); //run publishData method
         ros::spinOnce();
         rate.sleep();
