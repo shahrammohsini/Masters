@@ -168,6 +168,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+bionic_hand/CMakeFiles/test_mpc_node.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/test_mpc_node.dir/rule
+.PHONY : bionic_hand/CMakeFiles/test_mpc_node.dir/rule
+
+# Convenience name for target.
+test_mpc_node: bionic_hand/CMakeFiles/test_mpc_node.dir/rule
+
+.PHONY : test_mpc_node
+
+# fast build rule for target.
+test_mpc_node/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/test_mpc_node.dir/build.make bionic_hand/CMakeFiles/test_mpc_node.dir/build
+.PHONY : test_mpc_node/fast
+
+# Convenience name for target.
 bionic_hand/CMakeFiles/move_motor_node.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/move_motor_node.dir/rule
 .PHONY : bionic_hand/CMakeFiles/move_motor_node.dir/rule
@@ -617,6 +632,33 @@ src/pwm_control.cpp.s:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.s
 .PHONY : src/pwm_control.cpp.s
 
+src/testing_real_mpc_one_file.o: src/testing_real_mpc_one_file.cpp.o
+
+.PHONY : src/testing_real_mpc_one_file.o
+
+# target to build an object file
+src/testing_real_mpc_one_file.cpp.o:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/test_mpc_node.dir/build.make bionic_hand/CMakeFiles/test_mpc_node.dir/src/testing_real_mpc_one_file.cpp.o
+.PHONY : src/testing_real_mpc_one_file.cpp.o
+
+src/testing_real_mpc_one_file.i: src/testing_real_mpc_one_file.cpp.i
+
+.PHONY : src/testing_real_mpc_one_file.i
+
+# target to preprocess a source file
+src/testing_real_mpc_one_file.cpp.i:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/test_mpc_node.dir/build.make bionic_hand/CMakeFiles/test_mpc_node.dir/src/testing_real_mpc_one_file.cpp.i
+.PHONY : src/testing_real_mpc_one_file.cpp.i
+
+src/testing_real_mpc_one_file.s: src/testing_real_mpc_one_file.cpp.s
+
+.PHONY : src/testing_real_mpc_one_file.s
+
+# target to generate assembly for a file
+src/testing_real_mpc_one_file.cpp.s:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/test_mpc_node.dir/build.make bionic_hand/CMakeFiles/test_mpc_node.dir/src/testing_real_mpc_one_file.cpp.s
+.PHONY : src/testing_real_mpc_one_file.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -624,6 +666,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
+	@echo "... test_mpc_node"
 	@echo "... move_motor_node"
 	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"
@@ -666,6 +709,9 @@ help:
 	@echo "... src/pwm_control.o"
 	@echo "... src/pwm_control.i"
 	@echo "... src/pwm_control.s"
+	@echo "... src/testing_real_mpc_one_file.o"
+	@echo "... src/testing_real_mpc_one_file.i"
+	@echo "... src/testing_real_mpc_one_file.s"
 .PHONY : help
 
 

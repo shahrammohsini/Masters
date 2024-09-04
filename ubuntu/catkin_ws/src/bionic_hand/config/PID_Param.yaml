@@ -2,14 +2,14 @@ middle_finger:
         dt: 0.01
         M_joint:
                 kp: 0.2
-                ki: 0.1
+                ki: 0.001
                 kd: 0.001
         P_joint:
                 kp: 0.2
                 ki: 0.05
-                kd: 0.01
+                kd: 0.0005
         D_joint:
-                kp: 0.2
-                ki: 0.11
-                kd: 0.001
+                kp: 0.1
+                ki: 0
+                kd: 0.0001
                 

@@ -34,6 +34,12 @@ int main(int argc, char** argv) {
     // ros::init(argc, argv, "move_motor"); // Initialize ROS node
     ros::init(argc, argv, "controller_node");
     ros::NodeHandle nh; // Create a NodeHandle
+
+    // Set up AsyncSpinner with 2 threads. This ensures data collection is done in a seperate thread
+    ros::AsyncSpinner spinner(2); // Number of threads
+    spinner.start();
+
+
     // Create a finger object
     Finger middle_finger(1, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
     // middle_finger.name = "middle_finger";
@@ -57,13 +63,16 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 0;
-    float setpoint_P = 45;
-    float setpoint_D =  max_D_joint_angle;
+    float setpoint_M = 45;
+    float setpoint_P = max_P_joint_angle + 20;
+    float setpoint_D =  max_D_joint_angle + 20;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     int input;
+
+    // Wait for ROS to shut down
+    ros::waitForShutdown();
     
 
     return 0;

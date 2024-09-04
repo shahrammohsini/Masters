@@ -170,8 +170,8 @@ private:
 
     int max_pwm;
     int min_pwm;
-    double max_Voltage = 12;
-    double min_Voltage = -12;
+    double max_Voltage = 5;
+    double min_Voltage = -5;
     double setpoint_val;
 
 };

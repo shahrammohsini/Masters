@@ -61,10 +61,10 @@ bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/
 bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/ros/wall_timer.h
 bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
+bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
 bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 bionic_hand/CMakeFiles/bionic.dir/src/controller.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
 
-bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.cpp
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/advertise_options.h
@@ -85,7 +85,6 @@ bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/message.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/message_event.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/message_forward.h
-bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/message_operations.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/message_traits.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/names.h
 bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o: /opt/ros/noetic/include/ros/node_handle.h
@@ -188,6 +187,7 @@ bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/ros/ty
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/ros/wall_timer.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
+bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/std_msgs/Int32.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h

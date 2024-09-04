@@ -2,7 +2,8 @@
 (cl:in-package :asdf)
 
 (defsystem "bionic_hand-msg"
-  :depends-on (:roslisp-msg-protocol :roslisp-utils )
+  :depends-on (:roslisp-msg-protocol :roslisp-utils :std_msgs-msg
+)
   :components ((:file "_package")
     (:file "BulkSetItem" :depends-on ("_package_BulkSetItem"))
     (:file "_package_BulkSetItem" :depends-on ("_package"))

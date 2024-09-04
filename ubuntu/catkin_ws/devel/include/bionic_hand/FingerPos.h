@@ -15,6 +15,7 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <std_msgs/Header.h>
 
 namespace bionic_hand
 {
@@ -24,18 +25,23 @@ struct FingerPos_
   typedef FingerPos_<ContainerAllocator> Type;
 
   FingerPos_()
-    : theta_M(0.0)
+    : header()
+    , theta_M(0.0)
     , theta_P(0.0)
     , theta_D(0.0)  {
     }
   FingerPos_(const ContainerAllocator& _alloc)
-    : theta_M(0.0)
+    : header(_alloc)
+    , theta_M(0.0)
     , theta_P(0.0)
     , theta_D(0.0)  {
   (void)_alloc;
     }
 
 
+
+   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
+  _header_type header;
 
    typedef double _theta_M_type;
   _theta_M_type theta_M;
@@ -75,7 +81,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::bionic_hand::FingerPos_<ContainerAllocator1> & lhs, const ::bionic_hand::FingerPos_<ContainerAllocator2> & rhs)
 {
-  return lhs.theta_M == rhs.theta_M &&
+  return lhs.header == rhs.header &&
+    lhs.theta_M == rhs.theta_M &&
     lhs.theta_P == rhs.theta_P &&
     lhs.theta_D == rhs.theta_D;
 }
@@ -110,22 +117,22 @@ struct IsMessage< ::bionic_hand::FingerPos_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::bionic_hand::FingerPos_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::bionic_hand::FingerPos_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::bionic_hand::FingerPos_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::bionic_hand::FingerPos_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 
@@ -134,12 +141,12 @@ struct MD5Sum< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "87bf9b04d1a94d2eda566ee32685c210";
+    return "4b76b67765bb2cfec63fff0018dee699";
   }
 
   static const char* value(const ::bionic_hand::FingerPos_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x87bf9b04d1a94d2eULL;
-  static const uint64_t static_value2 = 0xda566ee32685c210ULL;
+  static const uint64_t static_value1 = 0x4b76b67765bb2cfeULL;
+  static const uint64_t static_value2 = 0xc63fff0018dee699ULL;
 };
 
 template<class ContainerAllocator>
@@ -158,9 +165,25 @@ struct Definition< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 theta_M\n"
+    return "Header header\n"
+"float64 theta_M\n"
 "float64 theta_P\n"
 "float64 theta_D\n"
+"================================================================================\n"
+"MSG: std_msgs/Header\n"
+"# Standard metadata for higher-level stamped data types.\n"
+"# This is generally used to communicate timestamped data \n"
+"# in a particular coordinate frame.\n"
+"# \n"
+"# sequence ID: consecutively increasing ID \n"
+"uint32 seq\n"
+"#Two-integer timestamp that is expressed as:\n"
+"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
+"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
+"# time-handling sugar is provided by the client library\n"
+"time stamp\n"
+"#Frame this data is associated with\n"
+"string frame_id\n"
 ;
   }
 
@@ -179,6 +202,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.header);
       stream.next(m.theta_M);
       stream.next(m.theta_P);
       stream.next(m.theta_D);
@@ -200,6 +224,9 @@ struct Printer< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::bionic_hand::FingerPos_<ContainerAllocator>& v)
   {
+    s << indent << "header: ";
+    s << std::endl;
+    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
     s << indent << "theta_M: ";
     Printer<double>::stream(s, indent + "  ", v.theta_M);
     s << indent << "theta_P: ";

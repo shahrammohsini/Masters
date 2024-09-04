@@ -157,6 +157,13 @@ add_dependencies(move_motor_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 target_link_libraries(move_motor_node ${catkin_LIBRARIES})
 
 
+#remove this later.
+add_executable(test_mpc_node src/testing_real_mpc_one_file.cpp) #move motor has its own executable so it can run independantly of main.cpp
+add_dependencies(test_mpc_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(test_mpc_node ${catkin_LIBRARIES})
+
+
+
 # target_link_libraries(move_motor
 #   ${catkin_LIBRARIES}
 # )

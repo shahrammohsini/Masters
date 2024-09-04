@@ -493,6 +493,19 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named test_mpc_node
+
+# Build rule for target.
+test_mpc_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_mpc_node
+.PHONY : test_mpc_node
+
+# fast build rule for target.
+test_mpc_node/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/test_mpc_node.dir/build.make bionic_hand/CMakeFiles/test_mpc_node.dir/build
+.PHONY : test_mpc_node/fast
+
+#=============================================================================
 # Target rules for targets named move_motor_node
 
 # Build rule for target.
@@ -1284,6 +1297,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... test_mpc_node"
 	@echo "... move_motor_node"
 	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"

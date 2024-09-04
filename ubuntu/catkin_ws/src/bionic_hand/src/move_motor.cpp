@@ -117,17 +117,18 @@ int main(int argc, char **argv) {
         
         int dxl_present_position = read_position(packetHandler, portHandler, DXL_ID, ADDR_PRESENT_POSITION);
 
-        std::cout << "Current Position: " << dxl_present_position << " -- PWM: " << g_PWM << std::endl;
+        // std::cout << "Current Position: " << dxl_present_position << " -- PWM: " << g_PWM << std::endl;
         if (dxl_present_position < 175 || dxl_present_position > 340) {
             packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, 0);
-            std::cout<<"Motor limit reached. Stopping "<< std::endl;
+            std::cout<<"Motor limit reached. Stopping at: "<< dxl_present_position<< std::endl;
             break;
 
         }
         else{
             packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_PRO_GOAL_PWM, g_PWM);
         }
-    
+        // ros::Rate rate(1.0 / 0.005); // rate = 10 Hz if dt = 0.1
+
         ros::spinOnce();
     }
 
