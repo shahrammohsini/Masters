@@ -287,7 +287,7 @@ def save_data(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwm
     for time,theta_m,theta_M_joint, theta_P_joint, theta_D_joint, pwm in zip(times,theta_ms,theta_M_joints, theta_P_joints, theta_D_joints, pwms):
         data.append([time,theta_m, theta_D_joint, theta_P_joint, theta_M_joint, pwm])
 
-    with open('ubuntu\python\Finger_Multi_Model_Approach\Data\Finger_Validation_Sim_Data_Forward.csv', 'w', newline='') as file:
+    with open('/home/shahram/Documents/GitHub/Masters/ubuntu/python/Finger_Multi_Model_Approach/Data/Finger_Validation_Sim_Data_Forward_3.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["time","theta_m", "theta_D_joint", "theta_P_joint" ,"theta_M_joint", "pwm"])
         writer.writerows(data)
