@@ -493,6 +493,19 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named move_finger_node
+
+# Build rule for target.
+move_finger_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 move_finger_node
+.PHONY : move_finger_node
+
+# fast build rule for target.
+move_finger_node/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/move_finger_node.dir/build.make bionic_hand/CMakeFiles/move_finger_node.dir/build
+.PHONY : move_finger_node/fast
+
+#=============================================================================
 # Target rules for targets named pwm_control_node
 
 # Build rule for target.
@@ -1271,6 +1284,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... move_finger_node"
 	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"
 	@echo "... bionic_hand_generate_messages_nodejs"
