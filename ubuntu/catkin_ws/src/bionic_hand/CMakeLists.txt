@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   dynamixel_sdk
   rospy
   message_generation
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -154,6 +155,8 @@ file(GLOB SOURCE_FILES "src/*.cpp")
 # add_executable(move_motor ${SOURCE_FILES})
 # add_executable(finger ${SOURCE_FILES})
 # add_executable(main ${SOURCE_FILES})
+
+#this adds all the files under an executable called bionic. Ensure all file are here unless they need to be ran seperately (while testing)
 add_executable(bionic src/main.cpp src/finger.cpp src/controller.cpp)
 
 

@@ -16,17 +16,21 @@
 #include <tuple>    // For std::tuple
 
 
-Controller::Controller(const std::string& finger_name) {
+Controller::Controller(int ID, const std::string& finger_name) {
+    this-> finger_ID = ID;
     pub_ = nh.advertise<bionic_hand::ControlCommands>("Control_Command", 1000); //initialize publisher node
     sub_ = nh.subscribe("Updated_Finger_Position", 1000, &Controller::fingerPositionCallback, this);  //initialize subscriber node
 }
+
 
 //Create publishData method to publish data
 void Controller::publishData(double PWM)
 {
    
-  bionic_hand::ControlCommands msg;
+    bionic_hand::ControlCommands msg;
     msg.PWM = PWM;
+    msg.ID = this->finger_ID;
+
 
     pub_.publish(msg);
     // ROS_INFO("Published PWM command");
@@ -649,6 +653,7 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> C
 
 //run method holding main control loop
 void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
+    std::cout << "running" <<std::endl;
     ros::Rate rate(10); // 10 Hz
 
     //Load PID values form parameter yaml file
@@ -758,6 +763,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     Eigen::MatrixXd DM_j_D, DM_j_P, DM_j_M;
     //reverse
     Eigen::MatrixXd DM_j_P_rev;
+    std::cout << "running" <<std::endl;
 
     //gernerate the forward dynamic matracies
     std::tie(DM_j_D, DM_j_P, DM_j_M) = generate_Dynamic_Matrix(N_D, nu_D, N_P, nu_P, N_M, nu_M);

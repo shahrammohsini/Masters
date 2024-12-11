@@ -1,4 +1,6 @@
 (cl:in-package bionic_hand-msg)
-(cl:export '(PWM-VAL
+(cl:export '(ID-VAL
+          ID
+          PWM-VAL
           PWM
 ))

@@ -6,16 +6,34 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
+import std_msgs.msg
 
 class FingerPos(genpy.Message):
-  _md5sum = "87bf9b04d1a94d2eda566ee32685c210"
+  _md5sum = "4b76b67765bb2cfec63fff0018dee699"
   _type = "bionic_hand/FingerPos"
-  _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """float64 theta_M
+  _has_header = True  # flag to mark the presence of a Header object
+  _full_text = """std_msgs/Header header
+float64 theta_M
 float64 theta_P
-float64 theta_D"""
-  __slots__ = ['theta_M','theta_P','theta_D']
-  _slot_types = ['float64','float64','float64']
+float64 theta_D
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+"""
+  __slots__ = ['header','theta_M','theta_P','theta_D']
+  _slot_types = ['std_msgs/Header','float64','float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +43,7 @@ float64 theta_D"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       theta_M,theta_P,theta_D
+       header,theta_M,theta_P,theta_D
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,6 +52,8 @@ float64 theta_D"""
     if args or kwds:
       super(FingerPos, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       if self.theta_M is None:
         self.theta_M = 0.
       if self.theta_P is None:
@@ -41,6 +61,7 @@ float64 theta_D"""
       if self.theta_D is None:
         self.theta_D = 0.
     else:
+      self.header = std_msgs.msg.Header()
       self.theta_M = 0.
       self.theta_P = 0.
       self.theta_D = 0.
@@ -58,6 +79,14 @@ float64 theta_D"""
     """
     try:
       _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self
       buff.write(_get_struct_3d().pack(_x.theta_M, _x.theta_P, _x.theta_D))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -70,7 +99,22 @@ float64 theta_D"""
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.header.frame_id = str[start:end]
       _x = self
       start = end
       end += 24
@@ -88,6 +132,14 @@ float64 theta_D"""
     """
     try:
       _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self
       buff.write(_get_struct_3d().pack(_x.theta_M, _x.theta_P, _x.theta_D))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -101,7 +153,22 @@ float64 theta_D"""
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.header.frame_id = str[start:end]
       _x = self
       start = end
       end += 24
@@ -114,6 +181,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I
 _struct_3d = None
 def _get_struct_3d():
     global _struct_3d
