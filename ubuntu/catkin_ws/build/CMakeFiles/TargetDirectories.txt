@@ -65,6 +65,7 @@
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/install.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_generate_messages_nodejs.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_genlisp.dir
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/install/strip.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_gencpp.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPosition.dir
@@ -72,6 +73,7 @@
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/edit_cache.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/test.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_ControlCommands.dir
@@ -85,7 +87,6 @@
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_genpy.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_geneus.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/DynamixelSDK/ros/dynamixel_sdk_examples/CMakeFiles/install/strip.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/DynamixelSDK/ros/dynamixel_sdk_examples/CMakeFiles/install/local.dir
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build/DynamixelSDK/ros/dynamixel_sdk_examples/CMakeFiles/install.dir

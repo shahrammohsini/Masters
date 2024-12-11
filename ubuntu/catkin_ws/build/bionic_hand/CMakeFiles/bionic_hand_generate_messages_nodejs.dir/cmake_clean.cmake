@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/ControlCommands.js"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/FingerJoints.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/FingerPos.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPosition.js"

@@ -11,6 +11,7 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
+let FingerJoints = require('./FingerJoints.js');
 let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
@@ -20,9 +21,8 @@ class FingerPos {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.header = null;
-      this.theta_M = null;
-      this.theta_P = null;
-      this.theta_D = null;
+      this.index = null;
+      this.middle = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -31,23 +31,17 @@ class FingerPos {
       else {
         this.header = new std_msgs.msg.Header();
       }
-      if (initObj.hasOwnProperty('theta_M')) {
-        this.theta_M = initObj.theta_M
+      if (initObj.hasOwnProperty('index')) {
+        this.index = initObj.index
       }
       else {
-        this.theta_M = 0.0;
+        this.index = new FingerJoints();
       }
-      if (initObj.hasOwnProperty('theta_P')) {
-        this.theta_P = initObj.theta_P
-      }
-      else {
-        this.theta_P = 0.0;
-      }
-      if (initObj.hasOwnProperty('theta_D')) {
-        this.theta_D = initObj.theta_D
+      if (initObj.hasOwnProperty('middle')) {
+        this.middle = initObj.middle
       }
       else {
-        this.theta_D = 0.0;
+        this.middle = new FingerJoints();
       }
     }
   }
@@ -56,12 +50,10 @@ class FingerPos {
     // Serializes a message object of type FingerPos
     // Serialize message field [header]
     bufferOffset = std_msgs.msg.Header.serialize(obj.header, buffer, bufferOffset);
-    // Serialize message field [theta_M]
-    bufferOffset = _serializer.float64(obj.theta_M, buffer, bufferOffset);
-    // Serialize message field [theta_P]
-    bufferOffset = _serializer.float64(obj.theta_P, buffer, bufferOffset);
-    // Serialize message field [theta_D]
-    bufferOffset = _serializer.float64(obj.theta_D, buffer, bufferOffset);
+    // Serialize message field [index]
+    bufferOffset = FingerJoints.serialize(obj.index, buffer, bufferOffset);
+    // Serialize message field [middle]
+    bufferOffset = FingerJoints.serialize(obj.middle, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -71,19 +63,17 @@ class FingerPos {
     let data = new FingerPos(null);
     // Deserialize message field [header]
     data.header = std_msgs.msg.Header.deserialize(buffer, bufferOffset);
-    // Deserialize message field [theta_M]
-    data.theta_M = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [theta_P]
-    data.theta_P = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [theta_D]
-    data.theta_D = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [index]
+    data.index = FingerJoints.deserialize(buffer, bufferOffset);
+    // Deserialize message field [middle]
+    data.middle = FingerJoints.deserialize(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    return length + 24;
+    return length + 48;
   }
 
   static datatype() {
@@ -93,16 +83,15 @@ class FingerPos {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '4b76b67765bb2cfec63fff0018dee699';
+    return 'df9ec1211fc81402f32ad35554d98a85';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     std_msgs/Header header
-    float64 theta_M
-    float64 theta_P
-    float64 theta_D
+    FingerJoints index
+    FingerJoints middle
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -119,6 +108,11 @@ class FingerPos {
     #Frame this data is associated with
     string frame_id
     
+    ================================================================================
+    MSG: bionic_hand/FingerJoints
+    float64 theta_M
+    float64 theta_P
+    float64 theta_D
     `;
   }
 
@@ -135,25 +129,18 @@ class FingerPos {
       resolved.header = new std_msgs.msg.Header()
     }
 
-    if (msg.theta_M !== undefined) {
-      resolved.theta_M = msg.theta_M;
+    if (msg.index !== undefined) {
+      resolved.index = FingerJoints.Resolve(msg.index)
     }
     else {
-      resolved.theta_M = 0.0
+      resolved.index = new FingerJoints()
     }
 
-    if (msg.theta_P !== undefined) {
-      resolved.theta_P = msg.theta_P;
+    if (msg.middle !== undefined) {
+      resolved.middle = FingerJoints.Resolve(msg.middle)
     }
     else {
-      resolved.theta_P = 0.0
-    }
-
-    if (msg.theta_D !== undefined) {
-      resolved.theta_D = msg.theta_D;
-    }
-    else {
-      resolved.theta_D = 0.0
+      resolved.middle = new FingerJoints()
     }
 
     return resolved;

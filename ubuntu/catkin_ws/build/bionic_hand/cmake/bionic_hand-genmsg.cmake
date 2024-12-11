@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "bionic_hand: 4 messages, 3 services")
+message(STATUS "bionic_hand: 5 messages, 3 services")
 
 set(MSG_I_FLAGS "-Ibionic_hand:/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -27,9 +27,14 @@ add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" ""
 )
 
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
+add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" ""
+)
+
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_custom_target(_bionic_hand_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" "std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "bionic_hand" "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" "std_msgs/Header:bionic_hand/FingerJoints"
 )
 
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg" NAME_WE)
@@ -71,9 +76,15 @@ _generate_msg_cpp(bionic_hand
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_cpp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
+)
+_generate_msg_cpp(bionic_hand
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_cpp(bionic_hand
@@ -119,6 +130,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_cpp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg" NAME_WE)
@@ -152,9 +165,15 @@ _generate_msg_eus(bionic_hand
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_eus(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
+)
+_generate_msg_eus(bionic_hand
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_eus(bionic_hand
@@ -200,6 +219,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_eus _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg" NAME_WE)
@@ -233,9 +254,15 @@ _generate_msg_lisp(bionic_hand
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_lisp(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
+)
+_generate_msg_lisp(bionic_hand
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_lisp(bionic_hand
@@ -281,6 +308,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_lisp _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg" NAME_WE)
@@ -314,9 +343,15 @@ _generate_msg_nodejs(bionic_hand
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_nodejs(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
+)
+_generate_msg_nodejs(bionic_hand
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_nodejs(bionic_hand
@@ -362,6 +397,8 @@ get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/
 add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_nodejs _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg" NAME_WE)
@@ -395,9 +432,15 @@ _generate_msg_py(bionic_hand
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_py(bionic_hand
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
+)
+_generate_msg_py(bionic_hand
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/bionic_hand
 )
 _generate_msg_py(bionic_hand
@@ -442,6 +485,8 @@ add_dependencies(bionic_hand_generate_messages bionic_hand_generate_messages_py)
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg" NAME_WE)
+add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg" NAME_WE)
 add_dependencies(bionic_hand_generate_messages_py _bionic_hand_generate_messages_check_deps_${_filename})

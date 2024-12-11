@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerPos.h
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerJoints.h
 string
 -
 vector
@@ -38,7 +38,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerPos.h
 string
 -
 vector
@@ -52,6 +52,12 @@ ros/serialization.h
 ros/builtin_message_traits.h
 -
 ros/message_operations.h
+-
+std_msgs/Header.h
+-
+bionic_hand/FingerJoints.h
+-
+bionic_hand/FingerJoints.h
 -
 
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/controller.cpp
@@ -96,32 +102,6 @@ eigen3/Eigen/Dense
 eigen3/Eigen/Dense
 -
 tuple
--
-
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.h
-ros/ros.h
--
-bionic_hand/SetPWM.h
--
-iostream
--
-
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/main.cpp
-ros/ros.h
--
-bionic_hand/SetPWM.h
--
-iostream
--
-finger.h
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/finger.h
-std_msgs/Int32.h
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/std_msgs/Int32.h
-controller.h
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/controller.h
-chrono
--
-thread
 -
 
 /opt/ros/noetic/include/ros/advertise_options.h
@@ -774,7 +754,7 @@ ros/forwards.h
 
 /opt/ros/noetic/include/rosconsole/macros_generated.h
 
-/opt/ros/noetic/include/std_msgs/Int32.h
+/opt/ros/noetic/include/std_msgs/Header.h
 string
 -
 vector

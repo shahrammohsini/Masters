@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg"
+messages_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPosition.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/SetPWM.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerJoints.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/FingerPos.msg;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/msg/ControlCommands.msg"
 services_str = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/GetPosition.srv;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/SyncGetPosition.srv;/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/srv/BulkGetItem.srv"
 pkg_name = "bionic_hand"
 dependencies_str = "std_msgs"

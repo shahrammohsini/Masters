@@ -54,6 +54,7 @@ add_message_files(
 #   Message2.msg
   SetPosition.msg
   SetPWM.msg
+  FingerJoints.msg
   FingerPos.msg
   ControlCommands.msg
 

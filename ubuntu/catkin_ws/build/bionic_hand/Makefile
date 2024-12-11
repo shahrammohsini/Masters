@@ -243,6 +243,21 @@ bionic_hand_genlisp/fast:
 .PHONY : bionic_hand_genlisp/fast
 
 # Convenience name for target.
+bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+bionic_hand_generate_messages_lisp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
+
+.PHONY : bionic_hand_generate_messages_lisp
+
+# fast build rule for target.
+bionic_hand_generate_messages_lisp/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
+.PHONY : bionic_hand_generate_messages_lisp/fast
+
+# Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_gencpp.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_gencpp.dir/rule
 .PHONY : bionic_hand/CMakeFiles/bionic_hand_gencpp.dir/rule
@@ -301,6 +316,21 @@ _bionic_hand_generate_messages_check_deps_SetPWM: bionic_hand/CMakeFiles/_bionic
 _bionic_hand_generate_messages_check_deps_SetPWM/fast:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build
 .PHONY : _bionic_hand_generate_messages_check_deps_SetPWM/fast
+
+# Convenience name for target.
+bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/rule:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/rule
+.PHONY : bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/rule
+
+# Convenience name for target.
+_bionic_hand_generate_messages_check_deps_FingerJoints: bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/rule
+
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerJoints
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_FingerJoints/fast:
+	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerJoints/fast
 
 # Convenience name for target.
 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos.dir/rule:
@@ -467,21 +497,6 @@ bionic_hand_generate_messages_eus/fast:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build
 .PHONY : bionic_hand_generate_messages_eus/fast
 
-# Convenience name for target.
-bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-.PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-bionic_hand_generate_messages_lisp: bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/rule
-
-.PHONY : bionic_hand_generate_messages_lisp
-
-# fast build rule for target.
-bionic_hand_generate_messages_lisp/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
-.PHONY : bionic_hand_generate_messages_lisp/fast
-
 src/controller.o: src/controller.cpp.o
 
 .PHONY : src/controller.o
@@ -630,6 +645,7 @@ help:
 	@echo "... install"
 	@echo "... bionic_hand_generate_messages_nodejs"
 	@echo "... bionic_hand_genlisp"
+	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... install/strip"
 	@echo "... bionic_hand_gencpp"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPosition"
@@ -637,6 +653,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... bionic"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPWM"
+	@echo "... _bionic_hand_generate_messages_check_deps_FingerJoints"
 	@echo "... test"
 	@echo "... _bionic_hand_generate_messages_check_deps_FingerPos"
 	@echo "... _bionic_hand_generate_messages_check_deps_ControlCommands"
@@ -650,7 +667,6 @@ help:
 	@echo "... bionic_hand_genpy"
 	@echo "... bionic_hand_geneus"
 	@echo "... bionic_hand_generate_messages_eus"
-	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
