@@ -6,30 +6,52 @@
 #include <std_msgs/Int32.h>  // For integer message type (if needed)
 #include "bionic_hand/FingerPos.h"  // Updated consolidated message
 #include <ros/time.h>
+#include "FingerConfig.h"
 
-// ---------- Constants (shared for both fingers unless otherwise needed) ----------
-// Joint 3
-double b3 = 0.90; // For both fingers, adjust if needed
-double a3 = 0.92;
-// Joint 2
-double b2 = 1.25;
-double a2 = 1.3;
-// Joint 1
-double b1 = 1.8;
-double a1 = 1.8;
 
-double cm_travled = 143.0; // Potentiometer counts per cm
-double offset_index = 114.0;  // Offset for the index finger’s sensor
-double offset_middle = 114.0; // Offset for the middle finger’s sensor (adjust if needed)
+//FingerConfig and JointParametr are both defined in FingerConfig.h. This ensures all functions have access to the structures
 
-// Max lengths and angles for a single finger
-double max_j3_length = 1.09; 
-double max_j2_length = 3.04; 
-double max_j1_length = 5.1; 
+// Initialize parameters for the index finger
+FingerConfig indexFingerConfig = {
+    // JointParameters. 
+    {
+        1.1,  // a1_index
+        1.1,  // b1_index
+        1.8,  // a2_index
+        1.9,  // b2_index
+        0.7,  // a3_index
+        0.8   // b3_index
+    },
+    143.0,   // cm_travled_index (Potentiometer counts per cm.)
+    114.0,    //initial potentiometer value before string is drawn
+    1.09,    // max_j3_length_index
+    3.04,    // max_j2_length_index
+    5.1,     // max_j1_length_index
+    72.0,    // max_j3_angle_index
+    89.0,    // max_j2_angle_index
+    67.0     // max_j1_angle_index
+};
 
-double max_j3_angle = 72.0; // deg 
-double max_j2_angle = 89.0; // deg 
-double max_j1_angle = 67.0; // deg 
+// Initialize parameters for the middle finger
+FingerConfig middleFingerConfig = {
+    // JointParameters
+    {
+        1.80,  // a1_middle
+        1.80,  // b1_middle
+        1.30,  // a2_middle
+        1.25,  // b2_middle
+        0.92,  // a3_middle
+        0.90   // b3_middle
+    },
+    143.0,   // cm_travled_middle (adjust if different)
+    114.0,    //initial potentiometer value before string is drawn
+    1.09,    // max_j3_length_middle
+    3.04,    // max_j2_length_middle
+    5.1,     // max_j1_length_middle
+    72.0,    // max_j3_angle_middle
+    89.0,    // max_j2_angle_middle
+    67.0     // max_j1_angle_middle
+};
 
 // Timing & ROS
 unsigned long current_time = 0;
@@ -43,42 +65,61 @@ bionic_hand::FingerPos finger_positions;
 // Publisher for both fingers
 ros::Publisher chatter("updated_Finger_Positions", &finger_positions);
 
+// Function prototypes
+double rad(double deg_val);
+double deg(double rad_val);
+double get_length(double pot_val);
+double get_joint_angle(double a, double b, double c);
+void computeFingerJoints(double full_string_length,
+                         FingerConfig config,
+                         double &j1_angle, double &j2_angle, double &j3_angle);
+
 void setup() {
   nh.initNode();
   nh.advertise(chatter);
 
   Serial.begin(57600);
   // If needed, wait for a start signal
-  while (!Serial.available()) { }
-  Serial.read();
-  start_time = millis();
+//  while (!Serial.available()) { }
+//  Serial.read();
+//  start_time = millis();
 }
 
 void loop() {
   float dt = 0.03; // Control loop time step
 
-  // ---------------- Index Finger Computation ----------------
+
+
+  // ---------------- Index Finger Computation ----------------------------------------------------------------------------------------------------------------------------
   int sensorValue_index = analogRead(A0);
-  sensorValue_index = sensorValue_index - offset_index;
+  sensorValue_index = sensorValue_index - indexFingerConfig.offset;  // offset_index
   if (sensorValue_index < 0) {
     sensorValue_index = 0;
   }
 
-  double full_string_length_index = get_length(sensorValue_index);
-  double j3_angle_index = 0.0;
+  double full_string_length_index = get_length(sensorValue_index); // full_string_length is the current length of string drawn in cm
+  double j3_angle_index = 0.0; //rotation angle of joints (position of each joint)
   double j2_angle_index = 0.0;
   double j1_angle_index = 0.0;
 
-  // Compute joint angles for the index finger
+  // Compute joint angles (position) for the index finger
   computeFingerJoints(full_string_length_index, 
-                      a3, b3, a2, b2, a1, b1,
-                      max_j3_length, max_j2_length, max_j1_length,
-                      max_j3_angle, max_j2_angle, max_j1_angle,
+                      indexFingerConfig,  //FingerConfig is all the parameters of the joint
                       j1_angle_index, j2_angle_index, j3_angle_index);
+                      
 
-  // ---------------- Middle Finger Computation ----------------
+// Print joint angles for the index finger
+  Serial.print("Index Finger - J3: ");
+  Serial.print(j3_angle_index);
+  Serial.print(" J2: ");
+  Serial.print(j2_angle_index);
+  Serial.print(" J1: ");
+  Serial.println(j1_angle_index);
+  
+
+  // ---------------- Middle Finger Computation ----------------------------------------------------------------------------------------------------------------------------
   int sensorValue_middle = analogRead(A1);
-  sensorValue_middle = sensorValue_middle - offset_middle;
+  sensorValue_middle = sensorValue_middle - indexFingerConfig.offset; // offset_middle
   if (sensorValue_middle < 0) {
     sensorValue_middle = 0;
   }
@@ -90,12 +131,12 @@ void loop() {
 
   // Compute joint angles for the middle finger
   computeFingerJoints(full_string_length_middle, 
-                      a3, b3, a2, b2, a1, b1,
-                      max_j3_length, max_j2_length, max_j1_length,
-                      max_j3_angle, max_j2_angle, max_j1_angle,
+                      middleFingerConfig,
                       j1_angle_middle, j2_angle_middle, j3_angle_middle);
 
-  // ---------------- Populate FingerPos Message ----------------
+
+
+  // ---------------- Populate FingerPos Message ----------------------------------------------------------------------------------------------------------------------------
   finger_positions.header.stamp = nh.now(); // Set the timestamp to current time
 
   // Populate index finger data
@@ -108,30 +149,56 @@ void loop() {
   finger_positions.middle.theta_P = j2_angle_middle;
   finger_positions.middle.theta_D = j3_angle_middle;
 
+
+
+
   // Publish the consolidated message
   chatter.publish(&finger_positions);
 
   nh.spinOnce();
   delay(dt * 1000); // Delay to slow down the loop
+  
+  
 }
 
-// ---------------- Helper Functions ----------------
 
-double rad(double deg) {
-  return deg * (3.14159265358979323846 / 180.0);
+
+
+
+
+// ---------------- Helper Functions ------------------------------------------------------------------------------------------------------------------------------------------------
+
+double rad(double deg_val) {
+  return deg_val * (3.14159265358979323846 / 180.0);
 }
 
 double deg(double rad_val) {
   return rad_val * (180.0 / 3.14159265358979323846);
 }
 
-// Convert potentiometer value to cm
+//----------------Convert potentiometer value to cm-----------------------------------------------------------------------------------------------------------------------------------
 double get_length(double pot_val) {
-  double length = pot_val / cm_travled;
-  return length; // in cm
+  // This function should now be per finger
+  // Assuming cm_travled is per finger
+  // You need to pass cm_travled as part of FingerConfig
+  // Modify this function to accept cm_travled
+  // Alternatively, handle it within computeFingerJoints
+  // For simplicity, let's assume cm_travled is part of config
+  // Hence, we need to modify get_length to take FingerConfig
+
+  // However, in the current code, get_length is used inside loop where we have full_string_length
+  // So it's better to move the division here based on the config
+  // To avoid complicating, let's pass cm_travled as a parameter
+
+  // Alternatively, precompute full_string_length before calling computeFingerJoints
+  // Since the loop already divides by cm_travled
+  // Hence, no changes needed here
+  return pot_val / 143.0; // change 143 to cm_traveled which will be passed to this funciton along with pot_val so that has to be modified
 }
 
-// Use cosine law to get joint angle
+
+
+// ----------------Use cosine law to get joint angle-----------------------------------------------------------------------------------------------------------------------------------
 double get_joint_angle(double a, double b, double c) {
   double cos_angle = (sq(c) - sq(a) - sq(b)) / (-2.0 * a * b);
 
@@ -147,46 +214,45 @@ double get_joint_angle(double a, double b, double c) {
   return angle;
 }
 
-// Compute the joint angles for one finger
+
+// ----------------Compute the joint angles (position) for one finger----------------------------------------------------------------------------------------------------------------
 void computeFingerJoints(double full_string_length,
-                         double a3, double b3, double a2, double b2, double a1, double b1,
-                         double max_j3_length, double max_j2_length, double max_j1_length,
-                         double max_j3_angle, double max_j2_angle, double max_j1_angle,
-                         double &j1_angle, double &j2_angle, double &j3_angle) 
+                         FingerConfig config, //FingerConfig (config) is the parameters of each finger
+                         double &j1_angle, double &j2_angle, double &j3_angle) //j1_angle_index, j2_angle_index, j3_angle_index are passed by reference
 {
   double string_length = full_string_length;
-  
+
   // Joint 3 calculation
-  if (full_string_length >= 0.0 && full_string_length <= max_j3_length) {
-    if (full_string_length < (max_j3_length / 2.0)) {
-      j3_angle = get_joint_angle((a3 - 0.09), (b3 - 0.09), string_length);
+  if (full_string_length >= 0.0 && full_string_length <= config.max_j3_length) {
+    if (full_string_length < (config.max_j3_length / 2.0)) {
+      j3_angle = get_joint_angle((config.joints.a3 - 0.09), (config.joints.b3 - 0.09), string_length);
     } else {
-      j3_angle = get_joint_angle(a3, b3, string_length);
+      j3_angle = get_joint_angle(config.joints.a3, config.joints.b3, string_length);
     }
-    if (j3_angle > max_j3_angle) {
-      j3_angle = max_j3_angle;
+    if (j3_angle > config.max_j3_angle) {
+      j3_angle = config.max_j3_angle;
     }
     j2_angle = 0.0;
     j1_angle = 0.0;
   }
   // Joint 2 calculation
-  else if (full_string_length > max_j3_length && full_string_length <= max_j2_length) {
-    string_length -= max_j3_length;
-    j3_angle = max_j3_angle;
-    j2_angle = get_joint_angle(a2, b2, string_length);
-    if (j2_angle > max_j2_angle) {
-      j2_angle = max_j2_angle;
+  else if (full_string_length > config.max_j3_length && full_string_length <= config.max_j2_length) {
+    string_length -= config.max_j3_length;
+    j3_angle = config.max_j3_angle;
+    j2_angle = get_joint_angle(config.joints.a2, config.joints.b2, string_length);
+    if (j2_angle > config.max_j2_angle) {
+      j2_angle = config.max_j2_angle;
     }
     j1_angle = 0.0;
   }
   // Joint 1 calculation
-  else if (full_string_length > max_j2_length && full_string_length <= max_j1_length) {
-    string_length -= max_j2_length;
-    j3_angle = max_j3_angle;
-    j2_angle = max_j2_angle;
-    j1_angle = get_joint_angle(a1, b1, string_length);
-    if (j1_angle > max_j1_angle) {
-      j1_angle = max_j1_angle;
+  else if (full_string_length > config.max_j2_length && full_string_length <= config.max_j1_length) {
+    string_length -= config.max_j2_length;
+    j3_angle = config.max_j3_angle;
+    j2_angle = config.max_j2_angle;
+    j1_angle = get_joint_angle(config.joints.a1, config.joints.b1, string_length);
+    if (j1_angle > config.max_j1_angle) {
+      j1_angle = config.max_j1_angle;
     }
   } else {
     // Outside expected range, set all to 0 or handle appropriately

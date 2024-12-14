@@ -130,6 +130,7 @@ bionic_hand/CMakeFiles/bionic.dir/src/finger.cpp.o
  /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
 bionic_hand/CMakeFiles/bionic.dir/src/main.cpp.o
  /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/ControlCommands.h
+ /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerJoints.h
  /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerPos.h
  /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
  /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/controller.h
