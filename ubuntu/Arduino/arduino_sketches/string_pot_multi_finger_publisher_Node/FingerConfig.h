@@ -16,7 +16,7 @@ struct FingerConfig {
     JointParameters joints;
     double cm_travled;      // Potentiometer counts per cm.
     double offset;          //initial potentiometer value before string is drawn 
-    double max_j3_length;  // length when j3 is fully bent
+    double max_j3_length;  // length when j3 (Joint D) is fully bent
     double max_j2_length;
     double max_j1_length;
     double max_j3_angle;    // degrees

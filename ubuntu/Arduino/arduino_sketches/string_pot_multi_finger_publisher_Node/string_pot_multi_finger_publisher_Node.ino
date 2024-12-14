@@ -22,14 +22,14 @@ FingerConfig indexFingerConfig = {
         0.7,  // a3_index
         0.8   // b3_index
     },
-    143.0,   // cm_travled_index (Potentiometer counts per cm.)
-    114.0,    //initial potentiometer value before string is drawn
-    1.09,    // max_j3_length_index
-    3.04,    // max_j2_length_index
-    5.1,     // max_j1_length_index
-    72.0,    // max_j3_angle_index
-    89.0,    // max_j2_angle_index
-    67.0     // max_j1_angle_index
+    145.0,   // cm_travled_index (Potentiometer counts per cm.)
+    22.0,    //offset: initial potentiometer value before string is drawn
+    1.24,    // max_j3_length_index
+    3.0,    // max_j2_length_index
+    5.15,     // max_j1_length_index
+    102.0,    // max_j3_angle_index
+    56.0,    // max_j2_angle_index
+    141.0     // max_j1_angle_index
 };
 
 // Initialize parameters for the middle finger
@@ -43,14 +43,14 @@ FingerConfig middleFingerConfig = {
         0.92,  // a3_middle
         0.90   // b3_middle
     },
-    143.0,   // cm_travled_middle (adjust if different)
-    114.0,    //initial potentiometer value before string is drawn
-    1.09,    // max_j3_length_middle
-    3.04,    // max_j2_length_middle
-    5.1,     // max_j1_length_middle
-    72.0,    // max_j3_angle_middle
-    89.0,    // max_j2_angle_middle
-    67.0     // max_j1_angle_middle
+    150.0,   // cm_travled_middle (adjust if different)
+    32.0,    //initial potentiometer value before string is drawn
+    1.15,    // max_j3_length_middle
+    3.15,    // max_j2_length_middle
+    5.71,     // max_j1_length_middle
+    80.0,    // max_j3_angle_middle
+    103.0,    // max_j2_angle_middle
+    90.0     // max_j1_angle_middle
 };
 
 // Timing & ROS
@@ -68,7 +68,7 @@ ros::Publisher chatter("updated_Finger_Positions", &finger_positions);
 // Function prototypes
 double rad(double deg_val);
 double deg(double rad_val);
-double get_length(double pot_val);
+double get_length(double pot_val, double cm_traveled);
 double get_joint_angle(double a, double b, double c);
 void computeFingerJoints(double full_string_length,
                          FingerConfig config,
@@ -92,12 +92,19 @@ void loop() {
 
   // ---------------- Index Finger Computation ----------------------------------------------------------------------------------------------------------------------------
   int sensorValue_index = analogRead(A0);
+//  Serial.print("sensorValue_index: ");
+//  Serial.print(sensorValue_index);
+  
+  
   sensorValue_index = sensorValue_index - indexFingerConfig.offset;  // offset_index
-  if (sensorValue_index < 0) {
+  if (sensorValue_index < 0) { //remove negative values
     sensorValue_index = 0;
   }
 
-  double full_string_length_index = get_length(sensorValue_index); // full_string_length is the current length of string drawn in cm
+  double full_string_length_index = get_length(sensorValue_index, indexFingerConfig.cm_travled); // full_string_length is the current length of string drawn in cm
+  Serial.print(" full_length_index: ");
+  Serial.print(full_string_length_index);
+  
   double j3_angle_index = 0.0; //rotation angle of joints (position of each joint)
   double j2_angle_index = 0.0;
   double j1_angle_index = 0.0;
@@ -109,22 +116,28 @@ void loop() {
                       
 
 // Print joint angles for the index finger
-  Serial.print("Index Finger - J3: ");
+  Serial.print("   Index Finger - J3: ");
   Serial.print(j3_angle_index);
   Serial.print(" J2: ");
   Serial.print(j2_angle_index);
   Serial.print(" J1: ");
-  Serial.println(j1_angle_index);
+  Serial.print(j1_angle_index);
   
 
   // ---------------- Middle Finger Computation ----------------------------------------------------------------------------------------------------------------------------
   int sensorValue_middle = analogRead(A1);
-  sensorValue_middle = sensorValue_middle - indexFingerConfig.offset; // offset_middle
-  if (sensorValue_middle < 0) {
+  Serial.print("------sensorValue_middle: ");
+  Serial.print(sensorValue_middle);
+  
+  sensorValue_middle = sensorValue_middle - middleFingerConfig.offset; // offset_middle
+  if (sensorValue_middle < 0) { //remove negative values
     sensorValue_middle = 0;
   }
 
-  double full_string_length_middle = get_length(sensorValue_middle);
+  double full_string_length_middle = get_length(sensorValue_middle, middleFingerConfig.cm_travled);
+  Serial.print(" full_length_middle: ");
+  Serial.print(full_string_length_middle);
+  
   double j3_angle_middle = 0.0;
   double j2_angle_middle = 0.0;
   double j1_angle_middle = 0.0;
@@ -133,7 +146,15 @@ void loop() {
   computeFingerJoints(full_string_length_middle, 
                       middleFingerConfig,
                       j1_angle_middle, j2_angle_middle, j3_angle_middle);
+                      
 
+// Print joint angles for the index finger
+  Serial.print("   middle Finger - J3: ");
+  Serial.print(j3_angle_middle);
+  Serial.print(" J2: ");
+  Serial.print(j2_angle_middle);
+  Serial.print(" J1: ");
+  Serial.println(j1_angle_middle);
 
 
   // ---------------- Populate FingerPos Message ----------------------------------------------------------------------------------------------------------------------------
@@ -177,22 +198,8 @@ double deg(double rad_val) {
 }
 
 //----------------Convert potentiometer value to cm-----------------------------------------------------------------------------------------------------------------------------------
-double get_length(double pot_val) {
-  // This function should now be per finger
-  // Assuming cm_travled is per finger
-  // You need to pass cm_travled as part of FingerConfig
-  // Modify this function to accept cm_travled
-  // Alternatively, handle it within computeFingerJoints
-  // For simplicity, let's assume cm_travled is part of config
-  // Hence, we need to modify get_length to take FingerConfig
-
-  // However, in the current code, get_length is used inside loop where we have full_string_length
-  // So it's better to move the division here based on the config
-  // To avoid complicating, let's pass cm_travled as a parameter
-
-  // Alternatively, precompute full_string_length before calling computeFingerJoints
-  // Since the loop already divides by cm_travled
-  // Hence, no changes needed here
+double get_length(double pot_val, double cm_travled) {
+  
   return pot_val / 143.0; // change 143 to cm_traveled which will be passed to this funciton along with pot_val so that has to be modified
 }
 
