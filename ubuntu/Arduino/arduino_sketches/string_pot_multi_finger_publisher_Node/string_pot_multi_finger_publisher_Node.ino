@@ -44,7 +44,7 @@ FingerConfig middleFingerConfig = {
         0.90   // b3_middle
     },
     150.0,   // cm_travled_middle (adjust if different)
-    32.0,    //initial potentiometer value before string is drawn
+    67.0,    //offset: initial potentiometer value before string is drawn
     1.15,    // max_j3_length_middle
     3.15,    // max_j2_length_middle
     5.71,     // max_j1_length_middle
@@ -80,14 +80,15 @@ void setup() {
 
   Serial.begin(57600);
   // If needed, wait for a start signal
-//  while (!Serial.available()) { }
-//  Serial.read();
-//  start_time = millis();
+    //while (!Serial.available()) { }
+    //Serial.read();
+    //delay(300);
+    start_time = millis();
 }
 
 void loop() {
   float dt = 0.03; // Control loop time step
-
+  
 
 
   // ---------------- Index Finger Computation ----------------------------------------------------------------------------------------------------------------------------
@@ -102,8 +103,8 @@ void loop() {
   }
 
   double full_string_length_index = get_length(sensorValue_index, indexFingerConfig.cm_travled); // full_string_length is the current length of string drawn in cm
-  Serial.print(" full_length_index: ");
-  Serial.print(full_string_length_index);
+//  Serial.print(" full_length_index: ");
+//  Serial.print(full_string_length_index);
   
   double j3_angle_index = 0.0; //rotation angle of joints (position of each joint)
   double j2_angle_index = 0.0;
@@ -116,27 +117,29 @@ void loop() {
                       
 
 // Print joint angles for the index finger
-  Serial.print("   Index Finger - J3: ");
-  Serial.print(j3_angle_index);
-  Serial.print(" J2: ");
-  Serial.print(j2_angle_index);
-  Serial.print(" J1: ");
-  Serial.print(j1_angle_index);
+//  Serial.print("   Index Finger - J3: ");
+//  Serial.print(j3_angle_index);
+//  Serial.print(" J2: ");
+//  Serial.print(j2_angle_index);
+//  Serial.print(" J1: ");
+//  Serial.print(j1_angle_index);
   
 
   // ---------------- Middle Finger Computation ----------------------------------------------------------------------------------------------------------------------------
   int sensorValue_middle = analogRead(A1);
-  Serial.print("------sensorValue_middle: ");
-  Serial.print(sensorValue_middle);
-  
+//  Serial.print("------sensorValue_middle: ");
+//  Serial.print(sensorValue_middle);
+//  
   sensorValue_middle = sensorValue_middle - middleFingerConfig.offset; // offset_middle
   if (sensorValue_middle < 0) { //remove negative values
     sensorValue_middle = 0;
   }
 
   double full_string_length_middle = get_length(sensorValue_middle, middleFingerConfig.cm_travled);
-  Serial.print(" full_length_middle: ");
-  Serial.print(full_string_length_middle);
+//  Serial.print(" full_length_middle: ");
+//  Serial.print(full_string_length_middle);
+//  Serial.print(" ");
+//  
   
   double j3_angle_middle = 0.0;
   double j2_angle_middle = 0.0;
@@ -149,12 +152,24 @@ void loop() {
                       
 
 // Print joint angles for the index finger
-  Serial.print("   middle Finger - J3: ");
+//  Serial.print("   middle Finger - J3: ");
+//  Serial.print(j3_angle_middle);
+//  Serial.print(" J2: ");
+//  Serial.print(j2_angle_middle);
+//  Serial.print(" J1: ");
+//  Serial.println(j1_angle_middle);
+
+
   Serial.print(j3_angle_middle);
-  Serial.print(" J2: ");
+  Serial.print(",");
   Serial.print(j2_angle_middle);
-  Serial.print(" J1: ");
-  Serial.println(j1_angle_middle);
+  Serial.print(",");
+  Serial.print(j1_angle_middle);
+
+  Serial.print(",");
+  current_time = millis() - start_time;
+  Serial.println(current_time/1000.0);
+
 
 
   // ---------------- Populate FingerPos Message ----------------------------------------------------------------------------------------------------------------------------
