@@ -183,21 +183,6 @@ move_finger_node/fast:
 .PHONY : move_finger_node/fast
 
 # Convenience name for target.
-bionic_hand/CMakeFiles/pwm_control_node.dir/rule:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/pwm_control_node.dir/rule
-.PHONY : bionic_hand/CMakeFiles/pwm_control_node.dir/rule
-
-# Convenience name for target.
-pwm_control_node: bionic_hand/CMakeFiles/pwm_control_node.dir/rule
-
-.PHONY : pwm_control_node
-
-# fast build rule for target.
-pwm_control_node/fast:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/build
-.PHONY : pwm_control_node/fast
-
-# Convenience name for target.
 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
 .PHONY : bionic_hand/CMakeFiles/bionic_hand_generate_messages_py.dir/rule
@@ -605,33 +590,6 @@ src/move_fingers.cpp.s:
 	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/move_finger_node.dir/build.make bionic_hand/CMakeFiles/move_finger_node.dir/src/move_fingers.cpp.s
 .PHONY : src/move_fingers.cpp.s
 
-src/pwm_control.o: src/pwm_control.cpp.o
-
-.PHONY : src/pwm_control.o
-
-# target to build an object file
-src/pwm_control.cpp.o:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.o
-.PHONY : src/pwm_control.cpp.o
-
-src/pwm_control.i: src/pwm_control.cpp.i
-
-.PHONY : src/pwm_control.i
-
-# target to preprocess a source file
-src/pwm_control.cpp.i:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.i
-.PHONY : src/pwm_control.cpp.i
-
-src/pwm_control.s: src/pwm_control.cpp.s
-
-.PHONY : src/pwm_control.s
-
-# target to generate assembly for a file
-src/pwm_control.cpp.s:
-	cd /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/build && $(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/src/pwm_control.cpp.s
-.PHONY : src/pwm_control.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -640,7 +598,6 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... move_finger_node"
-	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"
 	@echo "... install"
 	@echo "... bionic_hand_generate_messages_nodejs"
@@ -679,9 +636,6 @@ help:
 	@echo "... src/move_fingers.o"
 	@echo "... src/move_fingers.i"
 	@echo "... src/move_fingers.s"
-	@echo "... src/pwm_control.o"
-	@echo "... src/pwm_control.i"
-	@echo "... src/pwm_control.s"
 .PHONY : help
 
 

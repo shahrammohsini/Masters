@@ -220,55 +220,6 @@ def main():
         bulk_write_pwm(DXL_ID, 0)
         print("Motor stopped.")
 
-        # while(True):
-        #     print("wait")
-                  
-        # Prepare step input
-        total_time = 0.5
-        dt = 0.005
-        times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, MAX_PWM, MAX_VOLTAGE)
-
-        # Initialize Arduino serial communication
-        ser = serial.Serial('/dev/ttyACM0', 57600)
-        time.sleep(2)
-        ser.flushInput()  # Flush the input buffer
-        time.sleep(0.5)  # Allow time for Arduino to reset
-        ser.write(b'start')  # Signal Arduino to start sending data
-
-        # Start data collection thread
-        data_queue = queue.Queue()
-        stop_event = threading.Event()
-        data_thread = threading.Thread(target=collect_data, args=(ser, data_queue, stop_event))
-        data_thread.start()
-
-        max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
-        min_motor_pos = convert_deg_pos_to_raw(11)
-
-
-        # Main control loop
-        print("pwms: ", pwms)
-        for pwm in pwms:
-            current_position = read_current_position(DXL_ID)
-            #stop motor if it reaches max pos to prevent damage
-            if(current_position < min_motor_pos or current_position > max_motor_pos):
-                print("Max pos reached: ", convert_raw_pos_to_deg(current_position))
-                break
-
-            bulk_write_pwm(DXL_ID, pwm)
-            print(f"Set PWM to {pwm} -- Current pos: ", convert_raw_pos_to_deg(current_position))
-            time.sleep(dt)
-
-        # Stop motor
-        bulk_write_pwm(DXL_ID, 0)
-        stop_event.set()
-        # data_thread.join()
-
-        # Save collected data
-        data = []
-        while not data_queue.empty():
-            data.append(data_queue.get())
-        save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data.csv')
-
     except Exception as e:
         print(e)
     finally:

@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include "bionic_hand/SetPWM.h"
+#include "bionic_hand/ControlCommands.h"
 #include "dynamixel_sdk/dynamixel_sdk.h"
 
 using namespace dynamixel;
@@ -8,6 +8,7 @@ using namespace dynamixel;
 #define ADDR_TORQUE_ENABLE     64
 #define ADDR_OPERATING_MODE    11
 #define ADDR_GOAL_PWM          100
+#define ADDR_PRESENT_POSITION  132
 
 // Protocol version
 #define PROTOCOL_VERSION       2.0
@@ -24,6 +25,10 @@ using namespace dynamixel;
 PortHandler *portHandler;
 PacketHandler *packetHandler;
 GroupBulkWrite *groupBulkWrite;
+
+// Function declarations
+void setPWMCallback(const bionic_hand::ControlCommands::ConstPtr &msg);
+void shutdownMotors();
 
 // Function to enable torque
 void enableTorque(uint8_t dxl_id) {
@@ -51,9 +56,25 @@ void disableTorque(uint8_t dxl_id) {
     }
 }
 
+// Clean up function for safe shutdown
+void shutdownMotors() {
+    ROS_INFO("Shutting down motors...");
+    disableTorque(DXL1_ID);
+    disableTorque(DXL2_ID);
+
+    // Close the port and delete objects
+    if (portHandler) {
+        portHandler->closePort();
+        delete portHandler;
+    }
+    if (groupBulkWrite) {
+        delete groupBulkWrite;
+    }
+    ROS_INFO("Motors safely stopped and port closed.");
+}
+
 // Function to set operating mode
 void setOperatingMode(uint8_t dxl_id, uint8_t mode) {
-    // Disable torque before changing the operating mode
     disableTorque(dxl_id);
 
     uint8_t dxl_error = 0;
@@ -66,51 +87,41 @@ void setOperatingMode(uint8_t dxl_id, uint8_t mode) {
         ROS_INFO("Operating mode set to %d for ID:%d", mode, dxl_id);
     }
 
-    // Re-enable torque
     enableTorque(dxl_id);
 }
 
 // Callback to set PWM for motors
-void setPWMCallback(const bionic_hand::SetPWM::ConstPtr &msg) {
+void setPWMCallback(const bionic_hand::ControlCommands::ConstPtr &msg) {
     uint8_t param_goal_pwm[2];
-    param_goal_pwm[0] = DXL_LOBYTE((uint16_t)msg->pwm);
-    param_goal_pwm[1] = DXL_HIBYTE((uint16_t)msg->pwm);
+    param_goal_pwm[0] = DXL_LOBYTE((uint16_t)msg->PWM); // Extract low byte of PWM
+    param_goal_pwm[1] = DXL_HIBYTE((uint16_t)msg->PWM); // Extract high byte of PWM
 
-    // Add motor 1 to bulk write
-    if (!groupBulkWrite->addParam(DXL1_ID, ADDR_GOAL_PWM, 2, param_goal_pwm)) {
-        ROS_ERROR("Failed to add parameter for Motor 1");
+    // Add parameter to group bulk write
+    if (!groupBulkWrite->addParam(msg->ID, ADDR_GOAL_PWM, 2, param_goal_pwm)) {
+        ROS_ERROR("Failed to add parameter for Motor ID:%d", msg->ID);
         return;
     }
 
-    // Add motor 2 to bulk write
-    if (!groupBulkWrite->addParam(DXL2_ID, ADDR_GOAL_PWM, 2, param_goal_pwm)) {
-        ROS_ERROR("Failed to add parameter for Motor 2");
-        return;
-    }
-
-    // Send bulk write packet
+    // Send the bulk write packet
     int dxl_comm_result = groupBulkWrite->txPacket();
     if (dxl_comm_result != COMM_SUCCESS) {
         ROS_ERROR("Bulk write failed: %s", packetHandler->getTxRxResult(dxl_comm_result));
-    } else {
-        ROS_INFO("PWM set to %d for both motors", msg->pwm);
     }
+    // else {
+    //     ROS_INFO("PWM set to %f for Motor ID:%d", msg->PWM, msg->ID);
+    // }
 
-    // Clear parameters for next write
+    // Clear parameters for the next operation
     groupBulkWrite->clearParam();
 }
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "pwm_control_node");
+    ros::init(argc, argv, "move_finger_node");
     ros::NodeHandle nh;
-    // ROS subscriber for setting PWM
-    ros::Subscriber set_pwm_sub = nh.subscribe("/set_pwm", 10, setPWMCallback);
 
     // Initialize port handler and packet handler
     portHandler = PortHandler::getPortHandler(DEVICE_NAME);
     packetHandler = PacketHandler::getPacketHandler(PROTOCOL_VERSION);
-
-    // Initialize GroupBulkWrite
     groupBulkWrite = new GroupBulkWrite(portHandler, packetHandler);
 
     // Open port
@@ -131,15 +142,18 @@ int main(int argc, char **argv) {
     setOperatingMode(DXL1_ID, OPERATING_MODE_PWM);
     setOperatingMode(DXL2_ID, OPERATING_MODE_PWM);
 
-    
+    // ROS subscriber for setting PWM
+    ros::Subscriber set_pwm_sub = nh.subscribe("/Control_Command", 10, setPWMCallback);
 
-    // Spin to process ROS callbacks
-    ros::spin();
+    // Main loop to check for ROS shutdown
+    ros::Rate rate(10); // 10 Hz
+    while (ros::ok()) {
+        ros::spinOnce();
+        rate.sleep();
+    }
 
-    // Clean up
-    portHandler->closePort();
-    delete groupBulkWrite;
+    // Clean up before exiting
+    shutdownMotors();
 
-    ROS_INFO("Closed the port. Shutting down.");
     return 0;
 }

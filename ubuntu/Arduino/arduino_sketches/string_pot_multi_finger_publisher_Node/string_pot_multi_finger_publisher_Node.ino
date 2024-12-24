@@ -54,9 +54,9 @@ FingerConfig middleFingerConfig = {
 };
 
 // Timing & ROS
-unsigned long current_time = 0;
-unsigned long prev_time = 0;
-unsigned long start_time = 0;
+unsigned long current_time = 0.0;
+unsigned long prev_time = 0.0;
+unsigned long start_time = 0.0;
 ros::NodeHandle nh;
 
 // Message for both fingers

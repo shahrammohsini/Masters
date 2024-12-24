@@ -132,9 +132,9 @@ include_directories(
 )
 
 
-add_executable(pwm_control_node src/pwm_control.cpp)
-add_dependencies(pwm_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(pwm_control_node ${catkin_LIBRARIES})
+# add_executable(pwm_control_node src/pwm_control.cpp)
+# add_dependencies(pwm_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries(pwm_control_node ${catkin_LIBRARIES})
 
 add_executable(move_finger_node src/move_fingers.cpp)
 add_dependencies(move_finger_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

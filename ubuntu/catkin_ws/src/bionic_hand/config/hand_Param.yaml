@@ -1,5 +1,5 @@
 middle_finger:
   joint_limits:
-    max_M_joint_angle: 67
-    max_P_joint_angle: 89
-    max_D_joint_angle: 72
+    max_M_joint_angle: 73
+    max_P_joint_angle: 103
+    max_D_joint_angle: 80

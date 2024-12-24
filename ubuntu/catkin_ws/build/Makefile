@@ -506,19 +506,6 @@ move_finger_node/fast:
 .PHONY : move_finger_node/fast
 
 #=============================================================================
-# Target rules for targets named pwm_control_node
-
-# Build rule for target.
-pwm_control_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pwm_control_node
-.PHONY : pwm_control_node
-
-# fast build rule for target.
-pwm_control_node/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/build
-.PHONY : pwm_control_node/fast
-
-#=============================================================================
 # Target rules for targets named bionic_hand_generate_messages_py
 
 # Build rule for target.
@@ -1298,7 +1285,6 @@ help:
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... move_finger_node"
-	@echo "... pwm_control_node"
 	@echo "... bionic_hand_generate_messages_py"
 	@echo "... bionic_hand_generate_messages_nodejs"
 	@echo "... bionic_hand_genlisp"

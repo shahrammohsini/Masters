@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/ControlCommands.h
 string
 -
 vector
@@ -93,8 +93,8 @@ stdint.h
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/move_fingers.cpp
 ros/ros.h
 -
-bionic_hand/SetPWM.h
-/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/bionic_hand/SetPWM.h
+bionic_hand/ControlCommands.h
+/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/bionic_hand/ControlCommands.h
 dynamixel_sdk/dynamixel_sdk.h
 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/dynamixel_sdk/dynamixel_sdk.h
 

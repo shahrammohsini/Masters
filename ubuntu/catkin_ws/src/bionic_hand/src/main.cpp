@@ -34,8 +34,13 @@ int main(int argc, char** argv) {
     // ros::init(argc, argv, "move_motor"); // Initialize ROS node
     ros::init(argc, argv, "controller_node");
     ros::NodeHandle nh; // Create a NodeHandle
+
+    // Set up AsyncSpinner with 2 threads. This ensures data collection is done in a seperate thread
+    ros::AsyncSpinner spinner(3); // Number of threads
+    spinner.start();
+
     // Create a finger object
-    Finger middle_finger(1, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
+    Finger middle_finger(2, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
     Finger index_finger(2, "index_finger"); // Set motor ID. Middle finger's motor has id 1.
 
 
@@ -62,8 +67,8 @@ int main(int argc, char** argv) {
 
 
     float setpoint_M = 0;
-    float setpoint_P = 0;
-    float setpoint_D =  35;
+    float setpoint_P = 45;
+    float setpoint_D =  90;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     //Run each finger's controller in a seperate thread to control all fingers symultaneously
@@ -72,14 +77,12 @@ int main(int argc, char** argv) {
         control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
     });
 
-    std::thread index_thread([&](){
-        // This lambda runs in another separate thread
-        control_index_finger.run(1, 2, 3);
-    });
+    // std::thread index_thread([&](){
+    //     // This lambda runs in another separate thread
+    //     control_index_finger.run(1, 2, 3);
+    // });
 
-    //continue running ROS in the background without effecting the finger control threads
-    ros::AsyncSpinner spinner(2); // 2 threads for callback handling
-    spinner.start();
+  
 
     //wait for my command to stop running
     ros::waitForShutdown();
@@ -87,8 +90,8 @@ int main(int argc, char** argv) {
     // Join the threads before exiting (if run() is blocking and will eventually end)
     if(middle_thread.joinable())
         middle_thread.join();
-    if(index_thread.joinable())
-        index_thread.join();
+    // if(index_thread.joinable())
+    //     index_thread.join();
 
 
     int input;
