@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_ControlCommands.py"
+  "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_FingerJoints.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_FingerPos.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_SetPWM.py"
   "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_SetPosition.py"

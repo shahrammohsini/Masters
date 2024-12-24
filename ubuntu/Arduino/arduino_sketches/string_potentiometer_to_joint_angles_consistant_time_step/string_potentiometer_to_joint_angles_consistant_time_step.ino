@@ -32,12 +32,12 @@ void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
 
-  // Wait for a signal from the Python script
-  while (!Serial.available()) {
-    // Do nothing until data is available
-  }
-  Serial.read(); // Read the signal (assume it's a single byte)
-  delay(200);
+//  // Wait for a signal from the Python script
+//  while (!Serial.available()) {
+//    // Do nothing until data is available
+//  }
+//  Serial.read(); // Read the signal (assume it's a single byte)
+//  delay(200);
 
   start_time = millis();
   prev_time = start_time;
@@ -49,6 +49,10 @@ void loop() {
     prev_time = current_millis;
     
     int sensorValue = analogRead(A1);
+    
+    Serial.print(sensorValue);
+    Serial.print(",");
+    
     sensorValue = sensorValue - offset;
     if (sensorValue < 0) {
       sensorValue = 0;

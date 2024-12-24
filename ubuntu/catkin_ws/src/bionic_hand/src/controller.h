@@ -12,7 +12,7 @@
 
 class Controller{
 public:
-    Controller(const std::string& finger_name);
+    Controller(int ID, const std::string& finger_name);
     void publishData(double PWM);
     void fingerPositionCallback(const bionic_hand::FingerPos& msg);
     void run(float setpoint_M, float setpoint , float setpoint_D);  // Handles the ros::spin or ros::spinOnce inside
@@ -45,6 +45,7 @@ private:
     ros::Publisher pub_;
     ros::Subscriber sub_;
     bionic_hand::FingerPos position;
+    int finger_ID;
     // Dynamic states for PID
     double integral = 0.0;
     double previous_error = 0.0;
@@ -170,8 +171,8 @@ private:
 
     int max_pwm;
     int min_pwm;
-    double max_Voltage = 12;
-    double min_Voltage = -12;
+    double max_Voltage = 5;
+    double min_Voltage = -5;
     double setpoint_val;
 
 };

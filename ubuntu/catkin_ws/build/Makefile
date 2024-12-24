@@ -493,17 +493,17 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named pwm_control_node
+# Target rules for targets named move_finger_node
 
 # Build rule for target.
-pwm_control_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pwm_control_node
-.PHONY : pwm_control_node
+move_finger_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 move_finger_node
+.PHONY : move_finger_node
 
 # fast build rule for target.
-pwm_control_node/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/pwm_control_node.dir/build.make bionic_hand/CMakeFiles/pwm_control_node.dir/build
-.PHONY : pwm_control_node/fast
+move_finger_node/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/move_finger_node.dir/build.make bionic_hand/CMakeFiles/move_finger_node.dir/build
+.PHONY : move_finger_node/fast
 
 #=============================================================================
 # Target rules for targets named bionic_hand_generate_messages_py
@@ -543,6 +543,19 @@ bionic_hand_genlisp: cmake_check_build_system
 bionic_hand_genlisp/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_genlisp.dir/build
 .PHONY : bionic_hand_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named bionic_hand_generate_messages_lisp
+
+# Build rule for target.
+bionic_hand_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_generate_messages_lisp
+.PHONY : bionic_hand_generate_messages_lisp
+
+# fast build rule for target.
+bionic_hand_generate_messages_lisp/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
+.PHONY : bionic_hand_generate_messages_lisp/fast
 
 #=============================================================================
 # Target rules for targets named bionic_hand_gencpp
@@ -595,6 +608,19 @@ _bionic_hand_generate_messages_check_deps_SetPWM: cmake_check_build_system
 _bionic_hand_generate_messages_check_deps_SetPWM/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM.dir/build
 .PHONY : _bionic_hand_generate_messages_check_deps_SetPWM/fast
+
+#=============================================================================
+# Target rules for targets named _bionic_hand_generate_messages_check_deps_FingerJoints
+
+# Build rule for target.
+_bionic_hand_generate_messages_check_deps_FingerJoints: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _bionic_hand_generate_messages_check_deps_FingerJoints
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerJoints
+
+# fast build rule for target.
+_bionic_hand_generate_messages_check_deps_FingerJoints/fast:
+	$(MAKE) -f bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/build.make bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints.dir/build
+.PHONY : _bionic_hand_generate_messages_check_deps_FingerJoints/fast
 
 #=============================================================================
 # Target rules for targets named _bionic_hand_generate_messages_check_deps_FingerPos
@@ -738,19 +764,6 @@ bionic_hand_generate_messages_eus: cmake_check_build_system
 bionic_hand_generate_messages_eus/fast:
 	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_eus.dir/build
 .PHONY : bionic_hand_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named bionic_hand_generate_messages_lisp
-
-# Build rule for target.
-bionic_hand_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 bionic_hand_generate_messages_lisp
-.PHONY : bionic_hand_generate_messages_lisp
-
-# fast build rule for target.
-bionic_hand_generate_messages_lisp/fast:
-	$(MAKE) -f bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build.make bionic_hand/CMakeFiles/bionic_hand_generate_messages_lisp.dir/build
-.PHONY : bionic_hand_generate_messages_lisp/fast
 
 #=============================================================================
 # Target rules for targets named bulk_read_write_node
@@ -1271,14 +1284,16 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... pwm_control_node"
+	@echo "... move_finger_node"
 	@echo "... bionic_hand_generate_messages_py"
 	@echo "... bionic_hand_generate_messages_nodejs"
 	@echo "... bionic_hand_genlisp"
+	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... bionic_hand_gencpp"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPosition"
 	@echo "... bionic"
 	@echo "... _bionic_hand_generate_messages_check_deps_SetPWM"
+	@echo "... _bionic_hand_generate_messages_check_deps_FingerJoints"
 	@echo "... _bionic_hand_generate_messages_check_deps_FingerPos"
 	@echo "... _bionic_hand_generate_messages_check_deps_ControlCommands"
 	@echo "... bionic_hand_gennodejs"
@@ -1290,7 +1305,6 @@ help:
 	@echo "... bionic_hand_genpy"
 	@echo "... bionic_hand_geneus"
 	@echo "... bionic_hand_generate_messages_eus"
-	@echo "... bionic_hand_generate_messages_lisp"
 	@echo "... bulk_read_write_node"
 	@echo "... read_write_node"
 	@echo "... dynamixel_sdk_examples_generate_messages_py"

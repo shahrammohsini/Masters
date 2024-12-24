@@ -24,14 +24,19 @@ struct ControlCommands_
   typedef ControlCommands_<ContainerAllocator> Type;
 
   ControlCommands_()
-    : PWM(0.0)  {
+    : ID(0)
+    , PWM(0.0)  {
     }
   ControlCommands_(const ContainerAllocator& _alloc)
-    : PWM(0.0)  {
+    : ID(0)
+    , PWM(0.0)  {
   (void)_alloc;
     }
 
 
+
+   typedef int32_t _ID_type;
+  _ID_type ID;
 
    typedef double _PWM_type;
   _PWM_type PWM;
@@ -65,7 +70,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::bionic_hand::ControlCommands_<ContainerAllocator1> & lhs, const ::bionic_hand::ControlCommands_<ContainerAllocator2> & rhs)
 {
-  return lhs.PWM == rhs.PWM;
+  return lhs.ID == rhs.ID &&
+    lhs.PWM == rhs.PWM;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +128,12 @@ struct MD5Sum< ::bionic_hand::ControlCommands_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "630d1348e66951f61746659ef3574616";
+    return "0710b5797f0353030d05fc8a9f52589b";
   }
 
   static const char* value(const ::bionic_hand::ControlCommands_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x630d1348e66951f6ULL;
-  static const uint64_t static_value2 = 0x1746659ef3574616ULL;
+  static const uint64_t static_value1 = 0x0710b5797f035303ULL;
+  static const uint64_t static_value2 = 0x0d05fc8a9f52589bULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +152,8 @@ struct Definition< ::bionic_hand::ControlCommands_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 PWM\n"
+    return "int32 ID\n"
+"float64 PWM\n"
 ;
   }
 
@@ -165,6 +172,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.ID);
       stream.next(m.PWM);
     }
 
@@ -184,6 +192,8 @@ struct Printer< ::bionic_hand::ControlCommands_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::bionic_hand::ControlCommands_<ContainerAllocator>& v)
   {
+    s << indent << "ID: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.ID);
     s << indent << "PWM: ";
     Printer<double>::stream(s, indent + "  ", v.PWM);
   }

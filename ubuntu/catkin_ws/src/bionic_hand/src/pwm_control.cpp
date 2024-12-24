@@ -22,23 +22,6 @@ using namespace dynamixel;
 PortHandler *portHandler;
 PacketHandler *packetHandler;
 
-// bool getPresentPositionCallback(bionic_hand::GetPosition::Request & req,
-//                                 bionic_hand::GetPosition::Response & res) {
-//   uint8_t dxl_error = 0;
-//   int dxl_comm_result = COMM_TX_FAIL;
-//   int32_t position = 0;
-
-//   dxl_comm_result = packetHandler->read4ByteTxRx(portHandler, (uint8_t)req.id, ADDR_PRESENT_POSITION, (uint32_t *)&position, &dxl_error);
-//   if (dxl_comm_result == COMM_SUCCESS) {
-//     ROS_INFO("getPosition : [ID:%d] -> [POSITION:%d]", req.id, position);
-//     res.position = position;
-//     return true;
-//   } else {
-//     ROS_INFO("Failed to get position! Result: %d", dxl_comm_result);
-//     return false;
-//   }
-// }
-
 void setPWMCallback(const bionic_hand::SetPWM::ConstPtr & msg) {
   uint8_t dxl_error = 0;
   int dxl_comm_result = COMM_TX_FAIL;

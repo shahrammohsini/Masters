@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   dynamixel_sdk
   rospy
   message_generation
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -53,6 +54,7 @@ add_message_files(
 #   Message2.msg
   SetPosition.msg
   SetPWM.msg
+  FingerJoints.msg
   FingerPos.msg
   ControlCommands.msg
 
@@ -130,10 +132,13 @@ include_directories(
 )
 
 
-add_executable(pwm_control_node src/pwm_control.cpp)
-add_dependencies(pwm_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(pwm_control_node ${catkin_LIBRARIES})
+# add_executable(pwm_control_node src/pwm_control.cpp)
+# add_dependencies(pwm_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries(pwm_control_node ${catkin_LIBRARIES})
 
+add_executable(move_finger_node src/move_fingers.cpp)
+add_dependencies(move_finger_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(move_finger_node ${catkin_LIBRARIES})
 
 
 ## Declare a C++ library
@@ -151,6 +156,8 @@ file(GLOB SOURCE_FILES "src/*.cpp")
 # add_executable(move_motor ${SOURCE_FILES})
 # add_executable(finger ${SOURCE_FILES})
 # add_executable(main ${SOURCE_FILES})
+
+#this adds all the files under an executable called bionic. Ensure all file are here unless they need to be ran seperately (while testing)
 add_executable(bionic src/main.cpp src/finger.cpp src/controller.cpp)
 
 

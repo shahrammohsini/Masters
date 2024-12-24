@@ -18,9 +18,16 @@ class ControlCommands {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.ID = null;
       this.PWM = null;
     }
     else {
+      if (initObj.hasOwnProperty('ID')) {
+        this.ID = initObj.ID
+      }
+      else {
+        this.ID = 0;
+      }
       if (initObj.hasOwnProperty('PWM')) {
         this.PWM = initObj.PWM
       }
@@ -32,6 +39,8 @@ class ControlCommands {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ControlCommands
+    // Serialize message field [ID]
+    bufferOffset = _serializer.int32(obj.ID, buffer, bufferOffset);
     // Serialize message field [PWM]
     bufferOffset = _serializer.float64(obj.PWM, buffer, bufferOffset);
     return bufferOffset;
@@ -41,13 +50,15 @@ class ControlCommands {
     //deserializes a message object of type ControlCommands
     let len;
     let data = new ControlCommands(null);
+    // Deserialize message field [ID]
+    data.ID = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [PWM]
     data.PWM = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    return 12;
   }
 
   static datatype() {
@@ -57,12 +68,13 @@ class ControlCommands {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '630d1348e66951f61746659ef3574616';
+    return '0710b5797f0353030d05fc8a9f52589b';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    int32 ID
     float64 PWM
     `;
   }
@@ -73,6 +85,13 @@ class ControlCommands {
       msg = {};
     }
     const resolved = new ControlCommands(null);
+    if (msg.ID !== undefined) {
+      resolved.ID = msg.ID;
+    }
+    else {
+      resolved.ID = 0
+    }
+
     if (msg.PWM !== undefined) {
       resolved.PWM = msg.PWM;
     }

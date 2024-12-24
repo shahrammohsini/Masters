@@ -15,6 +15,9 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <std_msgs/Header.h>
+#include <bionic_hand/FingerJoints.h>
+#include <bionic_hand/FingerJoints.h>
 
 namespace bionic_hand
 {
@@ -24,27 +27,27 @@ struct FingerPos_
   typedef FingerPos_<ContainerAllocator> Type;
 
   FingerPos_()
-    : theta_M(0.0)
-    , theta_P(0.0)
-    , theta_D(0.0)  {
+    : header()
+    , index()
+    , middle()  {
     }
   FingerPos_(const ContainerAllocator& _alloc)
-    : theta_M(0.0)
-    , theta_P(0.0)
-    , theta_D(0.0)  {
+    : header(_alloc)
+    , index(_alloc)
+    , middle(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef double _theta_M_type;
-  _theta_M_type theta_M;
+   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
+  _header_type header;
 
-   typedef double _theta_P_type;
-  _theta_P_type theta_P;
+   typedef  ::bionic_hand::FingerJoints_<ContainerAllocator>  _index_type;
+  _index_type index;
 
-   typedef double _theta_D_type;
-  _theta_D_type theta_D;
+   typedef  ::bionic_hand::FingerJoints_<ContainerAllocator>  _middle_type;
+  _middle_type middle;
 
 
 
@@ -75,9 +78,9 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::bionic_hand::FingerPos_<ContainerAllocator1> & lhs, const ::bionic_hand::FingerPos_<ContainerAllocator2> & rhs)
 {
-  return lhs.theta_M == rhs.theta_M &&
-    lhs.theta_P == rhs.theta_P &&
-    lhs.theta_D == rhs.theta_D;
+  return lhs.header == rhs.header &&
+    lhs.index == rhs.index &&
+    lhs.middle == rhs.middle;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -110,22 +113,22 @@ struct IsMessage< ::bionic_hand::FingerPos_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::bionic_hand::FingerPos_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::bionic_hand::FingerPos_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::bionic_hand::FingerPos_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::bionic_hand::FingerPos_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 
@@ -134,12 +137,12 @@ struct MD5Sum< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "87bf9b04d1a94d2eda566ee32685c210";
+    return "df9ec1211fc81402f32ad35554d98a85";
   }
 
   static const char* value(const ::bionic_hand::FingerPos_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x87bf9b04d1a94d2eULL;
-  static const uint64_t static_value2 = 0xda566ee32685c210ULL;
+  static const uint64_t static_value1 = 0xdf9ec1211fc81402ULL;
+  static const uint64_t static_value2 = 0xf32ad35554d98a85ULL;
 };
 
 template<class ContainerAllocator>
@@ -158,7 +161,28 @@ struct Definition< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 theta_M\n"
+    return "std_msgs/Header header\n"
+"FingerJoints index\n"
+"FingerJoints middle\n"
+"================================================================================\n"
+"MSG: std_msgs/Header\n"
+"# Standard metadata for higher-level stamped data types.\n"
+"# This is generally used to communicate timestamped data \n"
+"# in a particular coordinate frame.\n"
+"# \n"
+"# sequence ID: consecutively increasing ID \n"
+"uint32 seq\n"
+"#Two-integer timestamp that is expressed as:\n"
+"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
+"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
+"# time-handling sugar is provided by the client library\n"
+"time stamp\n"
+"#Frame this data is associated with\n"
+"string frame_id\n"
+"\n"
+"================================================================================\n"
+"MSG: bionic_hand/FingerJoints\n"
+"float64 theta_M\n"
 "float64 theta_P\n"
 "float64 theta_D\n"
 ;
@@ -179,9 +203,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.theta_M);
-      stream.next(m.theta_P);
-      stream.next(m.theta_D);
+      stream.next(m.header);
+      stream.next(m.index);
+      stream.next(m.middle);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -200,12 +224,15 @@ struct Printer< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::bionic_hand::FingerPos_<ContainerAllocator>& v)
   {
-    s << indent << "theta_M: ";
-    Printer<double>::stream(s, indent + "  ", v.theta_M);
-    s << indent << "theta_P: ";
-    Printer<double>::stream(s, indent + "  ", v.theta_P);
-    s << indent << "theta_D: ";
-    Printer<double>::stream(s, indent + "  ", v.theta_D);
+    s << indent << "header: ";
+    s << std::endl;
+    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
+    s << indent << "index: ";
+    s << std::endl;
+    Printer< ::bionic_hand::FingerJoints_<ContainerAllocator> >::stream(s, indent + "  ", v.index);
+    s << indent << "middle: ";
+    s << std::endl;
+    Printer< ::bionic_hand::FingerJoints_<ContainerAllocator> >::stream(s, indent + "  ", v.middle);
   }
 };
 

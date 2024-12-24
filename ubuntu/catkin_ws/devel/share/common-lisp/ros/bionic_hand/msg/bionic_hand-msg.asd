@@ -2,12 +2,15 @@
 (cl:in-package :asdf)
 
 (defsystem "bionic_hand-msg"
-  :depends-on (:roslisp-msg-protocol :roslisp-utils )
+  :depends-on (:roslisp-msg-protocol :roslisp-utils :std_msgs-msg
+)
   :components ((:file "_package")
     (:file "BulkSetItem" :depends-on ("_package_BulkSetItem"))
     (:file "_package_BulkSetItem" :depends-on ("_package"))
     (:file "ControlCommands" :depends-on ("_package_ControlCommands"))
     (:file "_package_ControlCommands" :depends-on ("_package"))
+    (:file "FingerJoints" :depends-on ("_package_FingerJoints"))
+    (:file "_package_FingerJoints" :depends-on ("_package"))
     (:file "FingerPos" :depends-on ("_package_FingerPos"))
     (:file "_package_FingerPos" :depends-on ("_package"))
     (:file "SetPWM" :depends-on ("_package_SetPWM"))

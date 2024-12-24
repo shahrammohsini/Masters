@@ -8,12 +8,13 @@ import struct
 
 
 class ControlCommands(genpy.Message):
-  _md5sum = "630d1348e66951f61746659ef3574616"
+  _md5sum = "0710b5797f0353030d05fc8a9f52589b"
   _type = "bionic_hand/ControlCommands"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """float64 PWM"""
-  __slots__ = ['PWM']
-  _slot_types = ['float64']
+  _full_text = """int32 ID
+float64 PWM"""
+  __slots__ = ['ID','PWM']
+  _slot_types = ['int32','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +24,7 @@ class ControlCommands(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       PWM
+       ID,PWM
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -32,9 +33,12 @@ class ControlCommands(genpy.Message):
     if args or kwds:
       super(ControlCommands, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
+      if self.ID is None:
+        self.ID = 0
       if self.PWM is None:
         self.PWM = 0.
     else:
+      self.ID = 0
       self.PWM = 0.
 
   def _get_types(self):
@@ -49,8 +53,8 @@ class ControlCommands(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.PWM
-      buff.write(_get_struct_d().pack(_x))
+      _x = self
+      buff.write(_get_struct_id().pack(_x.ID, _x.PWM))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -63,9 +67,10 @@ class ControlCommands(genpy.Message):
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.PWM,) = _get_struct_d().unpack(str[start:end])
+      end += 12
+      (_x.ID, _x.PWM,) = _get_struct_id().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -78,8 +83,8 @@ class ControlCommands(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.PWM
-      buff.write(_get_struct_d().pack(_x))
+      _x = self
+      buff.write(_get_struct_id().pack(_x.ID, _x.PWM))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -93,9 +98,10 @@ class ControlCommands(genpy.Message):
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.PWM,) = _get_struct_d().unpack(str[start:end])
+      end += 12
+      (_x.ID, _x.PWM,) = _get_struct_id().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -104,9 +110,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_d = None
-def _get_struct_d():
-    global _struct_d
-    if _struct_d is None:
-        _struct_d = struct.Struct("<d")
-    return _struct_d
+_struct_id = None
+def _get_struct_id():
+    global _struct_id
+    if _struct_id is None:
+        _struct_id = struct.Struct("<id")
+    return _struct_id

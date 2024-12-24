@@ -2,6 +2,7 @@
 937f8a0af3bcee752a7321803e1b3b5e /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/BulkGetItem.h
 cf6897714bbe99a6effe7692ac6f365c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/ControlCommand.h
 025627352199a7c1e3be1ba5fa9e22bc /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/ControlCommands.h
+7d3d4aa69d17913abdc3ac4a2f3ebb0b /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerJoints.h
 02ce9f217c3e50688a05ac8452a80de0 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/FingerPos.h
 a88886f732a8810b65d27afbe2a09ca1 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/GetPosition.h
 5e7f1d017a4f73e372755b569f2de0bf /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/bionic_hand/SetPWM.h
@@ -16,6 +17,7 @@ d4e8b1d7ebbb062ed326920a00781572 /home/shahram/Documents/GitHub/Masters/ubuntu/c
 9159389734cbeacb99cfdedeeae46622 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/include/dynamixel_sdk_examples/SyncSetPosition.h
 16597b20657bc4b1f26e1feffb5e410a /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_ControlCommand.py
 d4355d8cc06a8f2423f3e139aa97e0b8 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_ControlCommands.py
+7974e9b5159a455810614f6de8ff2b3f /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_FingerJoints.py
 65310a7c9ee1979f7f1aa991560a945c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_FingerPos.py
 5372da5b2d3aafe8dde82213436add9e /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_SetPWM.py
 eec5e4bf3d4157ddebfd0bef68504b9c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/bionic_hand/msg/_SetPosition.py
@@ -35,6 +37,7 @@ e78c51e5fec7c9776e25562356630071 /home/shahram/Documents/GitHub/Masters/ubuntu/c
 945e30f7d55f42a6516b96140bfdc561 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/lib/python3/dist-packages/dynamixel_sdk_examples/srv/__init__.py
 9fe8d54b1345e46973a06fbcb062ac2b /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/ControlCommand.lisp
 1b6508c91ad8849da395ff87ef630e54 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/ControlCommands.lisp
+09b9d530435b2302b6185b6e5c7181c0 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/FingerJoints.lisp
 e892cabfb0df6a400906cdc89eeba59b /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/FingerPos.lisp
 f5445d33613b942b035cd4371e7d113c /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/SetPWM.lisp
 4a7a02fbdfe732d1471bcce765528e64 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/bionic_hand/msg/SetPosition.lisp
@@ -50,6 +53,7 @@ ed3146c4fc58e380e142791e4c3d6b6c /home/shahram/Documents/GitHub/Masters/ubuntu/c
 5bc460cac82560001a9fe6fae2fa4065 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/common-lisp/ros/dynamixel_sdk_examples/srv/SyncGetPosition.lisp
 dbc475378f75ccd75303bcddc4c5a996 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/ControlCommand.js
 ba8c04fcaadee39e8178b750ec88ac6f /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/ControlCommands.js
+ae22f5d68a2f8575a7306970dfff60c3 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/FingerJoints.js
 8ed1fbd5193ea91058146346d2fb6b85 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/FingerPos.js
 e490475447654b188af15aeea2839b44 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPWM.js
 48a0c91b275d3254dee566d39076e5f6 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/gennodejs/ros/bionic_hand/msg/SetPosition.js
@@ -66,6 +70,7 @@ cc3b7623bfe1ab554f07861a5e93e98e /home/shahram/Documents/GitHub/Masters/ubuntu/c
 e48d28cd7e36382a08d680dd27033366 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/manifest.l
 2370eb28556e0f82f311d82d97fcd25f /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/ControlCommand.l
 d9f5f7c2924f43247f3bb0c4dacecf4f /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/ControlCommands.l
+72ad5ebd4281b14791c407688843b2e3 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/FingerJoints.l
 934763ba34d8fff247c48c46c58f3da6 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/FingerPos.l
 b6528b29ece56e9aa7262822967cc01d /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/SetPWM.l
 a63fb71663fa61c8d99bcb5793691965 /home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/devel/share/roseus/ros/bionic_hand/msg/SetPosition.l
@@ -95,7 +100,8 @@ ac3060e5b42081769dc8e858968c34b4 DynamixelSDK/ros/dynamixel_sdk_examples/CMakeFi
 6dec6d9f135b17adfaea5aff05ef42d8 DynamixelSDK/ros/dynamixel_sdk_examples/CMakeFiles/dynamixel_sdk_examples_generate_messages_py
 9f0a868da2a2a1662f8be0437c587395 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_BulkGetItem
 d3f662923735e6d15d9c0687a49cf039 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_ControlCommands
-94bd0b5cf7a1b5f378678c6204a6a27b bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos
+52dac2ffeb27f938f303c708f950be10 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerJoints
+5ea6602ece0b51a167a3647d8db5c5c8 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_FingerPos
 dd554471ed9f48f61ee2a365de7fed27 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_GetPosition
 e7b6c83afc11de505664ef90dcf518a8 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPWM
 ff0934a11d045dffdb38a4bc847679a3 bionic_hand/CMakeFiles/_bionic_hand_generate_messages_check_deps_SetPosition
