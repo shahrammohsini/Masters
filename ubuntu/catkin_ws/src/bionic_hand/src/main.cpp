@@ -66,9 +66,9 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 0;
-    float setpoint_P = 45;
-    float setpoint_D =  90;
+    float setpoint_M = 20;
+    float setpoint_P = 110;
+    float setpoint_D =  85;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     //Run each finger's controller in a seperate thread to control all fingers symultaneously

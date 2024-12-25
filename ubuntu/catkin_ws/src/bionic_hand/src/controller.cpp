@@ -39,6 +39,9 @@ void Controller::publishData(double PWM)
 
 //create a subscriber node to get the latest pos info
 void Controller::fingerPositionCallback(const bionic_hand::FingerPos& msg){
+
+    //Note: Consider adding a designated thread for data collection.
+
     ros::Time current_time = ros::Time::now();
     ros::Duration time_diff = current_time - msg.header.stamp;
     
@@ -48,20 +51,21 @@ void Controller::fingerPositionCallback(const bionic_hand::FingerPos& msg){
         ROS_WARN("Received stale finger position data. Delay: %f seconds", time_diff.toSec());
         return;
     }
-    
-    position = msg;
-    switch (finger_ID)
-    {
-    case 1:
-        theta_M = position.index.theta_M;
-        theta_P = position.index.theta_P;
-        theta_D = position.index.theta_D;
-        break;
-    case 2:
-        theta_M = position.middle.theta_M;
-        theta_P = position.middle.theta_P;
-        theta_D = position.middle.theta_D;
-        break;
+    else{ //ensure older data is not used
+        position = msg;
+        switch (finger_ID)
+        {
+        case 1:
+            theta_M = position.index.theta_M;
+            theta_P = position.index.theta_P;
+            theta_D = position.index.theta_D;
+            break;
+        case 2:
+            theta_M = position.middle.theta_M;
+            theta_P = position.middle.theta_P;
+            theta_D = position.middle.theta_D;
+            break;
+        }
     }
 
 }
@@ -147,11 +151,13 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
 
     file.close();
 
+
+    //Dynamic Matrix D
     DM_j_D.setZero(); //populate with zeros
     // float bias = 4.2; //If motor has a bias value (min voltage to move motor)
     int normalize_val = 1;
     // DM_j_D.setConstant(bias); // populate with min voltage to move. This is the bias
-    //populate dynamic matrix
+    //populate dynamic matrix D
      for (int i =0; i < control_horizon_D; i++) { //create columns
         for(int j=0; j < prediction_horizon_D - i; j++){ //create rows
             const auto& d = dataset[j]; //d holds the current row
@@ -162,13 +168,13 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
     std::cout << "Matrix_D: \n" << DM_j_D <<std::endl;
 
 
-
+    //Dynamic Matrix P
     DM_j_P.setZero(); //populate with zeros
     // DM_j_P.setConstant(bias);
-    //populate dynamic matrix
+    //populate dynamic matrix P
      for (int i =0; i < control_horizon_P; i++) { //create columns
         for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-            const auto& d = dataset[j+53]; //d holds the current row adding +6 to start at the point where M joint moves
+            const auto& d = dataset[j+54]; //d holds the current row adding +6 to start at the point where M joint moves
             DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
             // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
@@ -176,12 +182,14 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
      }
     std::cout << "Matrix_P: \n" << DM_j_P <<std::endl;
 
+
+    //Dynamic Matrix M
     DM_j_M.setZero(); //populate with zeros
     // DM_j_M.setConstant(bias);
-    //populate dynamic matrix
+    //populate dynamic matrix M
      for (int i =0; i < control_horizon_M; i++) { //create columns
         for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
-            const auto& d = dataset[j + 95]; //d holds the current row.
+            const auto& d = dataset[j + 158]; //d holds the current row.
             DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
             // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
@@ -354,7 +362,7 @@ Eigen::MatrixXd Controller::addDeadTime_rev(const Eigen::MatrixXd& dynamicMatrix
 
 double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_position_D, int N_D, int nu_D, Eigen::MatrixXd A_D){
     // std::cout << "setpoint: \n" << setpoint <<std::endl; 
-    std::cout << "measured pos_D: " << measured_position_D <<std::endl; 
+    // std::cout << "measured pos_D: " << measured_position_D <<std::endl; 
     // std::cout << "y_hat_D: \n" << y_hat_D <<std::endl; 
     
     // PHI_D = measured_position(0) - y_hat_D(0); //difference between predicted pos (y_hat) and measured pos to obtain model inaccuracy.
@@ -390,12 +398,10 @@ double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_positi
     //add control input limits here
     for(int i = 0; i < nu_D; i++){
         if (u_D(i) > max_Voltage){
-            // std::cout << "active: " << u_D(i) <<std::endl; 
             u_D(i) = max_Voltage;
 
         }
         else if (u_D(i) < min_Voltage){
-            // std::cout << "negative active: " << u_D(i) <<std::endl; 
             u_D(i) = min_Voltage;
         }
         
@@ -414,11 +420,7 @@ double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_positi
     
     // delta_y_D = A_D.col(0)*delta_u_D(0,0); //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
     delta_y_D = A_D*delta_u_D; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
-    
-    
-    // delta_y_D = A_D*delta_u_D; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
-    // std::cout << "delta_y_D: \n" << delta_y_D<<std::endl; 
-   
+
     y_hat_D = y_hat_D + delta_y_D; // calculate new prediction for output
     // std::cout << "y_hat_D_pre: \n" << y_hat_D<<std::endl; 
    
@@ -454,7 +456,7 @@ double Controller::MPC_Control_P(Eigen::MatrixXd setpoint,double measured_positi
     // std::cout << "setpoint: \n" << setpoint <<std::endl; 
     // std::cout << "y_hat_P: \n" << y_hat_P(0) <<std::endl; 
 
-    std::cout << "errors: " << errors_P <<std::endl; 
+    // std::cout << "errors: " << errors_P <<std::endl; 
 
     // std::cout << "du: \n" << du <<std::endl; 
     // std::cout << "du_D: \n" << du_D <<std::endl; 
@@ -522,20 +524,15 @@ double Controller::MPC_Control_P(Eigen::MatrixXd setpoint,double measured_positi
     return u_P(0);
 }
 
-double Controller::MPC_Control_M(Eigen::MatrixXd setpoint,Eigen::MatrixXd measured_position, int N_M, int nu_M, Eigen::MatrixXd A_M){
+double Controller::MPC_Control_M(Eigen::MatrixXd setpoint,double measured_position_M, int N_M, int nu_M, Eigen::MatrixXd A_M){
     // std::cout << "setpoint: \n" << setpoint <<std::endl; 
     // std::cout << "measured pos: \n" << measured_position <<std::endl; 
     
-    PHI_M = measured_position - y_hat_M; //difference between predicted pos (y_hat) and measured pos to obtain model inaccuracy.
-    // std::cout << "PHI: \n" << PHI <<std::endl; 
-    y_hat_M = y_hat_M + PHI_M; //correct prediciton inaccuracy
-    // std::cout << "y_hat: \n" << y_hat <<std::endl; 
+    PHI_M = measured_position_M - y_hat_M(0); //difference between predicted pos (y_hat) and measured pos to obtain model inaccuracy.
+ 
+    y_hat_M = y_hat_M + Eigen::MatrixXd::Constant(y_hat_M.rows(), y_hat_M.cols(), PHI_M); //add the constant PHI to each value of y_hat
 
     errors_M = setpoint - y_hat_M; //error
-    // std::cout << "errors: \n" << errors <<std::endl; 
-
-    // std::cout << "du: \n" << du <<std::endl; 
-
 
     delta_u_M = du_M*errors_M; //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) // delta_u is the control input step
     // std::cout << "delta_u: \n" << delta_u <<std::endl; 
@@ -553,10 +550,7 @@ double Controller::MPC_Control_M(Eigen::MatrixXd setpoint,Eigen::MatrixXd measur
 
     }
 
-    delta_u_M = u_M - u_prev_M; //revaluate delta_u to account for the limits you've introduced to u
 
-    // delta_y_M = A_M*delta_u_M; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0)
-    // delta_y_M = A_M.col(0)*delta_u_M(0,0); //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
     delta_y_M = A_M*delta_u_M; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
     
     // std::cout << "delta_y: \n" << delta_y <<std::endl; 
@@ -785,9 +779,6 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
     //j_M parameters
     u_M = Eigen::MatrixXd::Zero(nu_M, 1); // control input -  1 dimentional matrix filled with zeros
-    PHI_M = Eigen::MatrixXd::Zero(N_M, 1); // model adjustment (correciton) matrix
-    measured_posi_M = Eigen::MatrixXd::Zero(N_M, 1); // model adjustment (correciton) matrix
-
     errors_M = Eigen::MatrixXd::Zero(N_M, 1); // error
     delta_u_M = Eigen::MatrixXd::Zero(nu_M, 1); // delta_u
     u_prev_M = Eigen::MatrixXd::Zero(nu_M, 1); // previous input
@@ -935,6 +926,7 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
                 Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_P,1,y_pdt_P(1)); //only use first value from the setpoint trajectory
                 // /Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_P,1,setpoint_val); //matrix of setpoint values                
                 
+                //reverse
                 Eigen::MatrixXd setpoint_rev = Eigen::MatrixXd::Constant(N_P_rev,1,y_pdt_P(1)); //matrix of setpoint values                
                 
                 control_effort = MPC_Control_P(setpoint, theta_P, N_P, nu_P, A_P);
@@ -955,19 +947,18 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
         }
         else{
             //control M joint
-            measured_posi_M = Eigen::MatrixXd::Constant(N_M, 1, theta_M); //set all values of measured pos to theta_D
             setpoint_val = setpoint_M;
             y_pdt_M(0) = theta_M; // Initialize with the current position
             // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_D,1,setpoint_val); //matrix of setpoint values
             for (int j = 1; j < 3; ++j) { //create a setpoint trajectory for a smoother rise
-            y_pdt_M(j) = alpha_M * y_pdt_M(j - 1) + (1 - alpha_M) * setpoint_val;
-            }
+            y_pdt_M(j) = alpha_M * y_pdt_M(j - 1) + (1 - alpha_M) * setpoint_val;}
+
             Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,y_pdt_M(1)); //only use first value from the setpoint trajectory
             // std::cout<<"theta M_Joint: "<< theta_M<<std::endl;
             // std::cout<<"setpoint M_Joint: "<< setpoint<<std::endl;
             // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N_M,1,setpoint_val); //matrix of setpoint values
             
-            control_effort = MPC_Control_M(setpoint, measured_posi_M, N_M, nu_M, A_M);
+            control_effort = MPC_Control_M(setpoint, theta_M, N_M, nu_M, A_M);
             // control_effort = PID_Control(setpoint_val, theta_M, kp_M, ki_M, kd_M, dt_pid);
 
             // std::cout<<"Controlling M_Joint "<<std::endl;

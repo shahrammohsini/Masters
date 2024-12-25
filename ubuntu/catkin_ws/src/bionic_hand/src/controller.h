@@ -25,7 +25,7 @@ public:
 
     double MPC_Control_D(Eigen::MatrixXd setpoint, double measured_position_D, int N_D, int nu_D, Eigen::MatrixXd A_D);
     double MPC_Control_P(Eigen::MatrixXd setpoint, double measured_position_P, int N_P, int nu_P, Eigen::MatrixXd A_P);
-    double MPC_Control_M(Eigen::MatrixXd setpoint, Eigen::MatrixXd measured_position, int N_M, int nu_M, Eigen::MatrixXd A_M);
+    double MPC_Control_M(Eigen::MatrixXd setpoint, double measured_position_M, int N_M, int nu_M, Eigen::MatrixXd A_M);
     double MPC_Control_P_Reverse(Eigen::MatrixXd setpoint, double measured_position_P_rev, int N_P_rev, int nu_P_rev, Eigen::MatrixXd A_P_rev);
     double convert_Voltage_to_PWM(double voltage);
    Eigen::MatrixXd addDeadTime(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
@@ -134,7 +134,7 @@ private:
     //M_joint controller parameters
     Eigen::MatrixXd A_M;
     Eigen::MatrixXd u_M;
-    Eigen::MatrixXd PHI_M;
+    double PHI_M;
     Eigen::MatrixXd measured_posi_M;
     Eigen::MatrixXd errors_M;
     Eigen::MatrixXd delta_u_M;

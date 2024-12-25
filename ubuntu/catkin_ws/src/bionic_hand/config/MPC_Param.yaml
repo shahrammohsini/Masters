@@ -2,9 +2,9 @@ middle_finger:
         dt: 0.03
         forward:
                 M_joint:
-                        N_M: 18
+                        N_M: 116
                         nu_M: 3
-                        LAMBDA_M: 1.01
+                        LAMBDA_M: 1.03
                         deadTimeSteps_M: 0
                 P_joint:
                         N_P: 100
