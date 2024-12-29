@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 
     // Create a finger object
     Finger middle_finger(2, "middle_finger"); // Set motor ID. Middle finger's motor has id 1.
-    Finger index_finger(2, "index_finger"); // Set motor ID. Middle finger's motor has id 1.
+    Finger index_finger(3, "index_finger"); // Set motor ID. Middle finger's motor has id 1.
 
 
     // controller object for middle finger
@@ -66,21 +66,25 @@ int main(int argc, char** argv) {
     nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
 
 
-    float setpoint_M = 0;
-    float setpoint_P = 45;
-    float setpoint_D =  90;
+    float setpoint_M_mid = 0;
+    float setpoint_P_mid = 45;
+    float setpoint_D_mid =  85;
+
+    float setpoint_M_ind = 0;
+    float setpoint_P_ind = 45;
+    float setpoint_D_ind =  110;
 
 //**************Shoul dprobably change it so N, nu, and lambda are sent in from here for all joints */
     //Run each finger's controller in a seperate thread to control all fingers symultaneously
    std::thread middle_thread([&](){
         
-        control_middle_finger.run(setpoint_M, setpoint_P, setpoint_D);
+        control_middle_finger.run(setpoint_M_mid, setpoint_P_mid, setpoint_D_mid);
     });
 
-    // std::thread index_thread([&](){
-    //     // This lambda runs in another separate thread
-    //     control_index_finger.run(1, 2, 3);
-    // });
+    std::thread index_thread([&](){
+        // This lambda runs in another separate thread
+        control_index_finger.run(setpoint_M_ind, setpoint_P_ind, setpoint_D_ind);
+    });
 
   
 
@@ -90,12 +94,11 @@ int main(int argc, char** argv) {
     // Join the threads before exiting (if run() is blocking and will eventually end)
     if(middle_thread.joinable())
         middle_thread.join();
-    // if(index_thread.joinable())
-    //     index_thread.join();
+    if(index_thread.joinable())
+        index_thread.join();
 
 
-    int input;
+    // int input;
     
-
     return 0;
 }

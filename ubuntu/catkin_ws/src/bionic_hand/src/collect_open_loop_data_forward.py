@@ -19,7 +19,7 @@ TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 PWM_MODE = 16
 POSITION_MODE = 3
-DXL_ID = 2  # Motor ID
+DXL_ID = 3  # Motor ID
 MAX_VOLTAGE = 12
 MAX_PWM = 885
 step_magnitude = -5  # Volts. -volts means cw rotation
@@ -219,10 +219,8 @@ def main():
         # Stop motor
         bulk_write_pwm(DXL_ID, 0)
         print("Motor stopped.")
+        time.sleep(0.5)
 
-        # while(True):
-        #     print("wait")
-                  
         # Prepare step input
         total_time = 0.5
         dt = 0.005
@@ -233,16 +231,21 @@ def main():
         time.sleep(2)
         ser.flushInput()  # Flush the input buffer
         time.sleep(0.5)  # Allow time for Arduino to reset
-        ser.write(b'start')  # Signal Arduino to start sending data
-
         # Start data collection thread
         data_queue = queue.Queue()
         stop_event = threading.Event()
+        ser.write(b'start')  # Signal Arduino to start sending data
+
         data_thread = threading.Thread(target=collect_data, args=(ser, data_queue, stop_event))
+
         data_thread.start()
 
-        max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
-        min_motor_pos = convert_deg_pos_to_raw(11)
+        if DXL_ID == 2: #middle finger
+            max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
+            min_motor_pos = convert_deg_pos_to_raw(11) #11 for middle
+        elif DXL_ID == 3: #index finger
+            max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
+            min_motor_pos = convert_deg_pos_to_raw(20) #11 for middle
 
 
         # Main control loop
@@ -267,7 +270,14 @@ def main():
         data = []
         while not data_queue.empty():
             data.append(data_queue.get())
-        save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data.csv')
+        
+        if DXL_ID == 2: #middle finger
+            save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_middle.csv')
+
+        elif DXL_ID == 3: #index finger
+            save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_index.csv')
+            
+
 
     except Exception as e:
         print(e)

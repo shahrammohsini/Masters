@@ -3,3 +3,8 @@ middle_finger:
     max_M_joint_angle: 73
     max_P_joint_angle: 103
     max_D_joint_angle: 80
+index_finger:
+  joint_limits:
+    max_M_joint_angle: 140
+    max_P_joint_angle: 56
+    max_D_joint_angle: 102
