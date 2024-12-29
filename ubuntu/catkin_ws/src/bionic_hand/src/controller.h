@@ -28,8 +28,11 @@ public:
     double MPC_Control_M(Eigen::MatrixXd setpoint, double measured_position_M, int N_M, int nu_M, Eigen::MatrixXd A_M);
     double MPC_Control_P_Reverse(Eigen::MatrixXd setpoint, double measured_position_P_rev, int N_P_rev, int nu_P_rev, Eigen::MatrixXd A_P_rev);
     double convert_Voltage_to_PWM(double voltage);
-   Eigen::MatrixXd addDeadTime(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
-   Eigen::MatrixXd addDeadTime_rev(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
+    Eigen::MatrixXd addDeadTime(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
+    Eigen::MatrixXd addDeadTime_rev(const Eigen::MatrixXd& dynamicMatrix, int deadTimeSteps);
+    void loadParameters(int finger_ID);
+    void initializeMPCMatrices(); 
+
 
 
 
@@ -166,7 +169,9 @@ private:
     Eigen::MatrixXd ATA_LambdaI_P_rev;
     Eigen::MatrixXd ATA_LambdaI_Inv_P_rev;
     Eigen::MatrixXd du_P_rev;
-
+    //variables to hold the dynamic matrices
+    Eigen::MatrixXd DM_j_D, DM_j_P, DM_j_M;
+    Eigen::MatrixXd DM_j_P_rev;
 
 
     int max_pwm;

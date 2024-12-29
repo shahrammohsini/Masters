@@ -19,7 +19,7 @@ TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 PWM_MODE = 16
 POSITION_MODE = 3
-DXL_ID = 2  # Motor ID
+DXL_ID = 3  # Motor ID
 MAX_VOLTAGE = 12
 MAX_PWM = 885
 step_magnitude = -5  # Volts. -volts means cw rotation
@@ -213,7 +213,7 @@ def main():
         enable_torque(DXL_ID)
 
         # Move to 65 degrees(starting pos) using PWM mode
-        target_position = 32  #desired pos in deg                                                                                                                                                                                                                                                                                                                                                                                                                                                               # Desired position in degrees
+        target_position = 32  #desired pos in deg 32                                                                                                                                                                                                                                                                                                                                                                                                                                                              # Desired position in degrees
         move_to_position_with_pwm(target_position, DXL_ID, max_pwm=300, tolerance=1)
 
         # Stop motor

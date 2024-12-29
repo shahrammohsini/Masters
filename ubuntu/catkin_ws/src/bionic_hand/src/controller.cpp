@@ -46,21 +46,22 @@ void Controller::fingerPositionCallback(const bionic_hand::FingerPos& msg){
     ros::Duration time_diff = current_time - msg.header.stamp;
     
     // Check if the message is too old
-    float acceptable_delay = 0.05;
+    float acceptable_delay = 0.03;
     if (time_diff.toSec() > acceptable_delay) {
         ROS_WARN("Received stale finger position data. Delay: %f seconds", time_diff.toSec());
         return;
     }
     else{ //ensure older data is not used
         position = msg;
+
         switch (finger_ID)
         {
-        case 1:
+        case 3: //index finger
             theta_M = position.index.theta_M;
             theta_P = position.index.theta_P;
             theta_D = position.index.theta_D;
             break;
-        case 2:
+        case 2: //middle finger
             theta_M = position.middle.theta_M;
             theta_P = position.middle.theta_P;
             theta_D = position.middle.theta_D;
@@ -113,7 +114,12 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
     Eigen::MatrixXd DM_j_M(prediction_horizon_M, control_horizon_M);
 
     //open file
-    std:: string filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data.csv";
+    std:: string filePath;
+    if (finger_ID == 2) { // Middle Finger
+        filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_middle.csv";
+    } else if (finger_ID == 3) { // Index Finger
+        filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_index.csv";
+    }
     std::ifstream file(filePath);
 
     //check if file is open
@@ -166,35 +172,65 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
         }
      }
     std::cout << "Matrix_D: \n" << DM_j_D <<std::endl;
-
-
+    
     //Dynamic Matrix P
-    DM_j_P.setZero(); //populate with zeros
-    // DM_j_P.setConstant(bias);
-    //populate dynamic matrix P
-     for (int i =0; i < control_horizon_P; i++) { //create columns
-        for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-            const auto& d = dataset[j+54]; //d holds the current row adding +6 to start at the point where M joint moves
-            DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-            // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+    if (finger_ID == 2) { // Middle Finger
+        DM_j_P.setZero(); //populate with zeros
+        // DM_j_P.setConstant(bias);
+        //populate dynamic matrix P
+        for (int i =0; i < control_horizon_P; i++) { //create columns
+            for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                const auto& d = dataset[j+54]; //d holds the current row adding +6 to start at the point where M joint moves
+                DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+            }
         }
-     }
+    }
+    else if(finger_ID == 3){ //index finger
+        DM_j_P.setZero(); //populate with zeros
+        // DM_j_P.setConstant(bias);
+        //populate dynamic matrix P
+        for (int i =0; i < control_horizon_P; i++) { //create columns
+            for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                const auto& d = dataset[j+47]; //d holds the current row adding +6 to start at the point where M joint moves
+                DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+
+            }
+        }
+    }
     std::cout << "Matrix_P: \n" << DM_j_P <<std::endl;
 
 
     //Dynamic Matrix M
-    DM_j_M.setZero(); //populate with zeros
-    // DM_j_M.setConstant(bias);
-    //populate dynamic matrix M
-     for (int i =0; i < control_horizon_M; i++) { //create columns
-        for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
-            const auto& d = dataset[j + 158]; //d holds the current row.
-            DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-            // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+    if (finger_ID == 2) { // Middle Finger
+        DM_j_M.setZero(); //populate with zeros
+        // DM_j_M.setConstant(bias);
+        //populate dynamic matrix M
+        for (int i =0; i < control_horizon_M; i++) { //create columns
+            for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
+                const auto& d = dataset[j + 158]; //d holds the current row.
+                DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+            }
         }
-     }
+    }
+    else if(finger_ID == 3){ //index finger
+        DM_j_M.setZero(); //populate with zeros
+        // DM_j_M.setConstant(bias);
+        //populate dynamic matrix M
+        for (int i =0; i < control_horizon_M; i++) { //create columns
+            for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
+                const auto& d = dataset[j + 115]; //d holds the current row.
+                DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+
+            }
+        }
+    }
+
     std::cout << "Matrix_M: \n" << DM_j_M <<std::endl;
 
     return std::make_tuple(DM_j_D, DM_j_P, DM_j_M);
@@ -212,7 +248,7 @@ Eigen::MatrixXd Controller::generate_Dynamic_Matrix_rev(int prediction_horizon_D
     // Eigen::MatrixXd DM_j_M(prediction_horizon_M, control_horizon_M);
 
     //open file
-    std:: string filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data.csv";
+    std:: string filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_middle.csv";
     std::ifstream file(filePath);
 
     //check if file is open
@@ -361,40 +397,15 @@ Eigen::MatrixXd Controller::addDeadTime_rev(const Eigen::MatrixXd& dynamicMatrix
 }
 
 double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_position_D, int N_D, int nu_D, Eigen::MatrixXd A_D){
-    // std::cout << "setpoint: \n" << setpoint <<std::endl; 
-    // std::cout << "measured pos_D: " << measured_position_D <<std::endl; 
-    // std::cout << "y_hat_D: \n" << y_hat_D <<std::endl; 
-    
-    // PHI_D = measured_position(0) - y_hat_D(0); //difference between predicted pos (y_hat) and measured pos to obtain model inaccuracy.
-    // float tempconst = measured_position(0) - y_hat_D(0);
-    // std::cout << "PHI: \n" << tempconst <<std::endl; 
-    // PHI_D = Eigen::MatrixXd::Constant(N_D,1, tempconst);
-    // std::cout << "y_hat_D(0): " << y_hat_D(0)<<std::endl; 
     
     PHI_D = measured_position_D - y_hat_D(0); //PHI is the difference between actual model and predicted model
-    // std::cout << "y_hat_D_Pre: \n" << y_hat_D<<std::endl; 
-    
-    // std::cout << "PHI_D: " << PHI_D<<std::endl; 
-
     y_hat_D = y_hat_D + Eigen::MatrixXd::Constant(y_hat_D.rows(), y_hat_D.cols(), PHI_D); //add the constant PHI to each value of y_hat
-    // std::cout << "y_hat_D: \n" << y_hat_D<<std::endl; 
 
     errors_D = setpoint - y_hat_D; //error
-    // std::cout << "errors: \n" << errors_D <<std::endl; 
-
-    // std::cout << "du: \n" << du <<std::endl; 
-    // std::cout << "du_D: \n" << du_D <<std::endl; 
-
     delta_u_D = du_D*errors_D; //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) // delta_u is the control input step
-    // std::cout << "delta_u_D: \n" << delta_u_D <<std::endl; 
-    
-    // std::cout << "u_prev_D: \n" << u_prev_D <<std::endl; 
-
 
     u_D = u_prev_D + delta_u_D; //calculate control move vector
-    // std::cout << "u_D: " << u_D <<std::endl; 
-    
-    
+
     //add control input limits here
     for(int i = 0; i < nu_D; i++){
         if (u_D(i) > max_Voltage){
@@ -407,22 +418,11 @@ double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_positi
         
         delta_u_D(i) = u_D(i) - u_prev_D(i); //revaluate delta_u to account for the limits you've introduced to u
     }
-    // std::cout << "u_prev_D: " << u_prev_D <<std::endl; 
-    // std::cout << "delta_u_D_post: " << delta_u_D <<std::endl; 
-    // std::cout << "u_D_post: " << u_D <<std::endl; 
 
-
-    // std::cout << "u_D_post: " << u_D <<std::endl; 
-
-
-    // delta_u_D = u_D - u_prev_D; //revaluate delta_u to account for the limits you've introduced to u
-    // std::cout << "A_D: \n"<< A_D <<std::endl;
-    
-    // delta_y_D = A_D.col(0)*delta_u_D(0,0); //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
     delta_y_D = A_D*delta_u_D; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
 
     y_hat_D = y_hat_D + delta_y_D; // calculate new prediction for output
-    // std::cout << "y_hat_D_pre: \n" << y_hat_D<<std::endl; 
+
    
     // advance prediction horizon one step ahead (Shift all elements to the left). y_hat[i] = y_hat[i+1]
     // Shift the prediction horizon
@@ -432,90 +432,46 @@ double Controller::MPC_Control_D(Eigen::MatrixXd setpoint,double measured_positi
     }
     y_hat_D(y_hat_D.size() - 1) = y_hat_last_D;  // Setting the last element to first element
     
-    // std::cout << "y_hat_D_post: \n" << y_hat_D<<std::endl; 
-
     //update control move
     u_prev_D = u_D;
-    // std::cout << "u_prev: \n" << u_prev <<std::endl; 
 
-    // std::cout << "u_D(0): " << u_D(0) <<std::endl;
     return u_D(0);
 }
 
 double Controller::MPC_Control_P(Eigen::MatrixXd setpoint,double measured_position_P, int N_P, int nu_P, Eigen::MatrixXd A_P){
-    // std::cout << "setpoint: \n" << setpoint <<std::endl; 
-    // std::cout << "measured pos: \n" << measured_position <<std::endl; 
-    // std::cout<<" y_hat_P: "<< y_hat_P<<std::endl;
-    // std::cout<<" measured_position: "<< measured_position<<std::endl;
 
     PHI_P = measured_position_P - y_hat_P(0); //PHI is the difference between actual model and predicted model
 
     y_hat_P = y_hat_P + Eigen::MatrixXd::Constant(y_hat_P.rows(), y_hat_P.cols(), PHI_P); //add the constant PHI to each value of y_hat
 
     errors_P = setpoint - y_hat_P; //error
-    // std::cout << "setpoint: \n" << setpoint <<std::endl; 
-    // std::cout << "y_hat_P: \n" << y_hat_P(0) <<std::endl; 
-
-    // std::cout << "errors: " << errors_P <<std::endl; 
-
-    // std::cout << "du: \n" << du <<std::endl; 
-    // std::cout << "du_D: \n" << du_D <<std::endl; 
-
+  
     delta_u_P = du_P*errors_P; //Δu=((ATA+λI)^−1)AT(setpoint-y_hat) // delta_u is the control input step
 
     u_P = u_prev_P + delta_u_P; //calculate control move vector
-    // std::cout << "u: " << u_P<<std::endl; 
-    // std::cout << "delta_u_P: " << delta_u_P<<std::endl; 
-    
-    
+
     //add control input limits here
     for(int i = 0; i < nu_P; i++){
         if (u_P(i) > max_Voltage){
             u_P(i) = max_Voltage;
-            // delta_u_P(i) = u_P(i) - u_prev_P(i); //revaluate delta_u to account for the limits you've introduced to u
-
         }
         else if (u_P(i) < min_Voltage){
             u_P(i) = min_Voltage;
-        
         }
         delta_u_P(i) = u_P(i) - u_prev_P(i); //revaluate delta_u to account for the limits you've introduced to u
     }
-    // std::cout << "delta_u_P_post: " << delta_u_P<<std::endl; 
 
-
-    // std::cout << "u_P_post: " << u_P<<std::endl; 
-    
-    // delta_y_P = A_P*delta_u_P; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0)
-    
-    // delta_y_P = A_P.col(0)*delta_u_P(0,0); //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
-    
     delta_y_P = A_P*delta_u_P; //caluclate change in predicted output: y_1 - y_0 = (a_1)(Delta u_0). Multiply first col of A_D with first val of delta_u
-
-
-    // std::cout << "delta_y_P: " << delta_y_P <<std::endl; 
-    // std::cout << "y_hat_P: " << y_hat_P <<std::endl; 
-    
-    // std::cout << "delta_y_P: " << delta_y_P <<std::endl; 
    
     y_hat_P = y_hat_P + delta_y_P; // calculate new prediction for output
     // std::cout << "y_hat_P_post: " << y_hat_P <<std::endl; 
 
-   
-    // std::cout << "y_hat_P_preshift: \n" << y_hat_P <<std::endl; 
-    // advance prediction horizon one step ahead (Shift all elements to the left). y_hat[i] = y_hat[i+1]
     // Shift the prediction horizon
     double y_hat_last_P = y_hat_P(0);
     for (int i = 1; i < y_hat_P.size(); ++i) {
         y_hat_P(i - 1) = y_hat_P(i);
     }
     y_hat_P(y_hat_P.size() - 1) = y_hat_last_P;  // Setting the last element to first element
-    
-    // y_hat_D(y_hat_D.size() - 1) = y_hat_D(y_hat_D.size() - 2) + delta_y_D(delta_y_D.size() - 1);
-    //y_hat_D(y_hat_D.size() - 1) = y_hat_D(y_hat_D.size() - 2) + (A_D.row(y_hat_D.size() - 1) * delta_u_D)(0);
-    
-    // std::cout << "y_hat: \n" << y_hat <<std::endl; 
-    // std::cout << "y_hat_P_posthift: " << y_hat_P <<std::endl; 
 
     //update control move
     u_prev_P = u_P;
@@ -705,116 +661,108 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> C
 }
 
 
+void Controller::loadParameters(int finger_ID) {
+    ///load parameters from catkin_ws/src/bionic_hand/config
+    std::string base_param_path;
+
+    if (finger_ID == 2) { // Middle Finger
+        base_param_path = "middle_finger";
+    } else if (finger_ID == 3) { // Index Finger
+        base_param_path = "index_finger";
+    } else {
+        ROS_ERROR("Invalid finger ID provided");
+        return;
+    }
+
+    // Load PID values from parameter server
+    nh.getParam(base_param_path + "/M_joint/kp", kp_M);
+    nh.getParam(base_param_path + "/M_joint/ki", ki_M);
+    nh.getParam(base_param_path + "/M_joint/kd", kd_M);
+    nh.getParam(base_param_path + "/P_joint/kp", kp_P);
+    nh.getParam(base_param_path + "/P_joint/ki", ki_P);
+    nh.getParam(base_param_path + "/P_joint/kd", kd_P);
+    nh.getParam(base_param_path + "/D_joint/kp", kp_D);
+    nh.getParam(base_param_path + "/D_joint/ki", ki_D);
+    nh.getParam(base_param_path + "/D_joint/kd", kd_D);
+
+    // Load maximum joint angles
+    nh.getParam(base_param_path + "/joint_limits/max_M_joint_angle", max_M_joint_angle);
+    nh.getParam(base_param_path + "/joint_limits/max_P_joint_angle", max_P_joint_angle);
+    nh.getParam(base_param_path + "/joint_limits/max_D_joint_angle", max_D_joint_angle);
+
+    // Load MPC parameters
+    nh.getParam(base_param_path + "/forward/D_joint/N_D", N_D);
+    nh.getParam(base_param_path + "/forward/D_joint/nu_D", nu_D);
+    nh.getParam(base_param_path + "/forward/D_joint/deadTimeSteps_D", deadTimeSteps_D);
+    nh.getParam(base_param_path + "/forward/D_joint/LAMBDA_D", LAMBDA_D);
+    nh.getParam(base_param_path + "/forward/P_joint/N_P", N_P);
+    nh.getParam(base_param_path + "/forward/P_joint/nu_P", nu_P);
+    nh.getParam(base_param_path + "/forward/P_joint/deadTimeSteps_P", deadTimeSteps_P);
+    nh.getParam(base_param_path + "/forward/P_joint/LAMBDA_P", LAMBDA_P);
+    nh.getParam(base_param_path + "/forward/M_joint/N_M", N_M);
+    nh.getParam(base_param_path + "/forward/M_joint/nu_M", nu_M);
+    nh.getParam(base_param_path + "/forward/M_joint/deadTimeSteps_M", deadTimeSteps_M);
+    nh.getParam(base_param_path + "/forward/M_joint/LAMBDA_M", LAMBDA_M);
+
+    // Load reverse MPC parameters (if applicable)
+    nh.getParam(base_param_path + "/reverse/P_joint/N_P_rev", N_P_rev);
+    nh.getParam(base_param_path + "/reverse/P_joint/nu_P_rev", nu_P_rev);
+    nh.getParam(base_param_path + "/reverse/P_joint/deadTimeSteps_P_rev", deadTimeSteps_P_rev);
+    nh.getParam(base_param_path + "/reverse/P_joint/LAMBDA_P_rev", LAMBDA_P_rev);
+
+    // Load other parameters
+    nh.getParam(base_param_path + "/dt", dt);
+}
+
+
+void Controller::initializeMPCMatrices() {
+    // Initialize identity matrices for the model adjustment
+    I_Matrix_D = Eigen::MatrixXd::Identity(nu_D, nu_D);
+    I_Matrix_P = Eigen::MatrixXd::Identity(nu_P, nu_P);
+    I_Matrix_M = Eigen::MatrixXd::Identity(nu_M, nu_M);
+    I_Matrix_P_rev = Eigen::MatrixXd::Identity(nu_P_rev, nu_P_rev);
+
+    // Initialize control vectors and matrices for all joints
+    u_D = Eigen::MatrixXd::Zero(nu_D, 1);
+    errors_D = Eigen::MatrixXd::Zero(N_D, 1);
+    delta_u_D = Eigen::MatrixXd::Zero(nu_D, 1);
+    u_prev_D = Eigen::MatrixXd::Zero(nu_D, 1);
+    delta_y_D = Eigen::MatrixXd::Zero(N_D, 1);
+    y_hat_D = Eigen::MatrixXd::Zero(N_D, 1);
+
+    u_P = Eigen::MatrixXd::Zero(nu_P, 1);
+    errors_P = Eigen::MatrixXd::Zero(N_P, 1);
+    delta_u_P = Eigen::MatrixXd::Zero(nu_P, 1);
+    u_prev_P = Eigen::MatrixXd::Zero(nu_P, 1);
+    delta_y_P = Eigen::MatrixXd::Zero(N_P, 1);
+    y_hat_P = Eigen::MatrixXd::Zero(N_P, 1);
+
+    u_M = Eigen::MatrixXd::Zero(nu_M, 1);
+    errors_M = Eigen::MatrixXd::Zero(N_M, 1);
+    delta_u_M = Eigen::MatrixXd::Zero(nu_M, 1);
+    u_prev_M = Eigen::MatrixXd::Zero(nu_M, 1);
+    delta_y_M = Eigen::MatrixXd::Zero(N_M, 1);
+    y_hat_M = Eigen::MatrixXd::Zero(N_M, 1);
+
+    u_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1);
+    errors_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1);
+    delta_u_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1);
+    u_prev_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1);
+    delta_y_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1);
+    y_hat_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1);
+
+}
+
+
 //run method holding main control loop
 void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
-    // ros::Rate rate(10); // 10 Hz
+
     float dt_pid;
-    //Load PID values form parameter yaml file
-    nh.getParam("middle_finger/M_joint/kp", kp_M);
-    nh.getParam("middle_finger/M_joint/ki", ki_M);
-    nh.getParam("middle_finger/M_joint/kd", kd_M);
-    nh.getParam("middle_finger/P_joint/kp", kp_P);
-    nh.getParam("middle_finger/P_joint/ki", ki_P);
-    nh.getParam("middle_finger/P_joint/kd", kd_P);
-    nh.getParam("middle_finger/D_joint/kp", kp_D);
-    nh.getParam("middle_finger/D_joint/ki", ki_D);
-    nh.getParam("middle_finger/D_joint/kd", kd_D);
-    nh.getParam("middle_finger/dt", dt_pid);
+    loadParameters(finger_ID); //load finger parameters based on finger ID
 
-    ///Load max joint angles form parameter yaml file
-    nh.getParam("/middle_finger/joint_limits/max_M_joint_angle", max_M_joint_angle);
-    nh.getParam("/middle_finger/joint_limits/max_P_joint_angle", max_P_joint_angle);
-    nh.getParam("/middle_finger/joint_limits/max_D_joint_angle", max_D_joint_angle);
+    std::cout << "max_D_joint_angle----------------------------------------- "<< max_D_joint_angle <<std::endl;
+    initializeMPCMatrices(); // Initialize all MPC related matrices and vectors
 
-    //MPC
-    //MPC loat parameters from yaml file
-    nh.getParam("/middle_finger/forward/D_joint/N_D", N_D);
-    nh.getParam("/middle_finger/forward/D_joint/nu_D", nu_D);
-    nh.getParam("/middle_finger/forward/D_joint/deadTimeSteps_D", deadTimeSteps_D);
-    nh.getParam("/middle_finger/forward/D_joint/LAMBDA_D", LAMBDA_D);
-    nh.getParam("/middle_finger/forward/P_joint/N_P", N_P);
-    nh.getParam("/middle_finger/forward/P_joint/nu_P", nu_P);
-    nh.getParam("/middle_finger/forward/P_joint/deadTimeSteps_P", deadTimeSteps_P);
-    nh.getParam("/middle_finger/forward/P_joint/LAMBDA_P", LAMBDA_P);
-    nh.getParam("/middle_finger/forward/M_joint/N_M", N_M);
-    nh.getParam("/middle_finger/forward/M_joint/nu_M", nu_M);
-    nh.getParam("/middle_finger/forward/M_joint/deadTimeSteps_M", deadTimeSteps_M);
-    nh.getParam("/middle_finger/forward/M_joint/LAMBDA_M", LAMBDA_M);
-    //reverse
-    nh.getParam("/middle_finger/reverse/P_joint/N_P_rev", N_P_rev);
-    nh.getParam("/middle_finger/reverse/P_joint/nu_P_rev", nu_P_rev);
-    nh.getParam("/middle_finger/reverse/P_joint/deadTimeSteps_P_rev", deadTimeSteps_P_rev);
-    nh.getParam("/middle_finger/reverse/P_joint/LAMBDA_P_rev", LAMBDA_P_rev);
-
-    nh.getParam("/middle_finger/dt", dt);
-    // std::cout << "dt"<< dt <<std::endl;
-    
-
-    // std::cout << "nu_D"<< nu_D <<std::endl;
-    //forward
-    I_Matrix_D = Eigen::MatrixXd::Identity(nu_D, nu_D); // model adjustment (correciton) matrix
-    I_Matrix_P = Eigen::MatrixXd::Identity(nu_P, nu_P); // model adjustment (correciton) matrix
-    I_Matrix_M = Eigen::MatrixXd::Identity(nu_M, nu_M); // model adjustment (correciton) matrix
-
-    // float LAMBDA_D = 1.01; //penalty factor //decrasing this to 1.08 seems to slow down the rise time but also reduces overshoot
-    // float LAMBDA_P = 1.01; //penalty factor //decrasing this to 1.08 seems to slow down the rise time but also reduces overshoot
-    // float LAMBDA_M = 1.01; //penalty factor //decrasing this to 1.08 seems to slow down the rise time but also reduces overshoot
-
-    
-    //j_D parameters
-    u_D = Eigen::MatrixXd::Zero(nu_D, 1); // control input -  1 dimentional matrix filled with zeros
-    errors_D = Eigen::MatrixXd::Zero(N_D, 1); // error
-    delta_u_D = Eigen::MatrixXd::Zero(nu_D, 1); // delta_u
-    u_prev_D = Eigen::MatrixXd::Zero(nu_D, 1); // previous input
-    delta_y_D = Eigen::MatrixXd::Zero(N_D, 1); // change in predicted output
-    y_hat_D = Eigen::MatrixXd::Zero(N_D, 1); // pridected output matrix
-
-    //j_P parameters
-    u_P = Eigen::MatrixXd::Zero(nu_P, 1); // control input -  1 dimentional matrix filled with zeros
-    errors_P = Eigen::MatrixXd::Zero(N_P, 1); // error
-    delta_u_P = Eigen::MatrixXd::Zero(nu_P, 1); // delta_u
-    u_prev_P = Eigen::MatrixXd::Zero(nu_P, 1); // previous input
-    delta_y_P = Eigen::MatrixXd::Zero(N_P, 1); // change in predicted output
-    y_hat_P = Eigen::MatrixXd::Zero(N_P, 1); // pridected output matrix
-
-    //j_M parameters
-    u_M = Eigen::MatrixXd::Zero(nu_M, 1); // control input -  1 dimentional matrix filled with zeros
-    errors_M = Eigen::MatrixXd::Zero(N_M, 1); // error
-    delta_u_M = Eigen::MatrixXd::Zero(nu_M, 1); // delta_u
-    u_prev_M = Eigen::MatrixXd::Zero(nu_M, 1); // previous input
-    delta_y_M = Eigen::MatrixXd::Zero(N_M, 1); // change in predicted output
-    y_hat_M = Eigen::MatrixXd::Zero(N_M, 1); // pridected output matrix
-
-    //reverse
-
-    I_Matrix_P_rev = Eigen::MatrixXd::Identity(nu_P_rev, nu_P_rev); // model adjustment (correciton) matrix
-
-    //j_P parameters reverse
-    u_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1); // control input -  1 dimentional matrix filled with zeros
-    errors_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1); // error
-    delta_u_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1); // delta_u
-    u_prev_P_rev = Eigen::MatrixXd::Zero(nu_P_rev, 1); // previous input
-    delta_y_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1); // change in predicted output
-    y_hat_P_rev = Eigen::MatrixXd::Zero(N_P_rev, 1); // pridected output matrix
-
-
-
-    //MPC coeffecients
-    //forward
-    Eigen::MatrixXd A_D = Eigen::MatrixXd::Zero(N_D,nu_D);
-    Eigen::MatrixXd A_P = Eigen::MatrixXd::Zero(N_P,nu_P);
-    Eigen::MatrixXd A_M = Eigen::MatrixXd::Zero(N_M,nu_M);
-    //reverse
-    Eigen::MatrixXd A_P_rev = Eigen::MatrixXd::Zero(N_P_rev,nu_P_rev);
-
-
-    // double setpoint_Val = 45; //desired setpoint
-    // Eigen::MatrixXd setpoint = Eigen::MatrixXd::Constant(N,1,setpoint_Val); //matrix of setpoint values
-    //generate dynamic matrix A
-    //forward
-    Eigen::MatrixXd DM_j_D, DM_j_P, DM_j_M;
-    //reverse
-    Eigen::MatrixXd DM_j_P_rev;
 
     //gernerate the forward dynamic matracies
     std::tie(DM_j_D, DM_j_P, DM_j_M) = generate_Dynamic_Matrix(N_D, nu_D, N_P, nu_P, N_M, nu_M);
@@ -822,21 +770,10 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     A_P = DM_j_P;
     A_M = DM_j_M;
 
-    std::cout<<"A_D: " << A_D <<std::endl;
-    std::cout<<"A_P: " << A_P <<std::endl;
-    std::cout<<"A_M: " << A_M <<std::endl;
-
     //reverse
     // std::tie(DM_j_D, DM_j_P, DM_j_M) = generate_Dynamic_Matrix(N_D, nu_D, N_P, nu_P, N_M, nu_M);
     DM_j_P_rev = generate_Dynamic_Matrix_rev(1, 1, N_P_rev, nu_P_rev, 1, 1);
-
-    // A_D = DM_j_D;
     A_P_rev = DM_j_P_rev;
-    // A_M = DM_j_M;
-    // std::cout<<"A_D: " << A_D <<std::endl;
-    // std::cout<<"A_P_rev: " << A_P_rev <<std::endl;
-    // std::cout<<"A_M: " << A_M <<std::endl;
-
 
     //add dead time to dynamic matrix
     //forward
@@ -845,26 +782,11 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
     A_M = addDeadTime(A_M,  deadTimeSteps_M);
     A_P_rev = addDeadTime_rev(A_P_rev,  deadTimeSteps_P_rev);
 
-    // std::cout<<"A_D_Deadtime: " << A_D <<std::endl;
-    // std::cout<<"A_P_rev_deadtime: " << A_P_rev <<std::endl;
-
-    //reverse
-    //...... to be added
-
-
     //gernerate du matrix (offline matrix calculations)
     std::tie(du_D, du_P, du_M, du_P_rev) = generate_du_Matrix(N_D, nu_D,N_P, nu_P,N_M, nu_M, N_P_rev, nu_P_rev, A_D, A_P, A_M, A_P_rev, LAMBDA_D, LAMBDA_P, LAMBDA_M, LAMBDA_P_rev);
 
-    // std::cout<<"du_D: " << du_D <<std::endl;
-    // std::cout<<"du_P: " << du_P <<std::endl;
-    // std::cout<<"du_M: " << du_M <<std::endl;
-    // std::cout<<"du_P_rev: " << du_P_rev <<std::endl;
-
-    
-
-
-    max_pwm = 368.75;
-    min_pwm = -368.75;
+    max_pwm = 368.75; //use 5v max
+    min_pwm = -368.75; //use 5v max
 
     //initialize trajectory vectors
     Eigen::MatrixXd y_pdt_D = Eigen::MatrixXd::Zero(N_D, 1);

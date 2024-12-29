@@ -32,4 +32,39 @@ middle_finger:
                         nu_D_rev: 3
                         LAMBDA_D_rev: 35
                         deadTimeSteps_D_rev: 2
+
+index_finger:
+        dt: 0.03
+        forward:
+                M_joint:
+                        N_M: 53
+                        nu_M: 4
+                        LAMBDA_M: 1.1
+                        deadTimeSteps_M: 0
+                P_joint:
+                        N_P: 67
+                        nu_P: 3
+                        LAMBDA_P: 1.08
+                        deadTimeSteps_P: 0
+                D_joint:
+                        N_D: 45
+                        nu_D: 4
+                        LAMBDA_D: 1.1
+                        deadTimeSteps_D: 0
+        reverse:
+                M_joint:
+                        N_M_rev: 10
+                        nu_M_rev: 3
+                        LAMBDA_M_rev: 10
+                        deadTimeSteps_M_rev: 0
+                P_joint:
+                        N_P_rev: 10
+                        nu_P_rev: 3
+                        LAMBDA_P_rev:  10
+                        deadTimeSteps_P_rev: 2
+                D_joint:
+                        N_D_rev: 10
+                        nu_D_rev: 3
+                        LAMBDA_D_rev: 35
+                        deadTimeSteps_D_rev: 2
                 

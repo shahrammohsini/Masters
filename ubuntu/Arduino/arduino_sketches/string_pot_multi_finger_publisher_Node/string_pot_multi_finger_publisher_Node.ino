@@ -160,11 +160,11 @@ void loop() {
 //  Serial.println(j1_angle_middle);
 
 
-  Serial.print(j3_angle_middle);
+  Serial.print(j3_angle_index);
   Serial.print(",");
-  Serial.print(j2_angle_middle);
+  Serial.print(j2_angle_index);
   Serial.print(",");
-  Serial.print(j1_angle_middle);
+  Serial.print(j1_angle_index);
 
   Serial.print(",");
   current_time = millis() - start_time;

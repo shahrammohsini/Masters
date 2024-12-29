@@ -14,8 +14,10 @@ using namespace dynamixel;
 #define PROTOCOL_VERSION       2.0
 
 // Default settings
-#define DXL1_ID                1  // Motor 1 ID
+// #define DXL1_ID                1  // Motor 1 ID
 #define DXL2_ID                2  // Motor 2 ID
+#define DXL3_ID                3  // Motor 3 ID
+
 #define BAUDRATE               57600
 #define DEVICE_NAME            "/dev/ttyUSB0"
 
@@ -59,8 +61,10 @@ void disableTorque(uint8_t dxl_id) {
 // Clean up function for safe shutdown
 void shutdownMotors() {
     ROS_INFO("Shutting down motors...");
-    disableTorque(DXL1_ID);
+    // disableTorque(DXL1_ID);
     disableTorque(DXL2_ID);
+    disableTorque(DXL3_ID);
+
 
     // Close the port and delete objects
     if (portHandler) {
@@ -139,8 +143,10 @@ int main(int argc, char **argv) {
     ROS_INFO("Succeeded in setting the baudrate!");
 
     // Set operating mode to PWM for both motors
-    setOperatingMode(DXL1_ID, OPERATING_MODE_PWM);
+    // setOperatingMode(DXL1_ID, OPERATING_MODE_PWM);
     setOperatingMode(DXL2_ID, OPERATING_MODE_PWM);
+    setOperatingMode(DXL3_ID, OPERATING_MODE_PWM);
+
 
     // ROS subscriber for setting PWM
     ros::Subscriber set_pwm_sub = nh.subscribe("/Control_Command", 10, setPWMCallback);
