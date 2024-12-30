@@ -9,7 +9,7 @@ from dynamixel_sdk import *  # Uses Dynamixel SDK library
 # Protocol version and Dynamixel settings
 PROTOCOL_VERSION = 2.0
 BAUDRATE = 57600
-DEVICENAME = '/dev/ttyUSB0'  # Adjust for your system
+DEVICENAME = '/dev/ttyUSB1'  # Adjust for your system
 ADDR_PRO_GOAL_PWM = 100
 ADDR_PRO_GOAL_POSITION = 116
 ADDR_PRESENT_POSITION = 132
@@ -19,7 +19,7 @@ TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 PWM_MODE = 16
 POSITION_MODE = 3
-DXL_ID = 3  # Motor ID
+DXL_ID = 4  # Motor ID
 MAX_VOLTAGE = 12
 MAX_PWM = 885
 step_magnitude = -5  # Volts. -volts means cw rotation
@@ -171,7 +171,7 @@ def collect_data(ser, data_queue, stop_event):
             try:
                 line = ser.readline().decode('utf-8').strip()
                 if line:
-                    print(f"Raw line: {line}")
+                    # print(f"Raw line: {line}")
 
                     real_time = time.time() - start_time
                     line_data = line.split(',')
@@ -213,7 +213,11 @@ def main():
         enable_torque(DXL_ID)
 
         # Move to 65 degrees(starting pos) using PWM mode
-        target_position = 32  #desired pos in deg                                                                                                                                                                                                                                                                                                                                                                                                                                                               # Desired position in degrees
+        if DXL_ID == 4: #thumb finger
+            target_position = 2  #desired pos in deg 
+        else:
+            target_position = 32  #desired pos in deg 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              # Desired position in degrees
         move_to_position_with_pwm(target_position, DXL_ID, max_pwm=300, tolerance=1)
 
         # Stop motor
@@ -227,7 +231,7 @@ def main():
         times, voltages, pwms = generate_step_input(total_time, dt, step_magnitude, MAX_PWM, MAX_VOLTAGE)
 
         # Initialize Arduino serial communication
-        ser = serial.Serial('/dev/ttyACM0', 57600)
+        ser = serial.Serial('/dev/ttyACM1', 57600)
         time.sleep(2)
         ser.flushInput()  # Flush the input buffer
         time.sleep(0.5)  # Allow time for Arduino to reset
@@ -240,12 +244,18 @@ def main():
 
         data_thread.start()
 
+         
         if DXL_ID == 2: #middle finger
             max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
             min_motor_pos = convert_deg_pos_to_raw(11) #11 for middle
         elif DXL_ID == 3: #index finger
             max_motor_pos = convert_deg_pos_to_raw(33) #max motor pos in deg before damage
             min_motor_pos = convert_deg_pos_to_raw(20) #11 for middle
+        elif DXL_ID == 4: #thumb
+            max_motor_pos = convert_deg_pos_to_raw(11) #max motor pos in deg before damage
+            min_motor_pos = convert_deg_pos_to_raw(1.8) #11 for middle
+        else:
+            print("Error: unknown motor ID")
 
 
         # Main control loop
@@ -257,7 +267,13 @@ def main():
                 print("Max pos reached: ", convert_raw_pos_to_deg(current_position))
                 break
 
-            bulk_write_pwm(DXL_ID, pwm)
+            if DXL_ID == 4: #thumb finger
+                bulk_write_pwm(DXL_ID, -pwm) #thumb closes when motor turns ccw
+
+            else:
+                bulk_write_pwm(DXL_ID, pwm)
+
+
             print(f"Set PWM to {pwm} -- Current pos: ", convert_raw_pos_to_deg(current_position))
             time.sleep(dt)
 
@@ -276,6 +292,9 @@ def main():
 
         elif DXL_ID == 3: #index finger
             save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_index.csv')
+        
+        elif DXL_ID == 4: #thumb finger
+            save_data_to_csv(data, '/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_thumb.csv')
             
 
 

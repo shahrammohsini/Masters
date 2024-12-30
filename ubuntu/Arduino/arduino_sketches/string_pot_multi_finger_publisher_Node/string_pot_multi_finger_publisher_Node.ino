@@ -164,8 +164,8 @@ void loop() {
 
   // ---------------- Thumb Computation ----------------
   int sensorValue_thumb = analogRead(A2);
-  Serial.print("------sensorValue_thumb: ");
-  Serial.print(sensorValue_thumb);
+//  Serial.print("------sensorValue_thumb: ");
+//  Serial.print(sensorValue_thumb);
   
   sensorValue_thumb -= thumbConfig.offset; // offset_thumb
   if (sensorValue_thumb < 0) { // Remove negative values
@@ -173,21 +173,44 @@ void loop() {
   }
 
   double full_string_length_thumb = get_length(sensorValue_thumb, thumbConfig.cm_travled);
-  Serial.print(" full_length_thumb: ");
-  Serial.print(full_string_length_thumb);
-  Serial.print(" ");
+//  Serial.print(" full_length_thumb: ");
+//  Serial.print(full_string_length_thumb);
+//  Serial.print(" ");
   
   double j3_angle_thumb = 0.0, j2_angle_thumb = 0.0, j1_angle_thumb = 0.0;
   // Compute joint angles for the thumb
   computeFingerJoints(full_string_length_thumb, thumbConfig, j1_angle_thumb, j2_angle_thumb, j3_angle_thumb);
   
   // Print joint angles for the thumb
-  Serial.print("   Thumb - J3: ");
+//  Serial.print("   Thumb - J3: ");
+//  Serial.print(j3_angle_thumb);
+//  Serial.print(" J2: ");
+//  Serial.print(j2_angle_thumb);
+//  Serial.print(" J1: ");
+//  Serial.println(j1_angle_thumb);
+
+
+//Open loop data collection
+// uncomment whichever finger open loop data is being collected for
+
+
+//  Serial.print(j3_angle_index);
+//  Serial.print(",");
+//  Serial.print(j2_angle_index);
+//  Serial.print(",");
+//  Serial.print(j1_angle_index);
+
   Serial.print(j3_angle_thumb);
-  Serial.print(" J2: ");
+  Serial.print(",");
   Serial.print(j2_angle_thumb);
-  Serial.print(" J1: ");
-  Serial.println(j1_angle_thumb);
+  Serial.print(",");
+  Serial.print(j1_angle_thumb);
+
+
+  Serial.print(",");
+  current_time = millis() - start_time;
+  Serial.println(current_time/1000.0);
+
 
   // ---------------- Populate FingerPos Message ----------------
   finger_positions.header.stamp = nh.now(); // Set the timestamp to current time

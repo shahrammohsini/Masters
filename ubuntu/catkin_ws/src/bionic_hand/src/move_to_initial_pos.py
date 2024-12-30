@@ -9,7 +9,7 @@ from dynamixel_sdk import *  # Uses Dynamixel SDK library
 # Protocol version and Dynamixel settings
 PROTOCOL_VERSION = 2.0
 BAUDRATE = 57600
-DEVICENAME = '/dev/ttyUSB0'  # Adjust for your system
+DEVICENAME = '/dev/ttyUSB1'  # Adjust for your system
 ADDR_PRO_GOAL_PWM = 100
 ADDR_PRO_GOAL_POSITION = 116
 ADDR_PRESENT_POSITION = 132
@@ -19,7 +19,7 @@ TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 PWM_MODE = 16
 POSITION_MODE = 3
-DXL_ID = 3  # Motor ID
+DXL_ID = 4  # Motor ID
 MAX_VOLTAGE = 12
 MAX_PWM = 885
 step_magnitude = -5  # Volts. -volts means cw rotation
@@ -213,7 +213,11 @@ def main():
         enable_torque(DXL_ID)
 
         # Move to 65 degrees(starting pos) using PWM mode
-        target_position = 32  #desired pos in deg 32                                                                                                                                                                                                                                                                                                                                                                                                                                                              # Desired position in degrees
+        if DXL_ID == 4: 
+            target_position = 2.32 #desired pos in deg 2.32  //  
+        else:
+            target_position = 32  #desired pos in deg 32  //  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                # Desired position in degrees
         move_to_position_with_pwm(target_position, DXL_ID, max_pwm=300, tolerance=1)
 
         # Stop motor
