@@ -8,3 +8,8 @@ index_finger:
     max_M_joint_angle: 140
     max_P_joint_angle: 56
     max_D_joint_angle: 102
+thumb_finger:
+  joint_limits:
+    max_M_joint_angle: 107
+    max_P_joint_angle: 33
+    max_D_joint_angle: 102 #ignore this parameter for thumb

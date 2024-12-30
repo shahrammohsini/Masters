@@ -1,3 +1,4 @@
 std_msgs/Header header
 FingerJoints index
 FingerJoints middle
+FingerJoints thumb

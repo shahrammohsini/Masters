@@ -5,4 +5,6 @@
           INDEX
           MIDDLE-VAL
           MIDDLE
+          THUMB-VAL
+          THUMB
 ))

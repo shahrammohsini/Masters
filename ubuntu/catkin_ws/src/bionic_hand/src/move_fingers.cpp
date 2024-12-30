@@ -15,11 +15,12 @@ using namespace dynamixel;
 
 // Default settings
 // #define DXL1_ID                1  // Motor 1 ID
-#define DXL2_ID                2  // Motor 2 ID
-#define DXL3_ID                3  // Motor 3 ID
+#define DXL2_ID                2  // Motor 2 ID middle finger
+#define DXL3_ID                3  // Motor 3 ID index finger
+#define DXL4_ID                4  // Motor 4 ID thumb finger
 
 #define BAUDRATE               57600
-#define DEVICE_NAME            "/dev/ttyUSB0"
+#define DEVICE_NAME            "/dev/ttyUSB1"
 
 // Operating mode values
 #define OPERATING_MODE_PWM     16
@@ -64,6 +65,8 @@ void shutdownMotors() {
     // disableTorque(DXL1_ID);
     disableTorque(DXL2_ID);
     disableTorque(DXL3_ID);
+    disableTorque(DXL4_ID);
+
 
 
     // Close the port and delete objects
@@ -146,6 +149,8 @@ int main(int argc, char **argv) {
     // setOperatingMode(DXL1_ID, OPERATING_MODE_PWM);
     setOperatingMode(DXL2_ID, OPERATING_MODE_PWM);
     setOperatingMode(DXL3_ID, OPERATING_MODE_PWM);
+    setOperatingMode(DXL4_ID, OPERATING_MODE_PWM);
+
 
 
     // ROS subscriber for setting PWM

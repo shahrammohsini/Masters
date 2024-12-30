@@ -66,6 +66,11 @@ void Controller::fingerPositionCallback(const bionic_hand::FingerPos& msg){
             theta_P = position.middle.theta_P;
             theta_D = position.middle.theta_D;
             break;
+        case 4: //thumb finger
+            theta_M = position.thumb.theta_M;
+            theta_P = position.thumb.theta_P;
+            theta_D = position.thumb.theta_D;
+            break;
         }
     }
 
@@ -115,11 +120,18 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
 
     //open file
     std:: string filePath;
-    if (finger_ID == 2) { // Middle Finger
-        filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_middle.csv";
-    } else if (finger_ID == 3) { // Index Finger
-        filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_index.csv";
-    }
+    switch (finger_ID)
+        {
+        case 3: //index finger
+            filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_index.csv";
+            break;
+        case 2: //middle finger
+            filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_middle.csv";
+            break;
+        case 4: //thumb finger
+            filePath = "/home/shahram/Documents/GitHub/Masters/ubuntu/catkin_ws/src/bionic_hand/src/Data/open_loop_data_thumb.csv";
+            break;
+        }
     std::ifstream file(filePath);
 
     //check if file is open
@@ -172,65 +184,103 @@ std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> Controller::genera
         }
      }
     std::cout << "Matrix_D: \n" << DM_j_D <<std::endl;
+
     
     //Dynamic Matrix P
-    if (finger_ID == 2) { // Middle Finger
-        DM_j_P.setZero(); //populate with zeros
-        // DM_j_P.setConstant(bias);
-        //populate dynamic matrix P
-        for (int i =0; i < control_horizon_P; i++) { //create columns
-            for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-                const auto& d = dataset[j+54]; //d holds the current row adding +6 to start at the point where M joint moves
-                DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-                // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+    switch (finger_ID)
+        {
+        case 3: //index finger
+            DM_j_P.setZero(); //populate with zeros
+            // DM_j_P.setConstant(bias);
+            //populate dynamic matrix P
+            for (int i =0; i < control_horizon_P; i++) { //create columns
+                for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                    const auto& d = dataset[j+47]; //d holds the current row adding +6 to start at the point where M joint moves
+                    DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+                }
             }
-        }
-    }
-    else if(finger_ID == 3){ //index finger
-        DM_j_P.setZero(); //populate with zeros
-        // DM_j_P.setConstant(bias);
-        //populate dynamic matrix P
-        for (int i =0; i < control_horizon_P; i++) { //create columns
-            for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
-                const auto& d = dataset[j+47]; //d holds the current row adding +6 to start at the point where M joint moves
-                DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-                // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+            break;
+        case 2: //middle finger
+            DM_j_P.setZero(); //populate with zeros
+            // DM_j_P.setConstant(bias);
+            //populate dynamic matrix P
+            for (int i =0; i < control_horizon_P; i++) { //create columns
+                for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                    const auto& d = dataset[j+54]; //d holds the current row adding +6 to start at the point where M joint moves
+                    DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+                }
             }
+            break;
+
+        case 4: //thumb finger
+            DM_j_P.setZero(); //populate with zeros
+            // DM_j_P.setConstant(bias);
+            //populate dynamic matrix P
+            for (int i =0; i < control_horizon_P; i++) { //create columns
+                for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                    const auto& d = dataset[j+92]; //d holds the current row adding +6 to start at the point where M joint moves
+                    DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+
+                }
+            }
+            break;
         }
-    }
+
     std::cout << "Matrix_P: \n" << DM_j_P <<std::endl;
 
 
+
+
     //Dynamic Matrix M
-    if (finger_ID == 2) { // Middle Finger
-        DM_j_M.setZero(); //populate with zeros
-        // DM_j_M.setConstant(bias);
-        //populate dynamic matrix M
-        for (int i =0; i < control_horizon_M; i++) { //create columns
-            for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
-                const auto& d = dataset[j + 158]; //d holds the current row.
-                DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-                // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+    switch (finger_ID)
+        {
+        case 3: //index finger
+            DM_j_M.setZero(); //populate with zeros
+            // DM_j_M.setConstant(bias);
+            //populate dynamic matrix M
+            for (int i =0; i < control_horizon_M; i++) { //create columns
+                for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
+                    const auto& d = dataset[j + 115]; //d holds the current row.
+                    DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+                }
             }
-        }
-    }
-    else if(finger_ID == 3){ //index finger
-        DM_j_M.setZero(); //populate with zeros
-        // DM_j_M.setConstant(bias);
-        //populate dynamic matrix M
-        for (int i =0; i < control_horizon_M; i++) { //create columns
-            for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
-                const auto& d = dataset[j + 115]; //d holds the current row.
-                DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
-                // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+            break;
+        case 2: //middle finger
+            DM_j_M.setZero(); //populate with zeros
+            // DM_j_M.setConstant(bias);
+            //populate dynamic matrix M
+            for (int i =0; i < control_horizon_M; i++) { //create columns
+                for(int j=0; j < prediction_horizon_M - i; j++){ //create rows
+                    const auto& d = dataset[j + 158]; //d holds the current row.
+                    DM_j_M(i + j, i) = ((d.theta_M_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_M(i + j, i) < bias) {DM_j_M(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
 
+                }
             }
-        }
-    }
+            break;
 
+        case 4: //thumb finger
+            DM_j_P.setZero(); //populate with zeros
+            // DM_j_P.setConstant(bias);
+            //populate dynamic matrix P
+            for (int i =0; i < control_horizon_P; i++) { //create columns
+                for(int j=0; j < prediction_horizon_P - i; j++){ //create rows
+                    const auto& d = dataset[j+5]; //d holds the current row adding +6 to start at the point where M joint moves
+                    DM_j_P(i + j, i) = ((d.theta_P_joint)/normalize_val); //fill current row for current column. Also, normalize the angle
+                    // if(DM_j_P(i + j, i) < bias) {DM_j_P(i + j, i) = bias;} //The motor does not move bellow 4 volts so to normalize we have to add 4 volts to values bellow 4 volts
+
+                }
+            }
+            break;
+        }
+    
     std::cout << "Matrix_M: \n" << DM_j_M <<std::endl;
 
     return std::make_tuple(DM_j_D, DM_j_P, DM_j_M);
@@ -665,15 +715,20 @@ void Controller::loadParameters(int finger_ID) {
     ///load parameters from catkin_ws/src/bionic_hand/config
     std::string base_param_path;
 
-    if (finger_ID == 2) { // Middle Finger
-        base_param_path = "middle_finger";
-    } else if (finger_ID == 3) { // Index Finger
-        base_param_path = "index_finger";
-    } else {
-        ROS_ERROR("Invalid finger ID provided");
-        return;
-    }
+    switch (finger_ID)
+        {
+        case 3: //index finger
+            base_param_path = "index_finger";
 
+            break;
+        case 2: //middle finger
+            base_param_path = "middle_finger";
+
+            break;
+        case 4: //thumb finger
+            base_param_path = "thumb_finger";
+            break;
+        }
     // Load PID values from parameter server
     nh.getParam(base_param_path + "/M_joint/kp", kp_M);
     nh.getParam(base_param_path + "/M_joint/ki", ki_M);
@@ -758,6 +813,8 @@ void Controller::initializeMPCMatrices() {
 void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
     float dt_pid;
+    std::cout <<"id -----------------------: " << finger_ID <<std::endl;
+
     loadParameters(finger_ID); //load finger parameters based on finger ID
 
     std::cout << "max_D_joint_angle----------------------------------------- "<< max_D_joint_angle <<std::endl;
@@ -891,7 +948,13 @@ void Controller::run(float setpoint_M, float setpoint_P, float setpoint_D) {
 
         //send u(0) to plant
         // std::cout <<"control_effor voltage: " << control_effort <<std::endl;
-        control_effort = convert_Voltage_to_PWM(-control_effort); //convert from voltage to PWM
+        if (finger_ID == 4){ //thumb closes when motor truns CCW. Other finger CW
+            control_effort = convert_Voltage_to_PWM(control_effort); //convert from voltage to PWM
+
+        }
+        else{
+            control_effort = convert_Voltage_to_PWM(-control_effort); //convert from voltage to PWM
+        }
 
         // std::cout <<"control_effor pwm: " << -control_effort <<std::endl;
         // control_effort = 50;

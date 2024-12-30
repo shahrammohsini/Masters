@@ -23,6 +23,7 @@ class FingerPos {
       this.header = null;
       this.index = null;
       this.middle = null;
+      this.thumb = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -43,6 +44,12 @@ class FingerPos {
       else {
         this.middle = new FingerJoints();
       }
+      if (initObj.hasOwnProperty('thumb')) {
+        this.thumb = initObj.thumb
+      }
+      else {
+        this.thumb = new FingerJoints();
+      }
     }
   }
 
@@ -54,6 +61,8 @@ class FingerPos {
     bufferOffset = FingerJoints.serialize(obj.index, buffer, bufferOffset);
     // Serialize message field [middle]
     bufferOffset = FingerJoints.serialize(obj.middle, buffer, bufferOffset);
+    // Serialize message field [thumb]
+    bufferOffset = FingerJoints.serialize(obj.thumb, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -67,13 +76,15 @@ class FingerPos {
     data.index = FingerJoints.deserialize(buffer, bufferOffset);
     // Deserialize message field [middle]
     data.middle = FingerJoints.deserialize(buffer, bufferOffset);
+    // Deserialize message field [thumb]
+    data.thumb = FingerJoints.deserialize(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    return length + 48;
+    return length + 72;
   }
 
   static datatype() {
@@ -83,7 +94,7 @@ class FingerPos {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'df9ec1211fc81402f32ad35554d98a85';
+    return 'ddb23831c46fbe010de19d051a0b3b5e';
   }
 
   static messageDefinition() {
@@ -92,6 +103,7 @@ class FingerPos {
     std_msgs/Header header
     FingerJoints index
     FingerJoints middle
+    FingerJoints thumb
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -141,6 +153,13 @@ class FingerPos {
     }
     else {
       resolved.middle = new FingerJoints()
+    }
+
+    if (msg.thumb !== undefined) {
+      resolved.thumb = FingerJoints.Resolve(msg.thumb)
+    }
+    else {
+      resolved.thumb = new FingerJoints()
     }
 
     return resolved;
