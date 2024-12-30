@@ -20,11 +20,14 @@ namespace bionic_hand
       _index_type index;
       typedef bionic_hand::FingerJoints _middle_type;
       _middle_type middle;
+      typedef bionic_hand::FingerJoints _thumb_type;
+      _thumb_type thumb;
 
     FingerPos():
       header(),
       index(),
-      middle()
+      middle(),
+      thumb()
     {
     }
 
@@ -34,6 +37,7 @@ namespace bionic_hand
       offset += this->header.serialize(outbuffer + offset);
       offset += this->index.serialize(outbuffer + offset);
       offset += this->middle.serialize(outbuffer + offset);
+      offset += this->thumb.serialize(outbuffer + offset);
       return offset;
     }
 
@@ -43,11 +47,12 @@ namespace bionic_hand
       offset += this->header.deserialize(inbuffer + offset);
       offset += this->index.deserialize(inbuffer + offset);
       offset += this->middle.deserialize(inbuffer + offset);
+      offset += this->thumb.deserialize(inbuffer + offset);
      return offset;
     }
 
     virtual const char * getType() override { return "bionic_hand/FingerPos"; };
-    virtual const char * getMD5() override { return "df9ec1211fc81402f32ad35554d98a85"; };
+    virtual const char * getMD5() override { return "ddb23831c46fbe010de19d051a0b3b5e"; };
 
   };
 

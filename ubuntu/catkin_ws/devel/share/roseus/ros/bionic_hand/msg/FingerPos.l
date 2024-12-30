@@ -16,7 +16,7 @@
 
 (defclass bionic_hand::FingerPos
   :super ros::object
-  :slots (_header _index _middle ))
+  :slots (_header _index _middle _thumb ))
 
 (defmethod bionic_hand::FingerPos
   (:init
@@ -24,11 +24,13 @@
     ((:header __header) (instance std_msgs::Header :init))
     ((:index __index) (instance bionic_hand::FingerJoints :init))
     ((:middle __middle) (instance bionic_hand::FingerJoints :init))
+    ((:thumb __thumb) (instance bionic_hand::FingerJoints :init))
     )
    (send-super :init)
    (setq _header __header)
    (setq _index __index)
    (setq _middle __middle)
+   (setq _thumb __thumb)
    self)
   (:header
    (&rest __header)
@@ -51,6 +53,13 @@
      (progn
        (if __middle (setq _middle (car __middle)))
        _middle)))
+  (:thumb
+   (&rest __thumb)
+   (if (keywordp (car __thumb))
+       (send* _thumb __thumb)
+     (progn
+       (if __thumb (setq _thumb (car __thumb)))
+       _thumb)))
   (:serialization-length
    ()
    (+
@@ -60,6 +69,8 @@
     (send _index :serialization-length)
     ;; bionic_hand/FingerJoints _middle
     (send _middle :serialization-length)
+    ;; bionic_hand/FingerJoints _thumb
+    (send _thumb :serialization-length)
     ))
   (:serialize
    (&optional strm)
@@ -71,6 +82,8 @@
        (send _index :serialize s)
      ;; bionic_hand/FingerJoints _middle
        (send _middle :serialize s)
+     ;; bionic_hand/FingerJoints _thumb
+       (send _thumb :serialize s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -81,16 +94,19 @@
      (send _index :deserialize buf ptr-) (incf ptr- (send _index :serialization-length))
    ;; bionic_hand/FingerJoints _middle
      (send _middle :deserialize buf ptr-) (incf ptr- (send _middle :serialization-length))
+   ;; bionic_hand/FingerJoints _thumb
+     (send _thumb :deserialize buf ptr-) (incf ptr- (send _thumb :serialization-length))
    ;;
    self)
   )
 
-(setf (get bionic_hand::FingerPos :md5sum-) "df9ec1211fc81402f32ad35554d98a85")
+(setf (get bionic_hand::FingerPos :md5sum-) "ddb23831c46fbe010de19d051a0b3b5e")
 (setf (get bionic_hand::FingerPos :datatype-) "bionic_hand/FingerPos")
 (setf (get bionic_hand::FingerPos :definition-)
       "std_msgs/Header header
 FingerJoints index
 FingerJoints middle
+FingerJoints thumb
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -116,6 +132,6 @@ float64 theta_D
 
 
 
-(provide :bionic_hand/FingerPos "df9ec1211fc81402f32ad35554d98a85")
+(provide :bionic_hand/FingerPos "ddb23831c46fbe010de19d051a0b3b5e")
 
 

@@ -21,6 +21,11 @@
     :reader middle
     :initarg :middle
     :type bionic_hand-msg:FingerJoints
+    :initform (cl:make-instance 'bionic_hand-msg:FingerJoints))
+   (thumb
+    :reader thumb
+    :initarg :thumb
+    :type bionic_hand-msg:FingerJoints
     :initform (cl:make-instance 'bionic_hand-msg:FingerJoints)))
 )
 
@@ -46,17 +51,24 @@
 (cl:defmethod middle-val ((m <FingerPos>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader bionic_hand-msg:middle-val is deprecated.  Use bionic_hand-msg:middle instead.")
   (middle m))
+
+(cl:ensure-generic-function 'thumb-val :lambda-list '(m))
+(cl:defmethod thumb-val ((m <FingerPos>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader bionic_hand-msg:thumb-val is deprecated.  Use bionic_hand-msg:thumb instead.")
+  (thumb m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <FingerPos>) ostream)
   "Serializes a message object of type '<FingerPos>"
   (roslisp-msg-protocol:serialize (cl:slot-value msg 'header) ostream)
   (roslisp-msg-protocol:serialize (cl:slot-value msg 'index) ostream)
   (roslisp-msg-protocol:serialize (cl:slot-value msg 'middle) ostream)
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'thumb) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <FingerPos>) istream)
   "Deserializes a message object of type '<FingerPos>"
   (roslisp-msg-protocol:deserialize (cl:slot-value msg 'header) istream)
   (roslisp-msg-protocol:deserialize (cl:slot-value msg 'index) istream)
   (roslisp-msg-protocol:deserialize (cl:slot-value msg 'middle) istream)
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'thumb) istream)
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<FingerPos>)))
@@ -67,21 +79,22 @@
   "bionic_hand/FingerPos")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<FingerPos>)))
   "Returns md5sum for a message object of type '<FingerPos>"
-  "df9ec1211fc81402f32ad35554d98a85")
+  "ddb23831c46fbe010de19d051a0b3b5e")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'FingerPos)))
   "Returns md5sum for a message object of type 'FingerPos"
-  "df9ec1211fc81402f32ad35554d98a85")
+  "ddb23831c46fbe010de19d051a0b3b5e")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<FingerPos>)))
   "Returns full string definition for message of type '<FingerPos>"
-  (cl:format cl:nil "std_msgs/Header header~%FingerJoints index~%FingerJoints middle~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: bionic_hand/FingerJoints~%float64 theta_M~%float64 theta_P~%float64 theta_D~%~%"))
+  (cl:format cl:nil "std_msgs/Header header~%FingerJoints index~%FingerJoints middle~%FingerJoints thumb~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: bionic_hand/FingerJoints~%float64 theta_M~%float64 theta_P~%float64 theta_D~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'FingerPos)))
   "Returns full string definition for message of type 'FingerPos"
-  (cl:format cl:nil "std_msgs/Header header~%FingerJoints index~%FingerJoints middle~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: bionic_hand/FingerJoints~%float64 theta_M~%float64 theta_P~%float64 theta_D~%~%"))
+  (cl:format cl:nil "std_msgs/Header header~%FingerJoints index~%FingerJoints middle~%FingerJoints thumb~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: bionic_hand/FingerJoints~%float64 theta_M~%float64 theta_P~%float64 theta_D~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <FingerPos>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'index))
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'middle))
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'thumb))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <FingerPos>))
   "Converts a ROS message object to a list"
@@ -89,4 +102,5 @@
     (cl:cons ':header (header msg))
     (cl:cons ':index (index msg))
     (cl:cons ':middle (middle msg))
+    (cl:cons ':thumb (thumb msg))
 ))

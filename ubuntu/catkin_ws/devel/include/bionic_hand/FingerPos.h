@@ -18,6 +18,7 @@
 #include <std_msgs/Header.h>
 #include <bionic_hand/FingerJoints.h>
 #include <bionic_hand/FingerJoints.h>
+#include <bionic_hand/FingerJoints.h>
 
 namespace bionic_hand
 {
@@ -29,12 +30,14 @@ struct FingerPos_
   FingerPos_()
     : header()
     , index()
-    , middle()  {
+    , middle()
+    , thumb()  {
     }
   FingerPos_(const ContainerAllocator& _alloc)
     : header(_alloc)
     , index(_alloc)
-    , middle(_alloc)  {
+    , middle(_alloc)
+    , thumb(_alloc)  {
   (void)_alloc;
     }
 
@@ -48,6 +51,9 @@ struct FingerPos_
 
    typedef  ::bionic_hand::FingerJoints_<ContainerAllocator>  _middle_type;
   _middle_type middle;
+
+   typedef  ::bionic_hand::FingerJoints_<ContainerAllocator>  _thumb_type;
+  _thumb_type thumb;
 
 
 
@@ -80,7 +86,8 @@ bool operator==(const ::bionic_hand::FingerPos_<ContainerAllocator1> & lhs, cons
 {
   return lhs.header == rhs.header &&
     lhs.index == rhs.index &&
-    lhs.middle == rhs.middle;
+    lhs.middle == rhs.middle &&
+    lhs.thumb == rhs.thumb;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -137,12 +144,12 @@ struct MD5Sum< ::bionic_hand::FingerPos_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "df9ec1211fc81402f32ad35554d98a85";
+    return "ddb23831c46fbe010de19d051a0b3b5e";
   }
 
   static const char* value(const ::bionic_hand::FingerPos_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xdf9ec1211fc81402ULL;
-  static const uint64_t static_value2 = 0xf32ad35554d98a85ULL;
+  static const uint64_t static_value1 = 0xddb23831c46fbe01ULL;
+  static const uint64_t static_value2 = 0x0de19d051a0b3b5eULL;
 };
 
 template<class ContainerAllocator>
@@ -164,6 +171,7 @@ struct Definition< ::bionic_hand::FingerPos_<ContainerAllocator> >
     return "std_msgs/Header header\n"
 "FingerJoints index\n"
 "FingerJoints middle\n"
+"FingerJoints thumb\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
 "# Standard metadata for higher-level stamped data types.\n"
@@ -206,6 +214,7 @@ namespace serialization
       stream.next(m.header);
       stream.next(m.index);
       stream.next(m.middle);
+      stream.next(m.thumb);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -233,6 +242,9 @@ struct Printer< ::bionic_hand::FingerPos_<ContainerAllocator> >
     s << indent << "middle: ";
     s << std::endl;
     Printer< ::bionic_hand::FingerJoints_<ContainerAllocator> >::stream(s, indent + "  ", v.middle);
+    s << indent << "thumb: ";
+    s << std::endl;
+    Printer< ::bionic_hand::FingerJoints_<ContainerAllocator> >::stream(s, indent + "  ", v.thumb);
   }
 };
 

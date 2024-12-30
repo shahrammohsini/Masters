@@ -10,12 +10,13 @@ import bionic_hand.msg
 import std_msgs.msg
 
 class FingerPos(genpy.Message):
-  _md5sum = "df9ec1211fc81402f32ad35554d98a85"
+  _md5sum = "ddb23831c46fbe010de19d051a0b3b5e"
   _type = "bionic_hand/FingerPos"
   _has_header = True  # flag to mark the presence of a Header object
   _full_text = """std_msgs/Header header
 FingerJoints index
 FingerJoints middle
+FingerJoints thumb
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -37,8 +38,8 @@ MSG: bionic_hand/FingerJoints
 float64 theta_M
 float64 theta_P
 float64 theta_D"""
-  __slots__ = ['header','index','middle']
-  _slot_types = ['std_msgs/Header','bionic_hand/FingerJoints','bionic_hand/FingerJoints']
+  __slots__ = ['header','index','middle','thumb']
+  _slot_types = ['std_msgs/Header','bionic_hand/FingerJoints','bionic_hand/FingerJoints','bionic_hand/FingerJoints']
 
   def __init__(self, *args, **kwds):
     """
@@ -48,7 +49,7 @@ float64 theta_D"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,index,middle
+       header,index,middle,thumb
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -63,10 +64,13 @@ float64 theta_D"""
         self.index = bionic_hand.msg.FingerJoints()
       if self.middle is None:
         self.middle = bionic_hand.msg.FingerJoints()
+      if self.thumb is None:
+        self.thumb = bionic_hand.msg.FingerJoints()
     else:
       self.header = std_msgs.msg.Header()
       self.index = bionic_hand.msg.FingerJoints()
       self.middle = bionic_hand.msg.FingerJoints()
+      self.thumb = bionic_hand.msg.FingerJoints()
 
   def _get_types(self):
     """
@@ -89,7 +93,7 @@ float64 theta_D"""
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self
-      buff.write(_get_struct_6d().pack(_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D))
+      buff.write(_get_struct_9d().pack(_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D, _x.thumb.theta_M, _x.thumb.theta_P, _x.thumb.theta_D))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -107,6 +111,8 @@ float64 theta_D"""
         self.index = bionic_hand.msg.FingerJoints()
       if self.middle is None:
         self.middle = bionic_hand.msg.FingerJoints()
+      if self.thumb is None:
+        self.thumb = bionic_hand.msg.FingerJoints()
       end = 0
       _x = self
       start = end
@@ -123,8 +129,8 @@ float64 theta_D"""
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 48
-      (_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D,) = _get_struct_6d().unpack(str[start:end])
+      end += 72
+      (_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D, _x.thumb.theta_M, _x.thumb.theta_P, _x.thumb.theta_D,) = _get_struct_9d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -146,7 +152,7 @@ float64 theta_D"""
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self
-      buff.write(_get_struct_6d().pack(_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D))
+      buff.write(_get_struct_9d().pack(_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D, _x.thumb.theta_M, _x.thumb.theta_P, _x.thumb.theta_D))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -165,6 +171,8 @@ float64 theta_D"""
         self.index = bionic_hand.msg.FingerJoints()
       if self.middle is None:
         self.middle = bionic_hand.msg.FingerJoints()
+      if self.thumb is None:
+        self.thumb = bionic_hand.msg.FingerJoints()
       end = 0
       _x = self
       start = end
@@ -181,8 +189,8 @@ float64 theta_D"""
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 48
-      (_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D,) = _get_struct_6d().unpack(str[start:end])
+      end += 72
+      (_x.index.theta_M, _x.index.theta_P, _x.index.theta_D, _x.middle.theta_M, _x.middle.theta_P, _x.middle.theta_D, _x.thumb.theta_M, _x.thumb.theta_P, _x.thumb.theta_D,) = _get_struct_9d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -197,9 +205,9 @@ def _get_struct_3I():
     if _struct_3I is None:
         _struct_3I = struct.Struct("<3I")
     return _struct_3I
-_struct_6d = None
-def _get_struct_6d():
-    global _struct_6d
-    if _struct_6d is None:
-        _struct_6d = struct.Struct("<6d")
-    return _struct_6d
+_struct_9d = None
+def _get_struct_9d():
+    global _struct_9d
+    if _struct_9d is None:
+        _struct_9d = struct.Struct("<9d")
+    return _struct_9d
